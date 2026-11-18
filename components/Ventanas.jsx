@@ -331,6 +331,7 @@ function Ajustes({ opciones, alCambiar, controles, alCambiarControles, alVolver 
       )}
       {pestana === 'sonido' && (
         <div className="panel opciones">
+          {deslizador('general', 'General')}
           {deslizador('ambiente', 'Ambiente')}
           {deslizador('cuerpo', 'Respiración')}
           {deslizador('pasos', 'Pasos')}

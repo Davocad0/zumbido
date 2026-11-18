@@ -5,6 +5,7 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import { EventBus } from '@/game/EventBus';
+import { Sonido } from '@/game/motor/audio';
 import Hud from './Hud';
 import { Nota, Cinta, Mapa, Diario, Pausa, Inicio, Completado, Compu, FinDelJuego } from './Ventanas';
 import Cinematica from './Cinematica';
@@ -108,6 +109,8 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
   // Aplicar los volúmenes y los destellos guardados.
   const aplicarOpciones = useCallback((o) => {
     if (!o) return;
+    // (El general va directo al audio: vale también para las escenas y las cintas, no solo dentro de un nivel.)
+    Sonido.volumenGeneral(o.general ?? 1);
     for (const bus of ['ambiente', 'cuerpo', 'pasos', 'objetos', 'inquilino']) EventBus.emit('volumen', { bus, valor: o[bus] ?? 0.9 });
     EventBus.emit('reducir-destellos', o.reducirDestellos);
     EventBus.emit('sin-sangre', !!o.sinSangre);

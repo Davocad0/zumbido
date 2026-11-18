@@ -37,7 +37,7 @@ function iniciar() {
     limitador.threshold.value = -3; limitador.knee.value = 0; limitador.ratio.value = 20;
     limitador.attack.value = 0.001; limitador.release.value = 0.12;
     maestro = ctx.createGain();
-    maestro.gain.value = 0.9;
+    maestro.gain.value = MAESTRO * general;
     // El filtro de todo (Lado B): cuanto más alta el agua, más apagado se oye todo, como Nico bajo el agua.
     hondo = ctx.createBiquadFilter();
     hondo.type = 'lowpass';
@@ -870,6 +870,15 @@ function tomar(demo) {
 function soltar(demo) { if (actual === demo) actual = null; }
 
 // Todo se oye como desde debajo del agua: frec = hasta qué agudos pasan (20000 = normal). t = en cuántos segundos.
+// El volumen general (2026-11-18, Ajustes › Sonido › General): sube o baja todo junto, música incluida, encima de
+// lo de cada grupo. De 0 a 1; se guarda aunque el audio todavía no haya arrancado (arranca con el primer clic).
+const MAESTRO = 0.9;
+let general = 1;
+function volumenGeneral(v) {
+  general = Math.max(0, Math.min(1, Number(v) || 0));
+  if (maestro) maestro.gain.setTargetAtTime(MAESTRO * general, ctx.currentTime, 0.05);
+}
+
 function sumergir(frec = 20000, t = 1) {
   if (!hondo) return;
   hondo.frequency.cancelScheduledValues(ctx.currentTime);
@@ -877,7 +886,7 @@ function sumergir(frec = 20000, t = 1) {
 }
 
 export const Sonido = {
-  iniciar, cargar, cargarVarios, sonar, golpe, bucle, colchon, latido, eco, cadena, tomar, soltar, sintetico, sumergir, paneo, vozContador, medir, agachar,
+  iniciar, cargar, cargarVarios, sonar, golpe, bucle, colchon, latido, eco, cadena, tomar, soltar, sintetico, sumergir, paneo, vozContador, medir, agachar, volumenGeneral,
   get ctx() { return ctx; },
   // Sonido 3D (HRTF) para lo que viene de un punto del mapa; apagado = solo izquierda y derecha, como antes.
   get espacial() { return espacial; },
