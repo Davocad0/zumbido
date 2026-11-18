@@ -1,0 +1,98 @@
+{
+  "nombre": "ZUMBIDO-48",
+  "descripcion": "Paleta única del juego. Todo (escenas, texturas, sprites, retratos, notas e interfaz pixel) se reduce a estos colores con tramado ordenado Bayer 4x4.",
+  "tramado": {
+    "tipo": "bayer4",
+    "matriz": [
+      [
+        0,
+        8,
+        2,
+        10
+      ],
+      [
+        12,
+        4,
+        14,
+        6
+      ],
+      [
+        3,
+        11,
+        1,
+        9
+      ],
+      [
+        15,
+        7,
+        13,
+        5
+      ]
+    ],
+    "dispersion": 26
+  },
+  "fijos": {
+    "llave roja": "#d9452b",
+    "llave azul": "#2f63d8",
+    "llave verde": "#0f8a6c",
+    "llave amarilla": "#d9a21a",
+    "salida": "#1d7a43",
+    "negro": "#0b0a06",
+    "blanco fluorescente": "#f6f1dc",
+    "azul VHS": "#2338b0",
+    "rojo REC": "#e2332b",
+    "piel": "#c98d63",
+    "piel sombra": "#8e5b3d",
+    "sudadera": "#c2922c"
+  },
+  "colores": [
+    "#0b0a06",
+    "#14090a",
+    "#181212",
+    "#4a0c09",
+    "#1f1d1b",
+    "#311c0d",
+    "#2c2b25",
+    "#4c2d11",
+    "#3c3a30",
+    "#85240d",
+    "#2338b0",
+    "#5e4520",
+    "#484c46",
+    "#a53214",
+    "#715617",
+    "#1d7a43",
+    "#736029",
+    "#994a37",
+    "#2f63d8",
+    "#0f8a6c",
+    "#5f655a",
+    "#e2332b",
+    "#8e5b3d",
+    "#866b24",
+    "#d9452b",
+    "#857039",
+    "#be5b14",
+    "#967b2c",
+    "#aa6959",
+    "#937e4a",
+    "#668e81",
+    "#a4863a",
+    "#a69054",
+    "#47afc4",
+    "#b29342",
+    "#c2922c",
+    "#86a39e",
+    "#c98d63",
+    "#b99380",
+    "#c0a04e",
+    "#d9a21a",
+    "#cdae5c",
+    "#a4b8b3",
+    "#c9b8a4",
+    "#dbc466",
+    "#c4ccc5",
+    "#e9ebe2",
+    "#f6f1dc"
+  ]
+}

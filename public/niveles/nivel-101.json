@@ -1,0 +1,771 @@
+{
+  "id": "nivel-101",
+  "numero": "101",
+  "nombre": "Casa de Espejos",
+  "descripcion": "El laberinto de espejos de un parque de diversiones abandonado, con cristales limpios entre los espejos. Cada pasillo se repite cien veces y la salida aparece en todas direcciones. Aquí por fin ves tu propia cara, y no siempre hace lo mismo que tú.",
+  "tension": 65,
+  "semilla": 1103,
+  "ancho": 19,
+  "alto": 19,
+  "mapa": [
+    "###################",
+    "#@%...........%...#",
+    "#.%.%==%%=%.%.%.%.#",
+    "#...........%...%.#",
+    "#==%%%%=%.%%%%%%%.#",
+    "#......r%.........#",
+    "#.%%=%%%%=%%=.%.%.#",
+    "#.....%...........#",
+    "#.%#%.%.%%%.%.%.=.#",
+    "#.%.%...%a%.......#",
+    "#R%.%=%%%.%%%%%=%%#",
+    "#...%.............#",
+    "#%%.%%%.%%%%%%%.%.#",
+    "#.....%.AX=.......#",
+    "#.%%%.%==%%.%.....#",
+    "#.....%...%.......#",
+    "#.=%%%%.#.%%%.....#",
+    "#.......%.........#",
+    "###################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 90
+  },
+  "llaves": [
+    {
+      "color": "roja",
+      "x": 7,
+      "y": 5,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 8,
+      "desdeEntrada": 42
+    },
+    {
+      "color": "azul",
+      "x": 9,
+      "y": 9,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 2,
+      "desdeEntrada": 43
+    }
+  ],
+  "puertas": [
+    {
+      "color": "roja",
+      "x": 1,
+      "y": 10,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": false
+    },
+    {
+      "color": "azul",
+      "x": 8,
+      "y": 13,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 9,
+    "y": 13
+  },
+  "salas": [
+    {
+      "x": 13,
+      "y": 13,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Taquilla del parque",
+    "x": 13,
+    "y": 13,
+    "ancho": 5,
+    "alto": 5
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Taquilla del parque",
+      "x": 13,
+      "y": 13,
+      "ancho": 5,
+      "alto": 5
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 17,
+      "y": 17,
+      "mirando": 180,
+      "cuarto": "Taquilla del parque",
+      "cinta": {
+        "titulo": "PLAYLAND, LABERINTO",
+        "descripcion": "La cámara tiembla. A la salida del mini laberinto de espejos, Nico, de 5, llora con un globo en la mano; Dani lo abraza fuerte. Atrás gira la rueda de la fortuna. Nadie dice nada."
+      }
+    }
+  ],
+  "escondites": [],
+  "props": [
+    {
+      "tipo": "mostrador",
+      "x": 14,
+      "y": 15
+    },
+    {
+      "tipo": "rollo_de_boletos",
+      "x": 17,
+      "y": 13
+    },
+    {
+      "tipo": "adivino_mecanico",
+      "x": 16,
+      "y": 15
+    },
+    {
+      "tipo": "cortina_roja",
+      "x": 15,
+      "y": 7
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "regla",
+      "soporte": "escrito con lápiz labial en un espejo",
+      "instrumento": "lápiz labial",
+      "estado": [],
+      "texto": "SI TIENE HUELLAS ES ESPEJO\nSI NO, ES SALIDA\nYO YA TOQUÉ TODOS",
+      "x": 5,
+      "y": 11
+    },
+    {
+      "autor": "D.",
+      "noche": 9,
+      "tipo": "diario",
+      "soporte": "reverso de un boleto de PlayLand",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada"
+      ],
+      "texto": "a los 14 perdí a nico en el mini laberinto de playland. el de verdad, el de los espejos. fueron diez minutos. lloró todo el camino a casa y no me soltó la mano.\nnunca le dije a nadie que me había distraído.\nnoche 9",
+      "pensamiento": "Diez minutos. Nunca se lo conté a nadie.",
+      "x": 3,
+      "y": 9
+    },
+    {
+      "autor": "D.",
+      "noche": 9,
+      "tipo": "diario",
+      "soporte": "boleto de la rueda de la fortuna",
+      "instrumento": "lápiz",
+      "estado": [
+        "arrugada",
+        "sucia"
+      ],
+      "texto": "todas las noches la enfermera me dice que ya puedo pasar a verlo.\ntodas las noches le digo mañana.\nno sé qué decirle. perdón no alcanza.",
+      "pensamiento": "Mañana. Siempre mañana.",
+      "x": 3,
+      "y": 10
+    },
+    {
+      "autor": "N. (5 años)",
+      "tipo": "diario",
+      "soporte": "dibujo con crayón",
+      "instrumento": "crayón rojo",
+      "estado": [
+        "arrugada"
+      ],
+      "dibujo": "espejos",
+      "texto": "DANI DONDE ESTAS",
+      "pensamiento": "Es la letra de Nico... de cuando tenía cinco años.",
+      "x": 2,
+      "y": 15
+    },
+    {
+      "autor": "D.",
+      "tipo": "advertencia",
+      "soporte": "papel pegado en un cristal",
+      "instrumento": "marcador negro",
+      "estado": [
+        "doblada"
+      ],
+      "texto": "no te quedes mirando ningún espejo de cerca.\nprimero se pone rojo y tu reflejo te señala por dónde ir. eso sirve.\npero cuando deja de copiarte, ya viene. mira para otro lado.\nen uno mi reflejo estaba mojado. como nico cuando lo sacaron.",
+      "pensamiento": "Como Nico cuando lo sacaron...",
+      "x": 16,
+      "y": 11
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 1,
+      "y": 6,
+      "apunta": -90
+    },
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 9,
+      "y": 10,
+      "apunta": -90
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 1,
+      "y": 6
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 7,
+      "y": 17
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "mano_en_el_vidrio",
+      "descripcion": "Al tocar este cristal, del otro lado aparece la huella de una mano que no es la tuya.",
+      "x": 1,
+      "y": 16
+    },
+    {
+      "tipo": "eco_en_los_espejos",
+      "descripcion": "El Inquilino solo existe dentro de los reflejos: desde la primera llave te sigue por detrás, cada vez más cerca. La tele del refugio lo aleja.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "mirada_fija",
+      "descripcion": "Si te quedas mirando de cerca un espejo, adentro todo se deforma, se oscurece y se pone rojo; tu reflejo te señala por dónde ir, deja de copiarte y El Inquilino viene por detrás. Si llega, te atrapa: mirar a otro lado lo corta.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "pasos_que_corren",
+      "descripcion": "Un chico corre en el pasillo de al lado, donde no se ve, y se ríe; la risa se corta. No llega nadie (Nico a las escondidas).",
+      "x": 4,
+      "y": 7,
+      "piensa": "Se reía así cuando no lo encontraba."
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "solo_en_los_reflejos"
+  },
+  "ambiente": {
+    "paredes": "espejo",
+    "paredesSinEspejo": "triplay_pintado",
+    "piso": "damero_blanco_y_negro",
+    "techo": "lona_de_carpa",
+    "colorNiebla": "#09060a",
+    "distanciaVision": 7,
+    "luz": 0.36,
+    "reflejosMaximos": 4
+  },
+  "audio": {
+    "ambiente": "vals_de_feria_desafinado",
+    "pasos": "madera_hueca",
+    "zonaSegura": "radio_de_taquilla"
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 104,
+    "segundosRutaOptima": 47,
+    "callejones": 6,
+    "porcentajePiso": 50,
+    "espejos": 92,
+    "cristales": 16,
+    "ordenLlaves": [
+      "roja",
+      "azul"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [],
+      "cierra": [
+        [
+          2,
+          13
+        ],
+        [
+          11,
+          5
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [],
+      "cierra": [
+        [
+          7,
+          1
+        ],
+        [
+          11,
+          14
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      6,
+      3
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      10,
+      5
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      12,
+      5
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      12,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      2,
+      11
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      5,
+      17
+    ],
+    [
+      6,
+      17
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      7,
+      15
+    ],
+    [
+      8,
+      15
+    ],
+    [
+      9,
+      15
+    ],
+    [
+      9,
+      16
+    ],
+    [
+      9,
+      17
+    ],
+    [
+      10,
+      17
+    ],
+    [
+      11,
+      17
+    ],
+    [
+      12,
+      17
+    ],
+    [
+      13,
+      17
+    ],
+    [
+      14,
+      17
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      15,
+      14
+    ],
+    [
+      15,
+      13
+    ],
+    [
+      15,
+      12
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      14,
+      11
+    ],
+    [
+      13,
+      11
+    ],
+    [
+      12,
+      11
+    ],
+    [
+      11,
+      11
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      8,
+      11
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      12
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      8,
+      13
+    ],
+    [
+      9,
+      13
+    ]
+  ]
+}

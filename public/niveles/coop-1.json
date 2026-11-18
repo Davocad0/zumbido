@@ -1,0 +1,543 @@
+{
+  "id": "coop-1",
+  "numero": "C1",
+  "nombre": "La cuenta",
+  "coop": true,
+  "descripcion": "Dos mundos, uno al lado del otro: el edificio de noche (Dani) y la piscina bajo el agua (Nico). Se ven por las ventanas; las compuertas de cada uno se abren desde el lado del otro.",
+  "tension": 70,
+  "semilla": 7724,
+  "ancho": 41,
+  "alto": 54,
+  "mapa": [
+    "#########################################",
+    "#@#.......#...#.....=.....#...#...#.....#",
+    "#.###.###.#.#.#.###.=.###.#.#.#.#.#.###.#",
+    "#...#.#.#...#.#.#.###...#...#.....#.#...#",
+    "###.#.#.#####.#.#.#.#.#.#########.#.#.###",
+    "#.#...#...#.#...#...#.#.....#...#.#.#...#",
+    "#.#####.....#####.###.#####.#.#.###.###.#",
+    "#.#.............#...=.#...#...#...#.....#",
+    "#.#.###.....#######.#.#.#.#######.#####.#",
+    "#.#.#...#...#.......=...#.#...........#.#",
+    "#.#.#.###.#.#.###########.#.#####.#.###.#",
+    "#...#.#.....#...#...#.#...#.#...#.#.....#",
+    "#.###.#.#######.###.=.#.##....#.#.#.#####",
+    "#.#...#.#...#.#...#.=.#.......#.#.#.#...#",
+    "###.###.#.#.#.###.#.#.###....##.#.#.#.#.#",
+    "#...#.....#...#...#.=...#.....#...#.....#",
+    "#.#.#########.#.###.=.#.#.###.#######.#.#",
+    "#.#.#.......#.#.#...=.#.#...#...#.....#.#",
+    "#.###.#####.#.#.#.#.=.#.###.###.#.#.###.#",
+    "#.#...#.....#.#.#.#.#.#.#.#.#.#.#.#.#...#",
+    "#.#.###.#.###.#.###.#.#.#.###.#.#...#.###",
+    "#...#...#.#...#.#...#.#...#...#...#...#.#",
+    "#.#####.#.#####.#.#.#.#######.#########.#",
+    "#.......#..#....#.#.=.......#...#.......#",
+    "#######.#########.#.#.#####.###.####...##",
+    "#...#.........#.....#.....#.....#.......#",
+    "#.###.###.#.##....#.#####.#######.#.....#",
+    "#.#...#...#.......#.=.....#...#...#.#...#",
+    "#.#.#####.###.....#.=.#####.#.#.###.#.#.#",
+    "#.#.....#...#...#.#.#.#.....#...#...#.#.#",
+    "#.#####.#######.#.###.#.#########.###.#.#",
+    "#.....#.#.....#.#...#.#...#.....#.#...#.#",
+    "#.#.###.#.###.#####.=.#####.#.###.###.#.#",
+    "#.#.......#.........=.....#.#.........#.#",
+    "#########################################",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####.....##.................##.....#####",
+    "#####.....##.................##.....#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####.....##.................##.....#####",
+    "#####.....##.................##.....#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#####...............................#####",
+    "#########################################",
+    "####################X####################",
+    "#########################################"
+  ],
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "inicioNico": {
+    "x": 39,
+    "y": 1,
+    "angulo": 180
+  },
+  "llaves": [],
+  "puertas": [],
+  "salida": {
+    "x": 20,
+    "y": 52
+  },
+  "salas": [],
+  "zonaSegura": null,
+  "cuartos": [],
+  "refugios": [],
+  "guardado": [],
+  "escondites": [
+    {
+      "tipo": "casillero",
+      "x": 3,
+      "y": 1,
+      "mirando": 0
+    },
+    {
+      "tipo": "cajas",
+      "x": 15,
+      "y": 23,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 13,
+      "y": 13,
+      "mirando": 0
+    },
+    {
+      "tipo": "cajas",
+      "x": 19,
+      "y": 1,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 13,
+      "y": 23,
+      "mirando": 0
+    }
+  ],
+  "props": [
+    {
+      "tipo": "cajas_desarmadas",
+      "x": 1,
+      "y": 5
+    },
+    {
+      "tipo": "pelota_de_playa",
+      "x": 39,
+      "y": 33
+    },
+    {
+      "tipo": "tv_crt",
+      "x": 1,
+      "y": 13
+    },
+    {
+      "tipo": "flotador",
+      "x": 39,
+      "y": 21
+    },
+    {
+      "tipo": "cochecito",
+      "x": 5,
+      "y": 15
+    },
+    {
+      "tipo": "escalera_piscina",
+      "x": 28,
+      "y": 31
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "diario",
+      "soporte": "captura de pantalla impresa, doblada",
+      "instrumento": "impreso",
+      "estado": [
+        "arrugada"
+      ],
+      "texto": "«¿CUÁNTO AGUANTA MI HERMANO BAJO EL AGUA? (EN VIVO)»\n2,3 M de vistas.\nNo lo borré. No puedo borrarlo y no puedo mirarlo.",
+      "pensamiento": "Todavía está subido.",
+      "x": 18,
+      "y": 1
+    },
+    {
+      "autor": "D.",
+      "tipo": "diario",
+      "soporte": "hoja de cuaderno, escrita con mucha fuerza",
+      "instrumento": "birome negra",
+      "estado": [
+        "rota"
+      ],
+      "texto": "contaba en voz alta. cuarenta y ocho, cuarenta y nueve.\nel chat pedía diez más. «dale», «jajaja», «no sale nada».\nse los di.",
+      "pensamiento": "Se los di.",
+      "x": 15,
+      "y": 21
+    },
+    {
+      "autor": "N.",
+      "tipo": "diario",
+      "soporte": "servilleta mojada",
+      "instrumento": "birome azul",
+      "estado": [
+        "mojada"
+      ],
+      "dibujo": "astro",
+      "texto": "dani dijo que si llegaba a 60 me compraba el juego.\nllegué a 50 y después no me acuerdo.\nacá abajo sigo contando.",
+      "pensamiento": "Sigo contando.",
+      "x": 33,
+      "y": 4
+    },
+    {
+      "autor": "N.",
+      "tipo": "diario",
+      "soporte": "hoja plastificada de las reglas de la piscina",
+      "instrumento": "crayón",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "desde abajo se ven las caras.\ntodos tienen el celu.\nnadie se tira.",
+      "pensamiento": "Nadie se tira.",
+      "x": 23,
+      "y": 33
+    },
+    {
+      "autor": "N.",
+      "tipo": "regla",
+      "soporte": "tablita de las de aprender a nadar, escrita con crayón",
+      "instrumento": "crayón",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "más adelante alguien cuenta con la voz de dani.\nde espaldas, contra la pared. cuando llega a 50 se da vuelta con el celu.\nsi me alumbra, me graba. tengo que salir de la luz. si nado rápido cerca, cuenta más rápido.",
+      "pensamiento": "Como ese día.",
+      "x": 33,
+      "y": 3
+    }
+  ],
+  "dibujos": [],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 2,
+      "y": 31
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 17,
+      "y": 17
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 6,
+      "y": 33
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 19,
+      "y": 24
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 8,
+      "y": 37
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 32,
+      "y": 37
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 15,
+      "y": 48
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 26,
+      "y": 42
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "los_que_miran",
+      "cantidad": 2,
+      "paso": 1.1,
+      "zona": {
+        "x0": 1,
+        "y0": 1,
+        "x1": 19,
+        "y1": 33
+      }
+    }
+  ],
+  "compuertas": [
+    {
+      "id": "dani1",
+      "lado": "dani",
+      "x": 19,
+      "y": 3
+    },
+    {
+      "id": "dani2",
+      "lado": "dani",
+      "x": 11,
+      "y": 23
+    },
+    {
+      "id": "nico1",
+      "lado": "nico",
+      "x": 27,
+      "y": 20
+    },
+    {
+      "id": "nico2",
+      "lado": "nico",
+      "x": 25,
+      "y": 32
+    },
+    {
+      "id": "dani3",
+      "lado": "dani",
+      "x": 13,
+      "y": 34
+    },
+    {
+      "id": "nico3",
+      "lado": "nico",
+      "x": 27,
+      "y": 34
+    },
+    {
+      "id": "salida",
+      "lado": "ambos",
+      "x": 20,
+      "y": 51
+    }
+  ],
+  "aire": [
+    {
+      "x": 39,
+      "y": 1
+    },
+    {
+      "x": 27,
+      "y": 18
+    },
+    {
+      "x": 24,
+      "y": 33
+    },
+    {
+      "x": 27,
+      "y": 32
+    },
+    {
+      "x": 29,
+      "y": 5
+    },
+    {
+      "x": 29,
+      "y": 3
+    },
+    {
+      "x": 25,
+      "y": 9
+    },
+    {
+      "x": 21,
+      "y": 16
+    },
+    {
+      "x": 35,
+      "y": 28
+    }
+  ],
+  "palancas": [
+    {
+      "id": "p-dani1",
+      "lado": "nico",
+      "x": 33,
+      "y": 5,
+      "abre": [
+        "dani1"
+      ]
+    },
+    {
+      "id": "p-nico1",
+      "lado": "dani",
+      "x": 17,
+      "y": 1,
+      "abre": [
+        "nico1"
+      ]
+    },
+    {
+      "id": "p-dani2",
+      "lado": "nico",
+      "x": 25,
+      "y": 19,
+      "abre": [
+        "dani2"
+      ]
+    },
+    {
+      "id": "p-nico2",
+      "lado": "dani",
+      "x": 14,
+      "y": 23,
+      "abre": [
+        "nico2"
+      ]
+    },
+    {
+      "id": "p-dani3",
+      "lado": "nico",
+      "x": 31,
+      "y": 31,
+      "abre": [
+        "dani3"
+      ]
+    },
+    {
+      "id": "p-nico3",
+      "lado": "dani",
+      "x": 11,
+      "y": 21,
+      "abre": [
+        "nico3"
+      ]
+    },
+    {
+      "id": "llamar1",
+      "tipo": "llamador",
+      "lado": "ambos",
+      "x": 5,
+      "y": 43,
+      "abre": []
+    },
+    {
+      "id": "llamar2",
+      "tipo": "llamador",
+      "lado": "ambos",
+      "x": 35,
+      "y": 43,
+      "abre": []
+    },
+    {
+      "id": "llamar3",
+      "tipo": "llamador",
+      "lado": "ambos",
+      "x": 25,
+      "y": 50,
+      "abre": []
+    }
+  ],
+  "sala": {
+    "x0": 5,
+    "y0": 35,
+    "x1": 35,
+    "y1": 50
+  },
+  "cama": {
+    "x": 20,
+    "y": 43
+  },
+  "regiones": [
+    {
+      "lado": "nico",
+      "x0": 21,
+      "y0": 0,
+      "x1": 40,
+      "y1": 34,
+      "paredes": "azulejo_blanco",
+      "piso": "azulejo_mojado"
+    },
+    {
+      "lado": "sala",
+      "x0": 4,
+      "y0": 35,
+      "x1": 36,
+      "y1": 53,
+      "paredes": "pared_hospital",
+      "piso": "linoleo_hospital"
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "aparece_tras_primera_llave"
+  },
+  "ambiente": {
+    "paredes": "papel_tapiz_edificio",
+    "piso": "alfombra_de_pasillo",
+    "techo": "techo_con_humedad",
+    "colorNiebla": "#120b08",
+    "distanciaVision": 8,
+    "luz": 0.5,
+    "vestirParedes": {
+      "puertas": 0.15,
+      "roto": 0.12
+    }
+  },
+  "audio": {
+    "ambiente": "edificio_de_noche",
+    "pasos": "alfombra"
+  },
+  "porRol": {
+    "nico": {
+      "ambiente": {
+        "colorNiebla": "#0b2124",
+        "distanciaVision": 7,
+        "luz": 0.55,
+        "techo": "superficie_con_caras",
+        "bajoElAgua": true
+      },
+      "audio": {
+        "ambiente": "bajo_el_agua",
+        "pasos": "agua_honda"
+      },
+      "entidad": null,
+      "eventos": [
+        {
+          "tipo": "el_contador",
+          "x": 21,
+          "y": 12,
+          "puestos": [
+            {
+              "x": 21,
+              "y": 12,
+              "mirando": 180
+            },
+            {
+              "x": 33,
+              "y": 23,
+              "mirando": 90
+            },
+            {
+              "x": 37,
+              "y": 31,
+              "mirando": 0
+            }
+          ],
+          "empieza": 0
+        }
+      ]
+    }
+  },
+  "estadisticas": {
+    "ordenLlaves": [],
+    "compuertas": 7,
+    "palancas": 6,
+    "ventanas": 15,
+    "pasosDani": 146,
+    "pasosNico": 158
+  }
+}

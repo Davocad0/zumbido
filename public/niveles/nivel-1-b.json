@@ -1,0 +1,1025 @@
+{
+  "id": "nivel-1-b",
+  "numero": "1",
+  "nombre": "Zona Habitable B",
+  "descripcion": "El edificio con el agua por encima de los tobillos. Las teles muestran estática con voces y una pasa el clima de «Puerto Lindo», como la radio de Marta. Alguien golpea despacio una puerta, como si no se animara a entrar.",
+  "tension": 60,
+  "lado": "B",
+  "base": "nivel-1",
+  "semilla": 2002,
+  "ancho": 21,
+  "alto": 21,
+  "mapa": [
+    "#####################",
+    "#@......#...........#",
+    "###.....#.#.###.###.#",
+    "#X#.....#.#...#.....#",
+    "#V#.#.#.#.###.#.....#",
+    "#.#...#...#.#a#.....#",
+    "#.#########.#.#.....#",
+    "#...........#.......#",
+    "#.#...#.###.#####.#.#",
+    "#.#...#...#...#.....#",
+    "#.#######.###.#A#####",
+    "#.#v....#.....#.....#",
+    "#.#.###.#####.#####.#",
+    "#.#.....#.......#...#",
+    "#.###...#.#.....#.#.#",
+    "#...#...#...........#",
+    "###.###.###.###.###.#",
+    "#.........#.........#",
+    "#.#######.#########.#",
+    "#...................#",
+    "#####################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "llaves": [
+    {
+      "color": "azul",
+      "x": 13,
+      "y": 5,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 6,
+      "desdeEntrada": 24
+    },
+    {
+      "color": "verde",
+      "x": 3,
+      "y": 11,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "desvio": 26,
+      "desdeEntrada": 37
+    }
+  ],
+  "puertas": [
+    {
+      "color": "azul",
+      "x": 15,
+      "y": 10,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": false
+    },
+    {
+      "color": "verde",
+      "x": 1,
+      "y": 4,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 1,
+    "y": 3
+  },
+  "salas": [
+    {
+      "x": 3,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 15,
+      "y": 3,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 11,
+      "y": 13,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Cuarto de la tele",
+    "x": 3,
+    "y": 1,
+    "ancho": 5,
+    "alto": 3
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 3,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 7,
+      "y": 1,
+      "mirando": 180,
+      "cuarto": "Cuarto de la tele",
+      "cinta": null
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "casillero",
+      "x": 15,
+      "y": 6,
+      "mirando": 0
+    },
+    {
+      "tipo": "cajas",
+      "x": 18,
+      "y": 17,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 6,
+      "y": 14,
+      "mirando": 0
+    }
+  ],
+  "props": [
+    {
+      "tipo": "tv_crt",
+      "x": 16,
+      "y": 3
+    },
+    {
+      "tipo": "radio",
+      "x": 19,
+      "y": 5
+    },
+    {
+      "tipo": "balde_y_trapeador",
+      "x": 18,
+      "y": 4
+    },
+    {
+      "tipo": "estante_latas",
+      "x": 18,
+      "y": 5
+    },
+    {
+      "tipo": "tv_crt",
+      "x": 3,
+      "y": 9
+    },
+    {
+      "tipo": "cajas_desarmadas",
+      "x": 7,
+      "y": 13
+    },
+    {
+      "tipo": "tv_crt",
+      "x": 13,
+      "y": 15
+    },
+    {
+      "tipo": "tv_estatica",
+      "x": 19,
+      "y": 8,
+      "puesto": "Una tele con estática y voces: la radio de 1996"
+    },
+    {
+      "tipo": "balde_y_trapeador",
+      "x": 8,
+      "y": 19,
+      "puesto": "El balde de Marta, dejado en medio del pasillo"
+    },
+    {
+      "tipo": "tv_estatica",
+      "x": 15,
+      "y": 13,
+      "puesto": "Otra tele prendida, sin nadie que la mire"
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "advertencia",
+      "soporte": "pedazo de cartón mojado",
+      "instrumento": "marcador azul",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "las teles hablan solas. una dice el clima de puerto lindo, igual que la radio.\nalguien golpea una puerta, despacio, como si no se animara. no abras. no es para ti.\nel micrófono también la oye. eso quiere decir que es de verdad, ¿no?",
+      "pensamiento": "«No es para ti»...",
+      "x": 11,
+      "y": 5
+    },
+    {
+      "autor": "D.",
+      "tipo": "regla",
+      "soporte": "escrito con marcador en la pantalla rota de un celular",
+      "instrumento": "marcador azul",
+      "estado": [
+        "rayada"
+      ],
+      "texto": "en los pasillos hay gente pegada por la espalda, con el celular metido en la mano. se ríen.\nsi los miras, no se mueven. si te das vuelta, están más cerca. cuando suena un celular en la oscuridad, están cerca.\nde frente y de cerca se deshacen. pero no te quedes mirando: la cámara se llena de ruido.",
+      "pensamiento": "Como ese día. Nadie se movió. Todos miraban.",
+      "x": 6,
+      "y": 13
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 11,
+      "y": 2,
+      "apunta": 90
+    },
+    {
+      "tipo": "astro",
+      "llave": "verde",
+      "x": 1,
+      "y": 8,
+      "apunta": 90
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 15,
+      "y": 9
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 5,
+      "y": 13
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "apagon_en_fila",
+      "descripcion": "Las luces del pasillo se apagan una por una detrás del jugador.",
+      "x": 1,
+      "y": 15,
+      "objetivo": {
+        "x": 1,
+        "y": 3
+      }
+    },
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 1,
+      "y": 15,
+      "objetivo": {
+        "x": 1,
+        "y": 3
+      }
+    },
+    {
+      "tipo": "los_que_miran",
+      "descripcion": "Lado B: Los Espectadores (hasta el 2026-11-14, «Los que miran»): tres personas pegadas por la espalda, con el celular hundido en la mano, que se ríen. Quietas mientras las miras (también en un espejo); si no, se acercan de a una casilla, de a una figura. De espaldas te alcanzan; de frente y de cerca se deshacen; mirarlas mucho llena la cámara de ruido.",
+      "x": null,
+      "y": null,
+      "cantidad": 2,
+      "paso": 0.75
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 9,
+      "y": 3,
+      "sonido": "golpe-seco",
+      "donde": "pared",
+      "vol": 2.8,
+      "repite": [
+        0.55,
+        1.15
+      ],
+      "piensa": "Del otro lado de la pared. Contra la pared."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 17,
+      "y": 9,
+      "sonido": "bebe-llora-fuerte",
+      "donde": "pared",
+      "vol": 1.6,
+      "inicio": 3,
+      "dur": 2.6,
+      "corte": true,
+      "piensa": "Paró de golpe."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 16,
+      "y": 19,
+      "sonido": "raspar",
+      "donde": "pared",
+      "vol": 2.4,
+      "repite": [
+        0.7,
+        1.4,
+        2.1,
+        2.8
+      ],
+      "piensa": "Algo raspa adentro de la pared. Va conmigo."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 3,
+      "y": 13,
+      "sonido": "nino-rie",
+      "donde": "atras",
+      "vol": 1.4,
+      "rate": 0.82
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 3,
+      "y": 15,
+      "sonido": "radio-voces",
+      "donde": "pared",
+      "vol": 2.6,
+      "inicio": 4,
+      "dur": 1.6,
+      "corte": true,
+      "filtro": 2400,
+      "piensa": "Una tele, a todo volumen. Y se apagó."
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "aparece_tras_primera_llave"
+  },
+  "ambiente": {
+    "paredes": "papel_tapiz_edificio",
+    "piso": "alfombra_de_pasillo",
+    "techo": "techo_con_humedad",
+    "colorNiebla": "#0f0d0b",
+    "distanciaVision": 8,
+    "luz": 0.55,
+    "vestirParedes": {
+      "puertas": 0.17,
+      "roto": 0.12
+    },
+    "agua": 0.12,
+    "marcaAgua": 0.22,
+    "colorAgua": "#2c2b25"
+  },
+  "audio": {
+    "ambiente": "edificio_b",
+    "pasos": "alfombra",
+    "zonaSegura": "radio_con_estatica"
+  },
+  "ladoB": {
+    "noche": 13,
+    "microfono": true,
+    "camaraFalla": 0.2,
+    "silencios": [
+      70,
+      120
+    ],
+    "sinFuente": [
+      {
+        "sonido": "golpes-puerta-lentos",
+        "donde": "puerta",
+        "cada": [
+          30,
+          55
+        ],
+        "vol": 0.9,
+        "quien": "Marta, en 1996, golpeando la puerta de la cama 4 sin animarse a entrar"
+      },
+      {
+        "sonido": "carrito-ruedas",
+        "donde": "lejos",
+        "cada": [
+          40,
+          70
+        ],
+        "vol": 0.8,
+        "quien": "El carrito de limpieza de Marta"
+      },
+      {
+        "sonido": "pasos-pasillo-lejos",
+        "donde": "lejos",
+        "cada": [
+          28,
+          50
+        ],
+        "vol": 0.8,
+        "dur": [
+          5,
+          9
+        ],
+        "quien": "Alguien que camina donde no se ve"
+      },
+      {
+        "sonido": "pasos-piso-arriba",
+        "donde": "arriba",
+        "cada": [
+          35,
+          60
+        ],
+        "vol": 0.9,
+        "dur": [
+          4,
+          7
+        ],
+        "quien": "Alguien que camina en el piso de arriba (no hay piso de arriba)"
+      },
+      {
+        "sonido": "bebe-quejido",
+        "donde": "pared",
+        "cada": [
+          60,
+          100
+        ],
+        "vol": 0.55,
+        "quien": "Un bebé que se queja del otro lado de la pared"
+      },
+      {
+        "sonido": "celular-vibra",
+        "donde": "lejos",
+        "cada": [
+          45,
+          80
+        ],
+        "vol": 0.8,
+        "quien": "Un celular que vibra en un departamento vacío"
+      },
+      {
+        "sonido": "llanto-ahogado",
+        "donde": "pared",
+        "cada": [
+          90,
+          150
+        ],
+        "veces": 1,
+        "vol": 0.7,
+        "dur": [
+          6,
+          9
+        ],
+        "quien": "Marta llorando detrás de una puerta (una sola vez)"
+      },
+      {
+        "sonido": "radio-voces",
+        "donde": "tv_estatica",
+        "bucle": true,
+        "radio": 5,
+        "vol": 0.5,
+        "quien": "La radio de 1996, con el clima de Puerto Lindo por debajo"
+      }
+    ],
+    "cuartoDeAntes": {
+      "nombre": "Cuarto del conserje",
+      "x": 15,
+      "y": 3,
+      "ancho": 5,
+      "alto": 5
+    }
+  },
+  "antes": {
+    "id": "nivel-1",
+    "mapa": [
+      "#####################",
+      "#@......#....a......#",
+      "###.....#.#.###.###.#",
+      "#.#.....#.#...#.....#",
+      "#.#.#.#.#.###.#.....#",
+      "#.#...#...#.#.#.....#",
+      "#.#########.#.#.....#",
+      "#...........#.......#",
+      "#.#...#.###.#####.#.#",
+      "#.#...#...#..v#.....#",
+      "#.#######.#####.#####",
+      "#.#.....#.....#.....#",
+      "#.#.###.#####.#####.#",
+      "#.#.....#.......#.A.#",
+      "#.###...#.#.....#.###",
+      "#...#...#.........#X#",
+      "###.###.###.###.###V#",
+      "#.........#.........#",
+      "#.#######.#########.#",
+      "#...................#",
+      "#####################"
+    ]
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 102,
+    "segundosRutaOptima": 46,
+    "callejones": 3,
+    "porcentajePiso": 52,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "azul",
+      "verde"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          9,
+          16
+        ],
+        [
+          9,
+          6
+        ]
+      ],
+      "cierra": [
+        [
+          18,
+          11
+        ],
+        [
+          11,
+          19
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [
+        [
+          13,
+          8
+        ],
+        [
+          9,
+          12
+        ]
+      ],
+      "cierra": [
+        [
+          6,
+          17
+        ],
+        [
+          1,
+          10
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      7,
+      4
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      8,
+      5
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      13,
+      4
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      14,
+      7
+    ],
+    [
+      15,
+      7
+    ],
+    [
+      16,
+      7
+    ],
+    [
+      17,
+      7
+    ],
+    [
+      17,
+      8
+    ],
+    [
+      17,
+      9
+    ],
+    [
+      16,
+      9
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      15,
+      10
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      16,
+      11
+    ],
+    [
+      17,
+      11
+    ],
+    [
+      18,
+      11
+    ],
+    [
+      19,
+      11
+    ],
+    [
+      19,
+      12
+    ],
+    [
+      19,
+      13
+    ],
+    [
+      19,
+      14
+    ],
+    [
+      19,
+      15
+    ],
+    [
+      19,
+      16
+    ],
+    [
+      19,
+      17
+    ],
+    [
+      19,
+      18
+    ],
+    [
+      19,
+      19
+    ],
+    [
+      18,
+      19
+    ],
+    [
+      17,
+      19
+    ],
+    [
+      16,
+      19
+    ],
+    [
+      15,
+      19
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      13,
+      19
+    ],
+    [
+      12,
+      19
+    ],
+    [
+      11,
+      19
+    ],
+    [
+      10,
+      19
+    ],
+    [
+      9,
+      19
+    ],
+    [
+      9,
+      18
+    ],
+    [
+      9,
+      17
+    ],
+    [
+      8,
+      17
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      7,
+      15
+    ],
+    [
+      6,
+      15
+    ],
+    [
+      5,
+      15
+    ],
+    [
+      5,
+      14
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      12
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      7,
+      14
+    ],
+    [
+      7,
+      15
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      6,
+      17
+    ],
+    [
+      5,
+      17
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      3,
+      16
+    ],
+    [
+      3,
+      15
+    ],
+    [
+      2,
+      15
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      12
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      3
+    ]
+  ]
+}

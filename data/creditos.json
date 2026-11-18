@@ -1,0 +1,712 @@
+{
+  "sonidos": [
+    {
+      "archivo": "zumbido",
+      "autor": "kentspublicdomain",
+      "titulo": "Flickering Fluorescent Light with Background Hum (Seamless Loop, 44100 Hz Mono)",
+      "pagina": "https://freesound.org/people/kentspublicdomain/sounds/777053/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 0: zumbido de fluorescentes en loop"
+    },
+    {
+      "archivo": "luces-parpadeo",
+      "autor": "TemperMode",
+      "titulo": "fluorescent light flickering 1.wav",
+      "pagina": "https://freesound.org/people/TemperMode/sounds/484157/",
+      "licencia": "CC0 1.0",
+      "uso": "Un tubo que parpadea (evento)"
+    },
+    {
+      "archivo": "luces-encienden",
+      "autor": "EverydaySounds",
+      "titulo": "Faulty Fluorescent Light Starter & Hum.wav",
+      "pagina": "https://freesound.org/people/EverydaySounds/sounds/125064/",
+      "licencia": "CC0 1.0",
+      "uso": "Las luces se encienden (evento)"
+    },
+    {
+      "archivo": "ventilacion-deposito",
+      "autor": "leonelmail",
+      "titulo": "Roomtone Warehouse Fans Vents Large",
+      "pagina": "https://freesound.org/people/leonelmail/sounds/427861/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 1: ventiladores de un depósito grande"
+    },
+    {
+      "archivo": "gota",
+      "autor": "beskhu",
+      "titulo": "water drop 1.aif",
+      "pagina": "https://freesound.org/people/beskhu/sounds/273870/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 1 y 2: una gota (con eco)"
+    },
+    {
+      "archivo": "sala-de-calderas",
+      "autor": "rucisko",
+      "titulo": "boiler room",
+      "pagina": "https://freesound.org/people/rucisko/sounds/164746/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 2: sala de calderas"
+    },
+    {
+      "archivo": "golpe-tuberia",
+      "autor": "RutgerMuller",
+      "titulo": "Metallic Pipe Hits on Concrete in Basement.aif",
+      "pagina": "https://freesound.org/people/RutgerMuller/sounds/104373/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 2: golpe en las tuberías (evento)"
+    },
+    {
+      "archivo": "piscina",
+      "autor": "InsEMT",
+      "titulo": "Espai wellness swimming pool.wav",
+      "pagina": "https://freesound.org/people/InsEMT/sounds/422996/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 37: piscina techada, agua y eco"
+    },
+    {
+      "archivo": "carrusel",
+      "autor": "neilraouf",
+      "titulo": "Carousel/Merry-go-round (48/24)",
+      "pagina": "https://freesound.org/people/neilraouf/sounds/484512/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 101: vals de carrusel, más lento y desafinado"
+    },
+    {
+      "archivo": "disco-duro",
+      "autor": "Crinkem",
+      "titulo": "Vintage Hard Drive Read and Idle",
+      "pagina": "https://freesound.org/people/Crinkem/sounds/493891/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 95: disco duro viejo leyendo"
+    },
+    {
+      "archivo": "zumbido-crt",
+      "autor": "Fission9",
+      "titulo": "CRT TV Whine",
+      "pagina": "https://freesound.org/people/Fission9/sounds/693863/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 95: pitido agudo de un monitor CRT (muy bajo)"
+    },
+    {
+      "archivo": "dron-tension",
+      "autor": "szegvari",
+      "titulo": "Dark Thriller Horror Atmo Scary Eerie Voice Drone Sad Myst Mood Ambience Cinematic Film Movie Surround.wav",
+      "pagina": "https://freesound.org/people/szegvari/sounds/633956/",
+      "licencia": "CC0 1.0",
+      "uso": "Capa de tensión: El Inquilino está cerca"
+    },
+    {
+      "archivo": "musica-suspenso",
+      "autor": "awrmacd",
+      "titulo": "Orchestral Suspense Loop 1",
+      "pagina": "https://freesound.org/people/awrmacd/sounds/387223/",
+      "licencia": "CC0 1.0",
+      "uso": "Capa de búsqueda: te está buscando"
+    },
+    {
+      "archivo": "musica-persecucion",
+      "autor": "PearceWilsonKing",
+      "titulo": "Horror Chase Music loop",
+      "pagina": "https://freesound.org/people/PearceWilsonKing/sounds/422274/",
+      "licencia": "CC0 1.0",
+      "uso": "Capa de persecución"
+    },
+    {
+      "archivo": "golpe-piano",
+      "autor": "DianneLaChauveSouris",
+      "titulo": "Piano Shock Impact",
+      "pagina": "https://freesound.org/people/DianneLaChauveSouris/sounds/460042/",
+      "licencia": "CC0 1.0",
+      "uso": "Te vio: golpe de piano que abre la persecución"
+    },
+    {
+      "archivo": "respiracion-calma",
+      "autor": "giddster",
+      "titulo": "Breathing, nose, calm",
+      "pagina": "https://freesound.org/people/giddster/sounds/336531/",
+      "licencia": "CC0 1.0",
+      "uso": "Respiración tranquila por la nariz"
+    },
+    {
+      "archivo": "respiracion-asustada",
+      "autor": "casiba842",
+      "titulo": "Scared Male Heavy Breathing",
+      "pagina": "https://freesound.org/people/casiba842/sounds/554307/",
+      "licencia": "CC0 1.0",
+      "uso": "Respiración con miedo, entrecortada (voz de hombre)"
+    },
+    {
+      "archivo": "respiracion-rapida",
+      "autor": "Nox_Sound",
+      "titulo": "Male_Breath_Fast_Loop_Stereo.wav",
+      "pagina": "https://freesound.org/people/Nox_Sound/sounds/554907/",
+      "licencia": "CC0 1.0",
+      "uso": "Respiración rápida en pánico (loop)"
+    },
+    {
+      "archivo": "jadeo",
+      "autor": "Artmasterrich",
+      "titulo": "Male_Medium_Breathing_01",
+      "pagina": "https://freesound.org/people/Artmasterrich/sounds/345464/",
+      "licencia": "CC0 1.0",
+      "uso": "Jadeo sin aliento (voz de hombre)"
+    },
+    {
+      "archivo": "respiracion-contenida",
+      "autor": "Nox_Sound",
+      "titulo": "Male_Breath_Scared_Frozen_Loop_Stereo.wav",
+      "pagina": "https://freesound.org/people/Nox_Sound/sounds/554906/",
+      "licencia": "CC0 1.0",
+      "uso": "Respiración contenida, escondido (loop)"
+    },
+    {
+      "archivo": "inhalacion",
+      "autor": "bertiehs",
+      "titulo": "Gasp Male",
+      "pagina": "https://freesound.org/people/bertiehs/sounds/271245/",
+      "licencia": "CC0 1.0",
+      "uso": "Inhalación brusca al verlo (voz de hombre)"
+    },
+    {
+      "archivo": "suspiro",
+      "autor": "morganveilleux",
+      "titulo": "male long sigh- close",
+      "pagina": "https://freesound.org/people/morganveilleux/sounds/389998/",
+      "licencia": "CC0 1.0",
+      "uso": "Suspiro largo de alivio"
+    },
+    {
+      "archivo": "pitido-oido",
+      "autor": "Breviceps",
+      "titulo": "Tinnitus sound",
+      "pagina": "https://freesound.org/people/Breviceps/sounds/450620/",
+      "licencia": "CC0 1.0",
+      "uso": "Pitido en los oídos (adrenalina y despertar)"
+    },
+    {
+      "archivo": "ropa",
+      "autor": "martian",
+      "titulo": "foley cloth rustle.wav",
+      "pagina": "https://freesound.org/people/martian/sounds/19291/",
+      "licencia": "CC0 1.0",
+      "uso": "Roce de ropa al moverse"
+    },
+    {
+      "archivo": "arrodillarse",
+      "autor": "josecruz98",
+      "titulo": "Personaje se arrodilla.wav",
+      "pagina": "https://freesound.org/people/josecruz98/sounds/393021/",
+      "licencia": "CC0 1.0",
+      "uso": "Arrodillarse para meterse bajo la mesa"
+    },
+    {
+      "archivo": "gatear-madera",
+      "autor": "krnash",
+      "titulo": "Crawling on a Wooden Floor.wav",
+      "pagina": "https://freesound.org/people/krnash/sounds/389794/",
+      "licencia": "CC0 1.0",
+      "uso": "Arrastrarse bajo la cama"
+    },
+    {
+      "archivo": "cama-sabanas",
+      "autor": "SpliceSound",
+      "titulo": "Foley, getting in and out of bed, sheets, fabric rustle.wav",
+      "pagina": "https://freesound.org/people/SpliceSound/sounds/150445/",
+      "licencia": "CC0 1.0",
+      "uso": "Moverse entre sábanas y el colchón"
+    },
+    {
+      "archivo": "pasos-alfombra",
+      "autor": "theshuggie",
+      "titulo": "Footsteps on carpet 2.wav",
+      "pagina": "https://freesound.org/people/theshuggie/sounds/371018/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 0: alfombra"
+    },
+    {
+      "archivo": "pasos-mojados",
+      "autor": "sqeeeek",
+      "titulo": "WetFootsteps.wav",
+      "pagina": "https://freesound.org/people/sqeeeek/sounds/326543/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 0: capa húmeda sobre la alfombra"
+    },
+    {
+      "archivo": "pasos-concreto",
+      "autor": "florianreichelt",
+      "titulo": "Footsteps on concrete",
+      "pagina": "https://freesound.org/people/florianreichelt/sounds/459964/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 1: concreto"
+    },
+    {
+      "archivo": "pasos-metal",
+      "autor": "Phil25",
+      "titulo": "Metal Steps",
+      "pagina": "https://freesound.org/people/Phil25/sounds/208101/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 2: rejilla de metal"
+    },
+    {
+      "archivo": "pasos-agua",
+      "autor": "ryansitz",
+      "titulo": "Wading in Shallow Water.wav",
+      "pagina": "https://freesound.org/people/ryansitz/sounds/342932/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 37: agua hasta los tobillos"
+    },
+    {
+      "archivo": "pasos-madera",
+      "autor": "taure",
+      "titulo": "Walking_Wood.mp3",
+      "pagina": "https://freesound.org/people/taure/sounds/362777/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 101: tablas de madera de la feria"
+    },
+    {
+      "archivo": "pasos-baldosa",
+      "autor": "SpliceSound",
+      "titulo": "Footsteps, Tile, Male Sneakers, Slow Pace.wav",
+      "pagina": "https://freesound.org/people/SpliceSound/sounds/170506/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 95: baldosa, zapatillas, caminando"
+    },
+    {
+      "archivo": "pasos-baldosa-rapido",
+      "autor": "SpliceSound",
+      "titulo": "Footsteps, Tile, Male Tennis Shoes, Fast Pace.wav",
+      "pagina": "https://freesound.org/people/SpliceSound/sounds/170501/",
+      "licencia": "CC0 1.0",
+      "uso": "Nivel 95: baldosa, zapatillas, corriendo"
+    },
+    {
+      "archivo": "inquilino-arrastre",
+      "autor": "abbahoot",
+      "titulo": "Footstep Drag Indoors .wav",
+      "pagina": "https://freesound.org/people/abbahoot/sounds/221650/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino: arrastra los pies"
+    },
+    {
+      "archivo": "inquilino-pantuflas",
+      "autor": "SpliceSound",
+      "titulo": "Footsteps, slippers dragging on tile.wav",
+      "pagina": "https://freesound.org/people/SpliceSound/sounds/369887/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino: pasos que se arrastran sobre baldosa"
+    },
+    {
+      "archivo": "inquilino-olfatea",
+      "autor": "kd_jack",
+      "titulo": "Werewolf breathing and sniffing ",
+      "pagina": "https://freesound.org/people/kd_jack/sounds/261464/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino: respira y olfatea"
+    },
+    {
+      "archivo": "inquilino-respira",
+      "autor": "iut_Paris8",
+      "titulo": "BORIERO_Nolwen_2020_2021_Monster breathing.wav",
+      "pagina": "https://freesound.org/people/iut_Paris8/sounds/567723/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino: respiración lenta y húmeda"
+    },
+    {
+      "archivo": "inquilino-tararea",
+      "autor": "mahakush",
+      "titulo": "male_hum.wav",
+      "pagina": "https://freesound.org/people/mahakush/sounds/368817/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino tararea la nota del zumbido (más grave)"
+    },
+    {
+      "archivo": "vhs-meter",
+      "autor": "PanZen",
+      "titulo": "59_VHS_casette_in.wav",
+      "pagina": "https://freesound.org/people/PanZen/sounds/216766/",
+      "licencia": "CC0 1.0",
+      "uso": "Meter la cinta en la videocasetera"
+    },
+    {
+      "archivo": "vhs-mecanismo",
+      "autor": "TRP",
+      "titulo": "VHS tape clicks rewind play mechanical 05.flac",
+      "pagina": "https://freesound.org/people/TRP/sounds/574865/",
+      "licencia": "CC0 1.0",
+      "uso": "Mecanismo de la videocasetera: clics, rebobinar, play"
+    },
+    {
+      "archivo": "tv-encender",
+      "autor": "Fission9",
+      "titulo": "CRT TV Switches On",
+      "pagina": "https://freesound.org/people/Fission9/sounds/693860/",
+      "licencia": "CC0 1.0",
+      "uso": "Tele CRT que se enciende"
+    },
+    {
+      "archivo": "tv-estatica",
+      "autor": "f-r-a-g-i-l-e",
+      "titulo": "Sixties TV Static",
+      "pagina": "https://freesound.org/people/f-r-a-g-i-l-e/sounds/478760/",
+      "licencia": "CC0 1.0",
+      "uso": "Tele sin señal: estática"
+    },
+    {
+      "archivo": "tv-canal",
+      "autor": "kyles",
+      "titulo": "tv channel change static blips (scanner CB radio tuning static blips +static sharp +scanner CB radio blips on+off good2).flac",
+      "pagina": "https://freesound.org/people/kyles/sounds/454259/",
+      "licencia": "CC0 1.0",
+      "uso": "Cambio de canal con chasquidos de estática"
+    },
+    {
+      "archivo": "rebobinar",
+      "autor": "Epease123",
+      "titulo": "VHS Rewind Tape Stop Power Off.wav",
+      "pagina": "https://freesound.org/people/Epease123/sounds/626663/",
+      "licencia": "CC0 1.0",
+      "uso": "◀◀ Rebobinando al ser atrapado"
+    },
+    {
+      "archivo": "casillero-abrir",
+      "autor": "kyles",
+      "titulo": "door metal locker gate grill open.flac",
+      "pagina": "https://freesound.org/people/kyles/sounds/637481/",
+      "licencia": "CC0 1.0",
+      "uso": "Abrir el casillero"
+    },
+    {
+      "archivo": "casillero-golpe",
+      "autor": "kyles",
+      "titulo": "door metal locker or shed close hard slam rattle solid nice.wav",
+      "pagina": "https://freesound.org/people/kyles/sounds/450792/",
+      "licencia": "CC0 1.0",
+      "uso": "Casillero que se cierra de golpe"
+    },
+    {
+      "archivo": "cama-cruje",
+      "autor": "MootMcnoodles",
+      "titulo": "Bed creak.wav",
+      "pagina": "https://freesound.org/people/MootMcnoodles/sounds/444389/",
+      "licencia": "CC0 1.0",
+      "uso": "La cama cruje"
+    },
+    {
+      "archivo": "silla",
+      "autor": "harrietniamh",
+      "titulo": "Wooden Chair Move.mp3",
+      "pagina": "https://freesound.org/people/harrietniamh/sounds/219677/",
+      "licencia": "CC0 1.0",
+      "uso": "Correr la silla para meterse bajo la mesa"
+    },
+    {
+      "archivo": "hospital",
+      "autor": "rthijs",
+      "titulo": "hospital_hallway_waiting_room.flac",
+      "pagina": "https://freesound.org/people/rthijs/sounds/614805/",
+      "licencia": "CC0 1.0",
+      "uso": "Prólogo y finales: pasillo y sala de espera de un hospital"
+    },
+    {
+      "archivo": "celular-vibra",
+      "autor": "Breviceps",
+      "titulo": "Phone vibration",
+      "pagina": "https://freesound.org/people/Breviceps/sounds/515295/",
+      "licencia": "CC0 1.0",
+      "uso": "Prólogo: llama mamá (no contesta) y después le escribe"
+    },
+    {
+      "archivo": "celular-escribir",
+      "autor": "vcspran",
+      "titulo": "Typing_Sending_Text_Message.wav",
+      "pagina": "https://freesound.org/people/vcspran/sounds/344606/",
+      "licencia": "CC0 1.0",
+      "uso": "Prólogo: escribe «no sé qué decirle», lo borra y manda «mañana»"
+    },
+    {
+      "archivo": "monitor-cardiaco",
+      "autor": "samfk360",
+      "titulo": "Heart Monitor Beep",
+      "pagina": "https://freesound.org/people/samfk360/sounds/148897/",
+      "licencia": "CC0 1.0",
+      "uso": "El monitor de Nico: solo el primer pitido, repetido a su ritmo. La grabación termina en el pitido continuo de un paro y esa parte no se usa"
+    },
+    {
+      "archivo": "luces-apagan",
+      "autor": "ThabzMalik",
+      "titulo": "Fluorescent lights turning on and off",
+      "pagina": "https://freesound.org/people/ThabzMalik/sounds/767055/",
+      "licencia": "CC0 1.0",
+      "uso": "Final «Despertar»: los tubos se apagan uno por uno al amanecer"
+    },
+    {
+      "archivo": "puerta",
+      "autor": "ahriik",
+      "titulo": "Door Open & Close 2 (Off-Axis).wav",
+      "pagina": "https://freesound.org/people/ahriik/sounds/627769/",
+      "licencia": "CC0 1.0",
+      "uso": "La puerta de la habitación 4 (solo la parte en que se abre)"
+    },
+    {
+      "archivo": "bajo-agua",
+      "autor": "yosarrian",
+      "titulo": "underwater",
+      "pagina": "https://freesound.org/people/yosarrian/sounds/179927/",
+      "licencia": "CC0 1.0",
+      "uso": "Prólogo: el recuerdo de un segundo bajo el agua"
+    },
+    {
+      "archivo": "amanecer",
+      "autor": "davidco80",
+      "titulo": "Morning Ambience city",
+      "pagina": "https://freesound.org/people/davidco80/sounds/164213/",
+      "licencia": "CC0 1.0",
+      "uso": "Final «Despertar»: la ciudad y los pájaros cuando se apagan los tubos"
+    },
+    {
+      "archivo": "lapiz",
+      "autor": "rivernile7",
+      "titulo": "Writing On Paper.wav",
+      "pagina": "https://freesound.org/people/rivernile7/sounds/234016/",
+      "licencia": "CC0 1.0",
+      "uso": "Final del Inquilino: el contrato se firma solo"
+    },
+    {
+      "archivo": "puerta-corrediza",
+      "autor": "musicandsoundyay",
+      "titulo": "Sliding door opening and closing.wav",
+      "pagina": "https://freesound.org/people/musicandsoundyay/sounds/452755/",
+      "licencia": "CC0 1.0",
+      "uso": "La puerta corrediza de la habitación 4 (solo la parte en que se abre)"
+    },
+    {
+      "archivo": "llave",
+      "autor": "tcrocker68",
+      "titulo": "Keys_Jingling.wav",
+      "pagina": "https://freesound.org/people/tcrocker68/sounds/235594/",
+      "licencia": "CC0 1.0",
+      "uso": "Recoger una llave"
+    },
+    {
+      "archivo": "puerta-cerrada",
+      "autor": "taure",
+      "titulo": "Door Handle jiggle.WAV",
+      "pagina": "https://freesound.org/people/taure/sounds/575307/",
+      "licencia": "CC0 1.0",
+      "uso": "Puerta cerrada, sin la llave"
+    },
+    {
+      "archivo": "puerta-abrir",
+      "autor": "plumaudio",
+      "titulo": "Lock Unlock Wooden Door",
+      "pagina": "https://freesound.org/people/plumaudio/sounds/513819/",
+      "licencia": "CC0 1.0",
+      "uso": "Abrir con la llave"
+    },
+    {
+      "archivo": "chapuzon",
+      "autor": "swordofkings128",
+      "titulo": "Splash",
+      "pagina": "https://freesound.org/people/swordofkings128/sounds/398032/",
+      "licencia": "CC0 1.0",
+      "uso": "El Inquilino te hunde con él (la atrapada)"
+    },
+    {
+      "archivo": "burbujas",
+      "autor": "ristooooo1",
+      "titulo": "Bubbles 001.wav",
+      "pagina": "https://freesound.org/people/ristooooo1/sounds/539823/",
+      "licencia": "CC0 1.0",
+      "uso": "Bajo el agua, en la atrapada: las burbujas que paran"
+    },
+    {
+      "archivo": "pasos-piso-arriba",
+      "autor": "Yuval",
+      "titulo": "neighbour's footsteps",
+      "pagina": "https://freesound.org/people/Yuval/sounds/210592/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Vestíbulo B: Nadie: el Vestíbulo no tiene piso de arriba"
+    },
+    {
+      "archivo": "pasos-pasillo-lejos",
+      "autor": "georgisound",
+      "titulo": "Footsteps_Hallway.wav",
+      "pagina": "https://freesound.org/people/georgisound/sounds/368834/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Zona Habitable B: Alguien que camina donde no se ve"
+    },
+    {
+      "archivo": "golpes-puerta-lentos",
+      "autor": "HunteR4708",
+      "titulo": "Knock on the door",
+      "pagina": "https://freesound.org/people/HunteR4708/sounds/256513/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Zona Habitable B y el pasillo del hospital: Marta, en 1996, golpeando la puerta de la cama 4 sin animarse a entrar"
+    },
+    {
+      "archivo": "carrito-ruedas",
+      "autor": "craigsmith",
+      "titulo": "R05-09-Squeaky Metal Wheels in Busy Space.wav",
+      "pagina": "https://freesound.org/people/craigsmith/sounds/482744/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Zona Habitable B: El carrito de limpieza de Marta"
+    },
+    {
+      "archivo": "llanto-ahogado",
+      "autor": "HorrorAudio",
+      "titulo": "Muffled Female Cry.wav",
+      "pagina": "https://freesound.org/people/HorrorAudio/sounds/359154/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Zona Habitable B, una sola vez: Marta llorando detrás de una puerta"
+    },
+    {
+      "archivo": "radio-voces",
+      "autor": "cognito perceptu",
+      "titulo": "static obscured voices 570 kHz.wav",
+      "pagina": "https://freesound.org/people/cognito%20perceptu/sounds/117140/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Las teles de la Zona Habitable B: La radio de 1996, con el clima de «Puerto Lindo» por debajo"
+    },
+    {
+      "archivo": "estatica-loop",
+      "autor": "dotY21",
+      "titulo": "hard static loop",
+      "pagina": "https://freesound.org/people/dotY21/sounds/395804/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Todos los niveles B: El micrófono de la cámara cuando algo está cerca"
+    },
+    {
+      "archivo": "camara-falla",
+      "autor": "humanhasbeenneutralized",
+      "titulo": "TV glitch",
+      "pagina": "https://freesound.org/people/humanhasbeenneutralized/sounds/534695/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Todos los niveles B: La cámara de Dani que falla, y Los que miran cuando los miras mucho"
+    },
+    {
+      "archivo": "agua-inunda",
+      "autor": "KevinT1001",
+      "titulo": "Water_Flood_enhanced.mp3",
+      "pagina": "https://freesound.org/people/KevinT1001/sounds/379906/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Tuberías B y Las Piscinas B: La línea del agua que sube"
+    },
+    {
+      "archivo": "caja-musical",
+      "autor": "AudioBitsAndBytes",
+      "titulo": "Music Box Lullaby Clip",
+      "pagina": "https://freesound.org/people/AudioBitsAndBytes/sounds/163644/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Tuberías B y los acertijos: La caja musical del cuarto de Dani y Nico; suena durante los acertijos"
+    },
+    {
+      "archivo": "montana-rusa-lejos",
+      "autor": "Garuda1982",
+      "titulo": "roller coaster field recording",
+      "pagina": "https://freesound.org/people/Garuda1982/sounds/535910/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Casa de Espejos B: PlayLand filtrándose en el laberinto"
+    },
+    {
+      "archivo": "rueda-cruje",
+      "autor": "LoafDV",
+      "titulo": "Long Metal Creak",
+      "pagina": "https://freesound.org/people/LoafDV/sounds/238289/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Casa de Espejos B: La rueda de la fortuna girando"
+    },
+    {
+      "archivo": "bajo-agua-hondo",
+      "autor": "Fission9",
+      "titulo": "Underwater Ambience",
+      "pagina": "https://freesound.org/people/Fission9/sounds/504641/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Protector de Pantalla B: Cómo oye Dani cuando el agua le llega al pecho"
+    },
+    {
+      "archivo": "silbato-eco",
+      "autor": "SpliceSound",
+      "titulo": "Referee whistle blow, gymnasium.wav",
+      "pagina": "https://freesound.org/people/SpliceSound/sounds/218318/",
+      "licencia": "CC0 1.0",
+      "uso": "Lado B: Las Piscinas B y a lo lejos en los demás: El Salvavidas: el silbato del día de la piscina"
+    },
+    {
+      "archivo": "piscina-gente",
+      "autor": "Breviceps",
+      "titulo": "People talking (Adults & Children)",
+      "pagina": "https://freesound.org/people/Breviceps/sounds/473586/",
+      "licencia": "CC0 1.0",
+      "uso": "Las cintas del Lado A (PLAYLAND, VERANO y SIN IMAGEN) y, en el Lado B: El recuerdo «La cuenta»: La piscina llena el día del accidente"
+    },
+    {
+      "archivo": "gente-se-asusta",
+      "autor": "deleted_user_2104797",
+      "titulo": "Crowd shock.wav",
+      "pagina": "https://freesound.org/people/deleted_user_2104797/sounds/324898/",
+      "licencia": "CC0 1.0",
+      "uso": "Las cintas del Lado A (PLAYLAND, VERANO y SIN IMAGEN) y, en el Lado B: El recuerdo «La cuenta»: El momento en que todos se dan cuenta"
+    },
+    {
+      "archivo": "bebe-llora",
+      "autor": "gumballworld",
+      "titulo": "newborn baby crying",
+      "pagina": "https://freesound.org/people/gumballworld/sounds/391181/",
+      "licencia": "CC0 1.0",
+      "uso": "Nico recién nacido: lo que Dani oía por el intercomunicador a los 9 años (Zona Habitable y el 95)"
+    },
+    {
+      "archivo": "bebe-llora-fuerte",
+      "autor": "PickleJones",
+      "titulo": "01 baby crying hard.wav",
+      "pagina": "https://freesound.org/people/PickleJones/sounds/151085/",
+      "licencia": "CC0 1.0",
+      "uso": "El llanto cuando no va nadie (Zona Habitable)"
+    },
+    {
+      "archivo": "bebe-quejido",
+      "autor": "jamesmbock",
+      "titulo": "babywhine1.mp3",
+      "pagina": "https://freesound.org/people/jamesmbock/sounds/458644/",
+      "licencia": "CC0 1.0",
+      "uso": "El quejido antes de llorar (y el que queda en la cuna vacía) (Zona Habitable)"
+    },
+    {
+      "archivo": "bebe-llora-otro",
+      "autor": "deleted_user_2104797",
+      "titulo": "Baby Cry.wav",
+      "pagina": "https://freesound.org/people/deleted_user_2104797/sounds/346663/",
+      "licencia": "CC0 1.0",
+      "uso": "Otra toma del llanto, por si la primera no sirve (De repuesto)"
+    },
+    {
+      "archivo": "nino-rie",
+      "autor": "OBXJohn",
+      "titulo": "Boy or Young Child Laughing",
+      "pagina": "https://freesound.org/people/OBXJohn/sounds/365632/",
+      "licencia": "CC0 1.0",
+      "uso": "Nico a las escondidas en el laberinto de espejos: se ríe y se corta (Casa de Espejos y Vestíbulo)"
+    },
+    {
+      "archivo": "golpes-puerta-fuertes",
+      "autor": "iamadam19",
+      "titulo": "banging on door",
+      "pagina": "https://freesound.org/people/iamadam19/sounds/362633/",
+      "licencia": "CC0 1.0",
+      "uso": "La puerta (o el casillero) que alguien quiere abrir cuando pasas"
+    }
+  ],
+  "musica": [
+    {
+      "titulo": "Local Forecast – Elevator",
+      "autor": "Kevin MacLeod",
+      "pagina": "https://commons.wikimedia.org/wiki/File:Local_Forecast_-_Elevator_(ISRC_USUAN1300012).mp3",
+      "licencia": "CC BY 3.0"
+    }
+  ],
+  "codigo": [
+    "Raycaster basado en el tutorial de Lode Vandevenne",
+    "Motor: Phaser 4 · Sitio: Next.js y React · Editor: Vue"
+  ]
+}

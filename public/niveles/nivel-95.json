@@ -1,0 +1,1424 @@
+{
+  "id": "nivel-95",
+  "numero": "95",
+  "nombre": "Protector de Pantalla",
+  "descripcion": "El laberinto de ladrillos rojos de una computadora de 1995. Con cada llave el papel tapiz amarillo se filtra por las grietas: el Vestíbulo te está alcanzando.",
+  "tension": 95,
+  "semilla": 1999,
+  "ancho": 25,
+  "alto": 25,
+  "mapa": [
+    "#########################",
+    "#@....#r....#.......#...#",
+    "#####.#####.#.#.###.#...#",
+    "#.....#...#...#.#.#.#...#",
+    "#.#####.#.#.###.#.#.###.#",
+    "#...#m..#.#.#...#.....#.#",
+    "###.###.#.#.#.#######.#.#",
+    "#...#...#.#.#.#...#.#...#",
+    "#.###.###M###.#.#.#.###.#",
+    "#.....#.#...#.V.#.#.#...#",
+    "#######.###.###.#.#.#.###",
+    "#.....#.......#.#.#.....#",
+    "###.#.#.#####.#.#.#####.#",
+    "#...#...#.....#.#...#...#",
+    "#.#.#####.#####.###.#.###",
+    "#.#.#.....#v..#.....#.#X#",
+    "#.#.#.#######.#...###.#R#",
+    "#.#.#.......#.#...#.....#",
+    "#.#########.#.#.#.#####.#",
+    "#.....#...#.#...#.....#.#",
+    "#.#.#.#.#.#.#####.###.###",
+    "#.#...#.#.#.....#...#...#",
+    "#.###.#.#.#####.###.###.#",
+    "#..a#...#.......A.......#",
+    "#########################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "llaves": [
+    {
+      "color": "amarilla",
+      "x": 5,
+      "y": 5,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "desvio": 2,
+      "desdeEntrada": 32
+    },
+    {
+      "color": "azul",
+      "x": 3,
+      "y": 23,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 28,
+      "desdeEntrada": 33
+    },
+    {
+      "color": "verde",
+      "x": 11,
+      "y": 15,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "desvio": 12,
+      "desdeEntrada": 23
+    },
+    {
+      "color": "roja",
+      "x": 7,
+      "y": 1,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 12,
+      "desdeEntrada": 23
+    }
+  ],
+  "puertas": [
+    {
+      "color": "amarilla",
+      "x": 9,
+      "y": 8,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "salida": false
+    },
+    {
+      "color": "azul",
+      "x": 16,
+      "y": 23,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": false
+    },
+    {
+      "color": "verde",
+      "x": 14,
+      "y": 9,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "salida": false
+    },
+    {
+      "color": "roja",
+      "x": 23,
+      "y": 16,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 23,
+    "y": 15
+  },
+  "salas": [
+    {
+      "x": 15,
+      "y": 15,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Escritorio 1996",
+    "x": 15,
+    "y": 15,
+    "ancho": 3,
+    "alto": 3
+  },
+  "cuartos": [
+    {
+      "x": 21,
+      "y": 1,
+      "ancho": 3,
+      "alto": 3,
+      "entrada": {
+        "x": 23,
+        "y": 4
+      }
+    }
+  ],
+  "refugios": [
+    {
+      "nombre": "Escritorio 1996",
+      "x": 15,
+      "y": 15,
+      "ancho": 3,
+      "alto": 3
+    },
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 21,
+      "y": 1,
+      "ancho": 3,
+      "alto": 3
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 15,
+      "y": 15,
+      "mirando": 0,
+      "cuarto": "Escritorio 1996",
+      "cinta": {
+        "titulo": "LA COMPU DE LA ABUELA",
+        "descripcion": "Los dos frente al monitor, mirando el laberinto de ladrillos. Nico: «¿Y si adentro vive alguien?»."
+      }
+    },
+    {
+      "tipo": "videocasetera",
+      "x": 21,
+      "y": 1,
+      "mirando": 45,
+      "cuarto": "Cuarto de la tele",
+      "cinta": {
+        "titulo": "NOCHE 11",
+        "descripcion": "Una sala de espera vacía, grabada desde una silla. Las luces zumban. La silla de al lado está girada hacia la cámara."
+      }
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "mesa",
+      "x": 8,
+      "y": 3,
+      "mirando": 0
+    },
+    {
+      "tipo": "armario",
+      "x": 3,
+      "y": 20,
+      "mirando": 90
+    },
+    {
+      "tipo": "cajas",
+      "x": 15,
+      "y": 22,
+      "mirando": 90
+    },
+    {
+      "tipo": "mesa",
+      "x": 15,
+      "y": 8,
+      "mirando": 90
+    },
+    {
+      "tipo": "armario",
+      "x": 11,
+      "y": 4,
+      "mirando": 90
+    }
+  ],
+  "props": [
+    {
+      "tipo": "pc_antigua",
+      "x": 17,
+      "y": 16
+    },
+    {
+      "tipo": "silla_giratoria",
+      "x": 17,
+      "y": 17
+    },
+    {
+      "tipo": "lampara_de_pie",
+      "x": 23,
+      "y": 1
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "regla",
+      "soporte": "papel continuo de impresora",
+      "instrumento": "birome azul",
+      "estado": [
+        "doblada"
+      ],
+      "impreso": "C:\\> LABERINTO.SCR",
+      "texto": "esta es la compu de la abuela. el laberinto que mirábamos con nico cuando se cortaba el internet. él decía que adentro vivía alguien.\ndespués de la tercera llave casi no descansa: te sale a buscar seguido. si no te vio, escóndete y aguanta el aire cuando huele la puerta: se aburre y se va. la luz de las teles sigue sirviendo.\nsigue las huellas mojadas y CORRE a la salida.",
+      "pensamiento": "La compu de la abuela...",
+      "x": 23,
+      "y": 19
+    },
+    {
+      "autor": "N.",
+      "tipo": "diario",
+      "soporte": "etiqueta de un disquete",
+      "instrumento": "birome azul",
+      "estado": [],
+      "dibujo": "astro",
+      "texto": "dani: ya sé salir.\nte espero afuera. no te quedes mirando la pantalla, a mí casi me pasa.",
+      "pensamiento": "Nico salió. Nico salió.",
+      "x": 19,
+      "y": 17
+    },
+    {
+      "autor": "D.",
+      "noche": 10,
+      "tipo": "diario",
+      "soporte": "hoja pegada en el monitor",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada",
+        "mojada"
+      ],
+      "texto": "si llegaste hasta aquí y todavía no te diste cuenta: la letra es la tuya.\nsoy tú. bueno, tú de la noche 10.\nnunca llegué a salir: siempre me despertaban antes. esta vez sal.\ny cuando vuelvas, deja una nota. a mí me sirvieron.",
+      "pensamiento": "Es mi letra. Siempre fue mi letra.",
+      "x": 19,
+      "y": 7
+    },
+    {
+      "autor": null,
+      "tipo": "objeto",
+      "soporte": "contrato de alquiler escrito a máquina",
+      "instrumento": "máquina de escribir",
+      "estado": [],
+      "texto": "CONTRATO DE ARRENDAMIENTO\nINQUILINO: DANI\nINMUEBLE: este\nPLAZO: indefinido\nFIRMA: ____________",
+      "pensamiento": "Tiene mi nombre. No voy a firmar nada.",
+      "x": 17,
+      "y": 3
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "amarilla",
+      "x": 6,
+      "y": 5,
+      "apunta": 180
+    },
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 10,
+      "y": 11,
+      "apunta": 180
+    },
+    {
+      "tipo": "astro",
+      "llave": "verde",
+      "x": 16,
+      "y": 17,
+      "apunta": 180
+    },
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 14,
+      "y": 1,
+      "apunta": 180
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 1,
+      "y": 22
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 15,
+      "y": 12
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "corrupcion_por_llave",
+      "descripcion": "Cada llave recogida sube un nivel la corrupción (0 a 4): grietas, carne detrás de los ladrillos, manos y palabras escritas, el piso y el techo manchados, y cada vez más oscuro y rojo.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 9,
+      "y": 23,
+      "objetivo": {
+        "x": 23,
+        "y": 23
+      }
+    },
+    {
+      "tipo": "persecucion_final",
+      "descripcion": "Tras la tercera llave, El Inquilino casi no descansa y sale a cazar seguido, con las mismas reglas: solo te persigue si te ve.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "detras_de_ti",
+      "descripcion": "Un respirador de hospital suena pegado a la nuca (sonido 3D). Si te das vuelta no hay nadie: se corta y cae una gota.",
+      "x": 6,
+      "y": 13,
+      "piensa": "Suena como la máquina del cuarto de Nico."
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "persigue_tras_tercera_llave"
+  },
+  "ambiente": {
+    "paredes": "ladrillo_rojo",
+    "paredesCorruptas": "ladrillo_con_papel_amarillo",
+    "piso": "baldosa_gris",
+    "techo": "yeso_amarillo",
+    "colorNiebla": "#000000",
+    "distanciaVision": 11,
+    "luz": 1
+  },
+  "audio": {
+    "ambiente": "zumbido_crt_y_ventilador_pc",
+    "pasos": "baldosa",
+    "zonaSegura": "modem_56k"
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 220,
+    "segundosRutaOptima": 100,
+    "callejones": 14,
+    "porcentajePiso": 47,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "amarilla",
+      "azul",
+      "verde",
+      "roja"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          4,
+          15
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          5,
+          10
+        ]
+      ],
+      "cierra": [
+        [
+          9,
+          6
+        ],
+        [
+          1,
+          15
+        ],
+        [
+          8,
+          11
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [
+        [
+          12,
+          17
+        ],
+        [
+          2,
+          17
+        ],
+        [
+          13,
+          14
+        ]
+      ],
+      "cierra": [
+        [
+          5,
+          20
+        ],
+        [
+          18,
+          21
+        ],
+        [
+          7,
+          22
+        ]
+      ]
+    },
+    {
+      "llaves": 3,
+      "abre": [
+        [
+          18,
+          9
+        ],
+        [
+          12,
+          9
+        ],
+        [
+          20,
+          14
+        ]
+      ],
+      "cierra": [
+        [
+          14,
+          19
+        ],
+        [
+          13,
+          6
+        ],
+        [
+          18,
+          23
+        ]
+      ]
+    },
+    {
+      "llaves": 4,
+      "abre": [
+        [
+          15,
+          6
+        ],
+        [
+          6,
+          3
+        ],
+        [
+          21,
+          18
+        ]
+      ],
+      "cierra": [
+        [
+          19,
+          4
+        ],
+        [
+          22,
+          11
+        ],
+        [
+          21,
+          16
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      3,
+      9
+    ],
+    [
+      4,
+      9
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      7,
+      4
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      9,
+      6
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      9,
+      8
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      10,
+      9
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      11,
+      10
+    ],
+    [
+      11,
+      11
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      8,
+      11
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      12
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      6,
+      13
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      5,
+      12
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      1,
+      18
+    ],
+    [
+      1,
+      19
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      22
+    ],
+    [
+      1,
+      23
+    ],
+    [
+      2,
+      23
+    ],
+    [
+      3,
+      23
+    ],
+    [
+      2,
+      23
+    ],
+    [
+      1,
+      23
+    ],
+    [
+      1,
+      22
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      19
+    ],
+    [
+      2,
+      19
+    ],
+    [
+      3,
+      19
+    ],
+    [
+      4,
+      19
+    ],
+    [
+      5,
+      19
+    ],
+    [
+      5,
+      20
+    ],
+    [
+      5,
+      21
+    ],
+    [
+      5,
+      22
+    ],
+    [
+      5,
+      23
+    ],
+    [
+      6,
+      23
+    ],
+    [
+      7,
+      23
+    ],
+    [
+      7,
+      22
+    ],
+    [
+      7,
+      21
+    ],
+    [
+      7,
+      20
+    ],
+    [
+      7,
+      19
+    ],
+    [
+      8,
+      19
+    ],
+    [
+      9,
+      19
+    ],
+    [
+      9,
+      20
+    ],
+    [
+      9,
+      21
+    ],
+    [
+      9,
+      22
+    ],
+    [
+      9,
+      23
+    ],
+    [
+      10,
+      23
+    ],
+    [
+      11,
+      23
+    ],
+    [
+      12,
+      23
+    ],
+    [
+      13,
+      23
+    ],
+    [
+      14,
+      23
+    ],
+    [
+      15,
+      23
+    ],
+    [
+      16,
+      23
+    ],
+    [
+      17,
+      23
+    ],
+    [
+      18,
+      23
+    ],
+    [
+      19,
+      23
+    ],
+    [
+      19,
+      22
+    ],
+    [
+      19,
+      21
+    ],
+    [
+      18,
+      21
+    ],
+    [
+      17,
+      21
+    ],
+    [
+      17,
+      20
+    ],
+    [
+      17,
+      19
+    ],
+    [
+      17,
+      18
+    ],
+    [
+      17,
+      17
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      15,
+      18
+    ],
+    [
+      15,
+      19
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      13,
+      19
+    ],
+    [
+      13,
+      18
+    ],
+    [
+      13,
+      17
+    ],
+    [
+      13,
+      16
+    ],
+    [
+      13,
+      15
+    ],
+    [
+      12,
+      15
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      12,
+      15
+    ],
+    [
+      13,
+      15
+    ],
+    [
+      13,
+      16
+    ],
+    [
+      13,
+      17
+    ],
+    [
+      13,
+      18
+    ],
+    [
+      13,
+      19
+    ],
+    [
+      14,
+      19
+    ],
+    [
+      15,
+      19
+    ],
+    [
+      15,
+      18
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      15,
+      14
+    ],
+    [
+      15,
+      13
+    ],
+    [
+      15,
+      12
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      15,
+      10
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      14,
+      9
+    ],
+    [
+      13,
+      9
+    ],
+    [
+      13,
+      8
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      14,
+      5
+    ],
+    [
+      15,
+      5
+    ],
+    [
+      15,
+      4
+    ],
+    [
+      15,
+      3
+    ],
+    [
+      15,
+      2
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      13,
+      2
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      12,
+      3
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      13,
+      2
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      17,
+      1
+    ],
+    [
+      18,
+      1
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      19,
+      2
+    ],
+    [
+      19,
+      3
+    ],
+    [
+      19,
+      4
+    ],
+    [
+      19,
+      5
+    ],
+    [
+      20,
+      5
+    ],
+    [
+      21,
+      5
+    ],
+    [
+      21,
+      6
+    ],
+    [
+      21,
+      7
+    ],
+    [
+      22,
+      7
+    ],
+    [
+      23,
+      7
+    ],
+    [
+      23,
+      8
+    ],
+    [
+      23,
+      9
+    ],
+    [
+      22,
+      9
+    ],
+    [
+      21,
+      9
+    ],
+    [
+      21,
+      10
+    ],
+    [
+      21,
+      11
+    ],
+    [
+      22,
+      11
+    ],
+    [
+      23,
+      11
+    ],
+    [
+      23,
+      12
+    ],
+    [
+      23,
+      13
+    ],
+    [
+      22,
+      13
+    ],
+    [
+      21,
+      13
+    ],
+    [
+      21,
+      14
+    ],
+    [
+      21,
+      15
+    ],
+    [
+      21,
+      16
+    ],
+    [
+      21,
+      17
+    ],
+    [
+      22,
+      17
+    ],
+    [
+      23,
+      17
+    ],
+    [
+      23,
+      16
+    ],
+    [
+      23,
+      15
+    ]
+  ]
+}

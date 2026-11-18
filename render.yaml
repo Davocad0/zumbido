@@ -1,0 +1,21 @@
+# Cómo se publica ZUMBIDO en Render (2026-11-17). Render lee este archivo al conectar el repositorio de GitHub
+# («New» › «Blueprint»): arma el juego y lo deja prendido en una dirección pública https://….onrender.com.
+# Es un solo servidor de Node (next start): las salas del cooperativo viven en su memoria, como en la computadora de uno.
+services:
+  - type: web
+    name: zumbido
+    runtime: node
+    plan: free
+    region: ohio
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      # Publicado: no mostrar las direcciones internas en la sala, no dejar guardar niveles, y los límites (lib/proteccion.js).
+      - key: ZUMBIDO_EN_LINEA
+        value: "1"
+      - key: NODE_VERSION
+        value: "24"
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"

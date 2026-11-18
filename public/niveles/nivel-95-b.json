@@ -1,0 +1,1285 @@
+{
+  "id": "nivel-95-b",
+  "numero": "95",
+  "nombre": "Protector de Pantalla B",
+  "descripcion": "Los ladrillos de la compu de la abuela con el agua hasta el pecho. Todo se oye como bajo el agua y la cámara de Dani falla cada vez más seguido.",
+  "tension": 95,
+  "lado": "B",
+  "base": "nivel-95",
+  "semilla": 1999,
+  "ancho": 25,
+  "alto": 25,
+  "mapa": [
+    "#########################",
+    "#@....#.....#.......#...#",
+    "#####.#####.#.#.#.#.#...#",
+    "#.....#...#...#.#.#.#...#",
+    "#.###.#M#.#.###.#.#.###.#",
+    "#...#...#.#.#...#.....#.#",
+    "###.###.#a#.#.#######.#.#",
+    "#..m#...#.#.#V#...#X#...#",
+    "#.###.###.###.#.#.#R###.#",
+    "#.....#.#...#...#.#.#...#",
+    "#######.###A###.#.#.#.###",
+    "#.....#.......#.#.#.....#",
+    "###.#.#.#####.#.#.#####.#",
+    "#...#...#.....#.#...#...#",
+    "#.#.#####.#####.###.#.###",
+    "#.#.#.....#...#.....#.#r#",
+    "#.#.#.#######.#...###.#.#",
+    "#.#.#.......#.#...#.....#",
+    "#.#########.#.#.#.#####.#",
+    "#.....#...#.#...#.....#.#",
+    "#.#.#.#.#.#.#####.###.###",
+    "#.#...#.#.#.....#...#...#",
+    "#.#.#.#.#.#####.###.###.#",
+    "#v..#...#...............#",
+    "#########################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "llaves": [
+    {
+      "color": "amarilla",
+      "x": 3,
+      "y": 7,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "desvio": 0,
+      "desdeEntrada": 16
+    },
+    {
+      "color": "azul",
+      "x": 9,
+      "y": 6,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 0,
+      "desdeEntrada": 6
+    },
+    {
+      "color": "verde",
+      "x": 1,
+      "y": 23,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "desvio": 26,
+      "desdeEntrada": 27
+    },
+    {
+      "color": "roja",
+      "x": 23,
+      "y": 15,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 14,
+      "desdeEntrada": 42
+    }
+  ],
+  "puertas": [
+    {
+      "color": "amarilla",
+      "x": 7,
+      "y": 4,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "salida": false
+    },
+    {
+      "color": "azul",
+      "x": 11,
+      "y": 10,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": false
+    },
+    {
+      "color": "verde",
+      "x": 13,
+      "y": 7,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "salida": false
+    },
+    {
+      "color": "roja",
+      "x": 19,
+      "y": 8,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 19,
+    "y": 7
+  },
+  "salas": [
+    {
+      "x": 15,
+      "y": 15,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": null,
+  "cuartos": [
+    {
+      "x": 21,
+      "y": 1,
+      "ancho": 3,
+      "alto": 3,
+      "entrada": {
+        "x": 23,
+        "y": 4
+      }
+    }
+  ],
+  "refugios": [
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 21,
+      "y": 1,
+      "ancho": 3,
+      "alto": 3
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 21,
+      "y": 1,
+      "mirando": 45,
+      "cuarto": "Cuarto de la tele",
+      "cinta": null
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "armario",
+      "x": 6,
+      "y": 5,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 3,
+      "y": 14,
+      "mirando": 90
+    },
+    {
+      "tipo": "armario",
+      "x": 15,
+      "y": 22,
+      "mirando": 90
+    },
+    {
+      "tipo": "casillero",
+      "x": 15,
+      "y": 8,
+      "mirando": 90
+    },
+    {
+      "tipo": "armario",
+      "x": 19,
+      "y": 17,
+      "mirando": 0
+    }
+  ],
+  "props": [
+    {
+      "tipo": "tv_crt",
+      "x": 16,
+      "y": 15
+    },
+    {
+      "tipo": "pc_antigua",
+      "x": 15,
+      "y": 16
+    },
+    {
+      "tipo": "silla_giratoria",
+      "x": 17,
+      "y": 15
+    },
+    {
+      "tipo": "lampara_de_pie",
+      "x": 23,
+      "y": 1
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "diario",
+      "soporte": "hoja pegada en el monitor, despegándose",
+      "instrumento": "birome azul",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "el agua me llega al pecho. no me puedo agachar.\nla cámara se apaga cada vez más seguido.\ncuando se apague del todo voy a tener que mirar con mis propios ojos.",
+      "pensamiento": "Con mis propios ojos...",
+      "x": 23,
+      "y": 19
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "verde",
+      "x": 10,
+      "y": 11,
+      "apunta": 180
+    },
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 22,
+      "y": 11,
+      "apunta": 0
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 1,
+      "y": 14
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 13,
+      "y": 6
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "corrupcion_por_llave",
+      "descripcion": "Cada llave recogida sube un nivel la corrupción (0 a 4): grietas, carne detrás de los ladrillos, manos y palabras escritas, el piso y el techo manchados, y cada vez más oscuro y rojo.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 1,
+      "y": 13,
+      "objetivo": {
+        "x": 1,
+        "y": 23
+      }
+    },
+    {
+      "tipo": "persecucion_final",
+      "descripcion": "Tras la tercera llave, El Inquilino casi no descansa y sale a cazar seguido, con las mismas reglas: solo te persigue si te ve.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "detras_de_ti",
+      "descripcion": "Un respirador de hospital suena pegado a la nuca (sonido 3D). Si te das vuelta no hay nadie: se corta y cae una gota.",
+      "x": 9,
+      "y": 11,
+      "piensa": "Suena como la máquina del cuarto de Nico."
+    },
+    {
+      "tipo": "llanto",
+      "descripcion": "Un bebé llora en algún departamento y el intercomunicador de bebé se prende solo. Si llegas a la cuna, se calla: está vacía y mojada.",
+      "x": 7,
+      "y": 20,
+      "forma": "bebe",
+      "piensa": [
+        "Llora como cuando era bebé. Pero viene del agua.",
+        "Nico...",
+        "Se hundió. No llegué. Nunca llego.",
+        "Ya no llora. Ahora es el monitor."
+      ],
+      "objetivo": {
+        "x": 19,
+        "y": 17
+      }
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "persigue_tras_tercera_llave"
+  },
+  "ambiente": {
+    "paredes": "ladrillo_rojo",
+    "paredesCorruptas": "ladrillo_con_papel_amarillo",
+    "piso": "baldosa_gris",
+    "techo": "yeso_amarillo",
+    "colorNiebla": "#000000",
+    "distanciaVision": 9,
+    "luz": 0.8,
+    "agua": 0.46,
+    "marcaAgua": 0.52,
+    "colorAgua": "#14090a"
+  },
+  "audio": {
+    "ambiente": "bajo_el_agua",
+    "pasos": "baldosa",
+    "zonaSegura": "modem_56k"
+  },
+  "ladoB": {
+    "noche": 17,
+    "microfono": true,
+    "camaraFalla": 0.6,
+    "silencios": [
+      60,
+      100
+    ],
+    "sinFuente": [
+      {
+        "sonido": "burbujas",
+        "donde": "lejos",
+        "cada": [
+          45,
+          80
+        ],
+        "vol": 0.7,
+        "quien": "Nico bajo el agua: las burbujas que suben"
+      }
+    ],
+    "cuartoDeAntes": {
+      "nombre": "Escritorio 1996",
+      "x": 15,
+      "y": 15,
+      "ancho": 3,
+      "alto": 3
+    }
+  },
+  "antes": {
+    "id": "nivel-95",
+    "mapa": [
+      "#########################",
+      "#@....#r....#.......#...#",
+      "#####.#####.#.#.###.#...#",
+      "#.....#...#...#.#.#.#...#",
+      "#.#####.#.#.###.#.#.###.#",
+      "#...#m..#.#.#...#.....#.#",
+      "###.###.#.#.#.#######.#.#",
+      "#...#...#.#.#.#...#.#...#",
+      "#.###.###M###.#.#.#.###.#",
+      "#.....#.#...#.V.#.#.#...#",
+      "#######.###.###.#.#.#.###",
+      "#.....#.......#.#.#.....#",
+      "###.#.#.#####.#.#.#####.#",
+      "#...#...#.....#.#...#...#",
+      "#.#.#####.#####.###.#.###",
+      "#.#.#.....#v..#.....#.#X#",
+      "#.#.#.#######.#...###.#R#",
+      "#.#.#.......#.#...#.....#",
+      "#.#########.#.#.#.#####.#",
+      "#.....#...#.#...#.....#.#",
+      "#.#.#.#.#.#.#####.###.###",
+      "#.#...#.#.#.....#...#...#",
+      "#.###.#.#.#####.###.###.#",
+      "#..a#...#.......A.......#",
+      "#########################"
+    ]
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 184,
+    "segundosRutaOptima": 84,
+    "callejones": 11,
+    "porcentajePiso": 48,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "amarilla",
+      "azul",
+      "verde",
+      "roja"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          4,
+          17
+        ],
+        [
+          11,
+          14
+        ],
+        [
+          14,
+          12
+        ]
+      ],
+      "cierra": [
+        [
+          5,
+          8
+        ],
+        [
+          4,
+          21
+        ],
+        [
+          17,
+          23
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [
+        [
+          5,
+          10
+        ],
+        [
+          1,
+          10
+        ],
+        [
+          7,
+          18
+        ]
+      ],
+      "cierra": [
+        [
+          1,
+          21
+        ],
+        [
+          1,
+          17
+        ],
+        [
+          6,
+          13
+        ]
+      ]
+    },
+    {
+      "llaves": 3,
+      "abre": [
+        [
+          11,
+          8
+        ],
+        [
+          10,
+          3
+        ],
+        [
+          13,
+          20
+        ]
+      ],
+      "cierra": [
+        [
+          15,
+          4
+        ],
+        [
+          7,
+          15
+        ],
+        [
+          18,
+          1
+        ]
+      ]
+    },
+    {
+      "llaves": 4,
+      "abre": [
+        [
+          18,
+          10
+        ],
+        [
+          20,
+          13
+        ],
+        [
+          17,
+          6
+        ]
+      ],
+      "cierra": [
+        [
+          22,
+          13
+        ],
+        [
+          20,
+          11
+        ],
+        [
+          16,
+          1
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      5,
+      2
+    ],
+    [
+      5,
+      3
+    ],
+    [
+      4,
+      3
+    ],
+    [
+      3,
+      3
+    ],
+    [
+      2,
+      3
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      3,
+      6
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      3,
+      9
+    ],
+    [
+      4,
+      9
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      6
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      7,
+      4
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      9,
+      6
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      9,
+      8
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      10,
+      9
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      11,
+      10
+    ],
+    [
+      11,
+      11
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      8,
+      11
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      7,
+      12
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      6,
+      13
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      5,
+      12
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      4,
+      11
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      1,
+      18
+    ],
+    [
+      1,
+      19
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      22
+    ],
+    [
+      1,
+      23
+    ],
+    [
+      2,
+      23
+    ],
+    [
+      3,
+      23
+    ],
+    [
+      3,
+      22
+    ],
+    [
+      3,
+      21
+    ],
+    [
+      4,
+      21
+    ],
+    [
+      5,
+      21
+    ],
+    [
+      5,
+      22
+    ],
+    [
+      5,
+      23
+    ],
+    [
+      6,
+      23
+    ],
+    [
+      7,
+      23
+    ],
+    [
+      7,
+      22
+    ],
+    [
+      7,
+      21
+    ],
+    [
+      7,
+      20
+    ],
+    [
+      7,
+      19
+    ],
+    [
+      8,
+      19
+    ],
+    [
+      9,
+      19
+    ],
+    [
+      9,
+      20
+    ],
+    [
+      9,
+      21
+    ],
+    [
+      9,
+      22
+    ],
+    [
+      9,
+      23
+    ],
+    [
+      10,
+      23
+    ],
+    [
+      11,
+      23
+    ],
+    [
+      12,
+      23
+    ],
+    [
+      13,
+      23
+    ],
+    [
+      14,
+      23
+    ],
+    [
+      15,
+      23
+    ],
+    [
+      16,
+      23
+    ],
+    [
+      17,
+      23
+    ],
+    [
+      18,
+      23
+    ],
+    [
+      19,
+      23
+    ],
+    [
+      19,
+      22
+    ],
+    [
+      19,
+      21
+    ],
+    [
+      18,
+      21
+    ],
+    [
+      17,
+      21
+    ],
+    [
+      17,
+      20
+    ],
+    [
+      17,
+      19
+    ],
+    [
+      17,
+      18
+    ],
+    [
+      17,
+      17
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      15,
+      14
+    ],
+    [
+      15,
+      13
+    ],
+    [
+      15,
+      12
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      15,
+      10
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      14,
+      9
+    ],
+    [
+      13,
+      9
+    ],
+    [
+      13,
+      8
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      14,
+      5
+    ],
+    [
+      15,
+      5
+    ],
+    [
+      15,
+      4
+    ],
+    [
+      15,
+      3
+    ],
+    [
+      15,
+      2
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      17,
+      1
+    ],
+    [
+      18,
+      1
+    ],
+    [
+      19,
+      1
+    ],
+    [
+      19,
+      2
+    ],
+    [
+      19,
+      3
+    ],
+    [
+      19,
+      4
+    ],
+    [
+      19,
+      5
+    ],
+    [
+      20,
+      5
+    ],
+    [
+      21,
+      5
+    ],
+    [
+      21,
+      6
+    ],
+    [
+      21,
+      7
+    ],
+    [
+      22,
+      7
+    ],
+    [
+      23,
+      7
+    ],
+    [
+      23,
+      8
+    ],
+    [
+      23,
+      9
+    ],
+    [
+      22,
+      9
+    ],
+    [
+      21,
+      9
+    ],
+    [
+      21,
+      10
+    ],
+    [
+      21,
+      11
+    ],
+    [
+      22,
+      11
+    ],
+    [
+      23,
+      11
+    ],
+    [
+      23,
+      12
+    ],
+    [
+      23,
+      13
+    ],
+    [
+      22,
+      13
+    ],
+    [
+      21,
+      13
+    ],
+    [
+      21,
+      14
+    ],
+    [
+      21,
+      15
+    ],
+    [
+      21,
+      16
+    ],
+    [
+      21,
+      17
+    ],
+    [
+      22,
+      17
+    ],
+    [
+      23,
+      17
+    ],
+    [
+      23,
+      16
+    ],
+    [
+      23,
+      15
+    ],
+    [
+      23,
+      16
+    ],
+    [
+      23,
+      17
+    ],
+    [
+      22,
+      17
+    ],
+    [
+      21,
+      17
+    ],
+    [
+      21,
+      16
+    ],
+    [
+      21,
+      15
+    ],
+    [
+      21,
+      14
+    ],
+    [
+      21,
+      13
+    ],
+    [
+      22,
+      13
+    ],
+    [
+      23,
+      13
+    ],
+    [
+      23,
+      12
+    ],
+    [
+      23,
+      11
+    ],
+    [
+      22,
+      11
+    ],
+    [
+      21,
+      11
+    ],
+    [
+      20,
+      11
+    ],
+    [
+      19,
+      11
+    ],
+    [
+      19,
+      10
+    ],
+    [
+      19,
+      9
+    ],
+    [
+      19,
+      8
+    ],
+    [
+      19,
+      7
+    ]
+  ]
+}

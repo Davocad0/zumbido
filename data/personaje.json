@@ -1,0 +1,116 @@
+{
+  "nombre": "Dani",
+  "nombreProvisional": true,
+  "nota": "Valores iniciales para probar. Se ajustan jugando; el juego los lee de este archivo.",
+  "movimiento": {
+    "unidad": "casillas por segundo",
+    "caminar": 2.2,
+    "correr": 3.6,
+    "despacio": 1.0,
+    "agotado": 1.4,
+    "enAgua": 1.5,
+    "escondido": 0
+  },
+  "aliento": {
+    "maximo": 100,
+    "gastoCorriendo": 18,
+    "recuperaCaminando": 10,
+    "recuperaQuieto": 16,
+    "recuperaEscondido": 22,
+    "minimoParaVolverACorrer": 30,
+    "segundosAgotado": 3,
+    "jadeoDesde": 40
+  },
+  "adrenalina": {
+    "seActivaCuando": [
+      "el aliento llega a 0 durante una persecución",
+      "El Inquilino está a menos de 2 casillas"
+    ],
+    "duracionSegundos": 6,
+    "gastoCorriendo": 5,
+    "esperaEntreUsosSegundos": 60,
+    "bajon": {
+      "duracionSegundos": 10,
+      "multiplicadorRecuperacion": 0.4,
+      "temblor": true
+    }
+  },
+  "pulso": {
+    "unidad": "latidos por minuto",
+    "reposo": 72,
+    "maximo": 185,
+    "subidaPorSegundo": 1.5,
+    "bajadaPorSegundo": 0.12,
+    "estimulos": {
+      "zonaSegura": 72,
+      "caminarConLuz": 80,
+      "oscuridad": 100,
+      "lucesParpadean": 105,
+      "correr": 115,
+      "zumbidoSeCorta": 125,
+      "escondidoConPeligroCerca": 130,
+      "verAlInquilino": 150,
+      "persecucion": 165,
+      "adrenalina": 182
+    },
+    "estados": [
+      { "nombre": "calma", "desde": 0, "rostro": "neutral" },
+      { "nombre": "inquietud", "desde": 92, "rostro": "inquieto" },
+      { "nombre": "miedo", "desde": 110, "rostro": "asustado" },
+      { "nombre": "panico", "desde": 140, "rostro": "aterrado" },
+      { "nombre": "adrenalina", "desde": 172, "rostro": "adrenalina" }
+    ]
+  },
+  "latido": {
+    "audibleDesde": 92,
+    "volumenMaximo": 0.9,
+    "filtroGravesHz": [300, 4000],
+    "vinetaLatePorEncimaDe": 110
+  },
+  "respiracion": {
+    "contenerSegundos": 6,
+    "contenerSegundosAgotado": 3.5,
+    "llenoDesdeAliento": 60,
+    "recargaPorSegundo": 1.6,
+    "alSoltarTarde": "jadeo fuerte que se oye a 6 casillas",
+    "suspiros": {
+      "inhalacionBrusca": "al ver a El Inquilino por primera vez en un pasillo",
+      "suspiroEntrecortado": "cada 3 a 6 s durante una persecución",
+      "suspiroDeAlivio": "al entrar a una zona segura o cuando El Inquilino se va"
+    }
+  },
+  "linterna": {
+    "nota": "La linterna de Nico, en los niveles oscuros (Nivel 2). Se recoge al entrar. Prendida gasta pila (unos 90 s llena); apagada se recupera de a poco, como unas pilas viejas que descansan. Con poca pila parpadea; sin pila se apaga y no vuelve a prender hasta pasar el mínimo.",
+    "gastoPorSegundo": 1.1,
+    "recuperaPorSegundo": 0.35,
+    "pilaBajaDesde": 20,
+    "minimoParaPrender": 8
+  },
+  "rostros": [
+    "desorientado", "neutral", "inquieto", "asustado", "aterrado",
+    "agotado", "adrenalina", "escondido", "aliviado", "leyendo"
+  ],
+  "manos": [
+    "apoyadas en el piso al despertar",
+    "sosteniendo una nota",
+    "girando la llave en la cerradura",
+    "tapando la boca en un escondite",
+    "en las rodillas al quedar sin aliento",
+    "estirada para tantear en la Casa de Espejos",
+    "sosteniendo la linterna, que tiembla con el pulso alto"
+  ],
+  "frases": {
+    "puertaCerrada": "Cerrada. Necesito la llave {color}.",
+    "primeraLlave": "Una llave... ¿quién la dejó aquí?",
+    "primeraVezQueLoVe": "¿Qué... qué es eso?",
+    "agotado": "No... puedo... más.",
+    "despuesDeLaAdrenalina": "Me tiemblan las manos.",
+    "zonaSegura": "Aquí se está tranquilo. Demasiado.",
+    "guardar": "Grabando. Si me pasa algo, vuelvo aquí.",
+    "frenteAlEspejo": "Esa... ¿esa es mi cara?",
+    "recogeLinterna": "La linterna de Nico... la que usábamos debajo de las sábanas.",
+    "pilaBaja": "Está parpadeando. Se le acaba la pila.",
+    "sinPila": "Se apagó... no, no, no.",
+    "noPrende": "No prende. Tengo que dejarla descansar."
+  }
+}

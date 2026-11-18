@@ -1,0 +1,26 @@
+{
+  "name": "zumbido",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ZUMBIDO: laberinto de terror en primera persona (raycaster en Phaser) con Next.js y React.",
+  "scripts": {
+    "datos": "node scripts/copiar-datos.mjs",
+    "predev": "node scripts/copiar-datos.mjs && node scripts/copiar-escenas.mjs",
+    "dev": "next dev",
+    "prebuild": "node scripts/copiar-datos.mjs && node scripts/copiar-escenas.mjs",
+    "build": "next build",
+    "start": "next start",
+    "probar": "node scripts/probar-niveles.mjs && node scripts/probar-inquilino.mjs && node scripts/probar-animacion.mjs && node scripts/probar-rastros.mjs && node scripts/probar-finales.mjs && node scripts/probar-lado-b.mjs && node scripts/probar-ambiente.mjs && node scripts/probar-los-que-miran.mjs && node scripts/probar-contador.mjs && node scripts/probar-cama.mjs && node scripts/probar-coop.mjs && node scripts/probar-cambios.mjs && node scripts/probar-espectadores-coop.mjs && node scripts/probar-escondites.mjs",
+    "escenas": "node scripts/copiar-escenas.mjs"
+  },
+  "dependencies": {
+    "next": "16.4.6",
+    "phaser": "4.2.1",
+    "react": "19.3.1",
+    "react-dom": "19.3.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

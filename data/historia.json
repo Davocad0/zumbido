@@ -1,0 +1,554 @@
+{
+  "titulo": "Once noches en una sala de espera",
+  "logline": "Dani lleva once noches sin animarse a entrar a la habitación de su hermano, que está en coma después de un accidente en la piscina de PlayLand. Cada vez que se duerme en la sala de espera, cae a un laberinto de lugares de paso. Esta noche tiene que salir antes de convertirse en uno de los que se quedan.",
+  "tema": "Esperar sin hacer nada también es quedarse. La culpa te deja quieto; lo que te saca es ir hacia alguien.",
+  "fuentes": [
+    {
+      "nombre": "Blake Snyder, Save the Cat! (2005)",
+      "tipo": "libro",
+      "url": "https://www.tckpublishing.com/save-the-cat-beat-sheet-a-quick-guide/",
+      "idea": "Quince momentos fijos. Tomamos la imagen de apertura y la final (la misma sala de espera, de noche y al amanecer), el punto medio y «todo está perdido»."
+    },
+    {
+      "nombre": "Syd Field, El libro del guion (1979)",
+      "tipo": "libro",
+      "url": "https://openaccess.uoc.edu/bitstream/10609/140371/2/M%c3%b3dulo%205_Dramatizaci%c3%b3n.pdf",
+      "idea": "Tres actos separados por dos puntos de giro: la radio que nombra a Nico y el reflejo que pide quedarse."
+    },
+    {
+      "nombre": "Dan Harmon, el círculo de la historia",
+      "tipo": "guionista",
+      "url": "https://www.studiobinder.com/blog/dan-harmon-story-circle/",
+      "idea": "Ocho pasos que vuelven al punto de partida, pero cambiado: Dani empieza y termina en la misma silla."
+    },
+    {
+      "nombre": "K. M. Weiland, Creating Character Arcs",
+      "tipo": "libro",
+      "url": "https://www.helpingwritersbecomeauthors.com/character-arcs-3/",
+      "idea": "El personaje cree una mentira; lo que quiere sale de esa mentira y lo que necesita, de la verdad. Dani quiere salir; necesita entrar."
+    },
+    {
+      "nombre": "Harvey Smith y Matthias Worch, «What Happened Here?» (GDC 2010)",
+      "tipo": "charla",
+      "url": "https://gdcvault.com/play/1012647/What-Happened-Here-Environmental",
+      "idea": "Lugares armados para que el jugador deduzca qué pasó: el balde de Marta todavía moviéndose, la litera de arriba tibia."
+    },
+    {
+      "nombre": "Steve Gaynor, Gone Home",
+      "tipo": "juego y entrevistas",
+      "url": "https://www.gamedeveloper.com/design/how-i-gone-home-i-s-design-constraints-lead-to-a-powerful-story",
+      "idea": "La historia de gente que no está, contada con objetos y una voz «a distancia». Por eso mamá solo aparece en el celular."
+    },
+    {
+      "nombre": "Half-Life (1998): escenas sin quitar el control",
+      "tipo": "análisis",
+      "url": "https://wwrdeepdives.substack.com/p/half-life-how-to-tell-a-story-without",
+      "idea": "La mayoría de las escenas pasan dentro del juego y el jugador sigue mirando o caminando. Solo el prólogo, el mensaje de voz y la salida quitan el control."
+    },
+    {
+      "nombre": "What Remains of Edith Finch (2017)",
+      "tipo": "juego",
+      "url": "https://en.wikipedia.org/wiki/What_Remains_of_Edith_Finch",
+      "idea": "Recuerdos jugables, cada uno con su propia mecánica. De ahí salen «El borde» y «El laberinto»."
+    },
+    {
+      "nombre": "Silent Hill 2 (2001)",
+      "tipo": "juego",
+      "url": "https://en.wikipedia.org/wiki/Silent_Hill_2",
+      "idea": "El lugar y el monstruo reflejan la culpa del protagonista. Los niveles son lugares de la vida de Dani y El Inquilino es en lo que se puede convertir."
+    },
+    {
+      "nombre": "Koichi Hayashida y el kishōtenketsu",
+      "tipo": "entrevista",
+      "url": "https://www.gamedeveloper.com/design/the-secret-to-i-mario-i-level-design",
+      "idea": "Cuatro tiempos: presentar, desarrollar, girar, cerrar. Cada nivel presenta su lugar, lo desarrolla con notas, gira con una escena y cierra con la salida."
+    },
+    {
+      "nombre": "Stephen King, Danse Macabre (1981)",
+      "tipo": "libro",
+      "url": "https://www.avclub.com/stephen-king-breaks-down-the-different-levels-of-horror-1806112160",
+      "idea": "El terror (lo que imaginas) va primero; el asco, al final. El recuerdo de la piscina no muestra el accidente: lo deja en el silbato y el agua."
+    },
+    {
+      "nombre": "Jesse Schell, The Art of Game Design",
+      "tipo": "libro",
+      "url": "https://notesbylex.com/interest-curve",
+      "idea": "Curva de interés: un gancho fuerte, subidas con descansos y un gran final. El prólogo es el gancho y Las Piscinas, el descanso."
+    },
+    {
+      "nombre": "Kane Pixels, The Backrooms (Found Footage)",
+      "tipo": "serie web",
+      "url": "https://en.wikipedia.org/wiki/Backrooms_(web_series)",
+      "idea": "El misterio se arma con grabaciones sueltas que el público junta. Las nueve cintas de los puestos de guardado trabajan igual."
+    },
+    {
+      "nombre": "Foro de Unreal Engine: «Narrative Design for Psychological Horror Games»",
+      "tipo": "foro",
+      "url": "https://forums.unrealengine.com/t/narrative-design-for-psychological-horror-games-from-story-notes-to-playable-fear/2728627",
+      "idea": "Contar con el entorno, los sonidos, las reglas y los detalles, no solo con diálogos."
+    },
+    {
+      "nombre": "Foro de desarrolladores de Roblox: guía para el terror",
+      "tipo": "foro",
+      "url": "https://devforum.roblox.com/t/guide-to-making-better-horror-experiences/2212571",
+      "idea": "Llenar el mundo de notas aleja al jugador. Por eso las escenas cargan parte de la historia y cada nivel tiene pocas notas."
+    },
+    {
+      "nombre": "Final Draft, «How to Write Subtext in Dialogue»",
+      "tipo": "guía de guion",
+      "url": "https://www.finaldraft.com/blog/how-to-write-subtext-in-dialogue",
+      "idea": "Que el personaje esquive el tema, haga pausas y que el cuerpo contradiga lo que dice. Dani nunca dice «me siento culpable»: lo dicen la mano que suelta la manija, el «No puedo… Mañana» y lo que escribe y borra."
+    },
+    {
+      "nombre": "Emily is Away (Kyle Seeley, 2015)",
+      "tipo": "videojuego",
+      "url": "https://thevaultpublication.com/2020/02/19/its-just-nice-to-know-youre-real-how-the-emily-is-away-series-constructs-genuine-romantic-narratives",
+      "idea": "El personaje escribe un mensaje difícil, lo borra y manda otra cosa. En el prólogo Dani escribe «no sé qué decirle», lo borra y manda «mañana»: el jugador lee lo que de verdad piensa."
+    },
+    {
+      "nombre": "Familiares en terapia intensiva (Critical Care Medicine, 2015)",
+      "tipo": "estudio",
+      "url": "https://sciencedaily.com/releases/2015/07/150722150918.htm",
+      "idea": "Muchos familiares de pacientes en terapia intensiva enfrentan la situación evitándola, y la culpa es una de las emociones más fuertes. Por eso Dani no entra aunque quiere, y por eso la enfermera no se sorprende."
+    },
+    {
+      "nombre": "MSKTC, hoja sobre el coma y los estados de mínima conciencia (2020)",
+      "tipo": "guía médica",
+      "url": "https://tbi.washington.edu/wp-content/uploads/TBI-AbtVegMinConscState-508-2.pdf",
+      "idea": "Las primeras señales al salir del coma son seguir a alguien con la mirada y responder a «apriete mi mano», al principio no siempre. Se recomienda hablarle aunque no conteste. De ahí salen el «Dicen que escuchan», el apretón de «Despertar» y la mirada de «Juntos»."
+    },
+    {
+      "nombre": "Game Developer, «Multiple endings in games»",
+      "tipo": "artículo de diseño",
+      "url": "https://www.gamedeveloper.com/design/multiple-endings-in-games",
+      "idea": "Cada final tiene que sentirse como consecuencia de cómo jugaste y valer la pena verlo. Por eso los tres finales empiezan en otro lugar, tienen otro ritmo y muestran otra decisión de Dani."
+    }
+  ],
+  "actos": [
+    {
+      "acto": "I",
+      "nombre": "Planteamiento",
+      "donde": "Prólogo, Nivel 0 y Nivel 1",
+      "resumen": "Quién es Dani, qué evita y cuáles son las reglas del laberinto.",
+      "giro": "La radio del cuarto del conserje llama a «familiares de Nicolás, cama cuatro». Dani recuerda a su hermano y decide buscarlo."
+    },
+    {
+      "acto": "II",
+      "nombre": "Confrontación",
+      "donde": "Nivel 2, Nivel 37 y Nivel 101",
+      "resumen": "Dani sigue las huellas de Nico y va recordando. En la mitad, Las Piscinas le devuelven el recuerdo del accidente.",
+      "giro": "En la Casa de Espejos su reflejo se ata la cinta sobre los ojos, se convierte en El Inquilino y le pide que se quede."
+    },
+    {
+      "acto": "III",
+      "nombre": "Resolución",
+      "donde": "Mensaje de voz, Nivel 95 y epílogo",
+      "resumen": "Dani elige seguir. La persecución final, la salida y lo que hace al despertar."
+    }
+  ],
+  "momentos": [
+    {
+      "momento": "Imagen de apertura",
+      "donde": "Prólogo",
+      "que": "Dani sentado bajo los fluorescentes a las 02:13, con el celular vibrando en la mano y sin contestar."
+    },
+    {
+      "momento": "Tema enunciado",
+      "donde": "Prólogo",
+      "que": "La enfermera: «Eso mismo me dijo ayer… Esperar también cansa»."
+    },
+    {
+      "momento": "Planteamiento",
+      "donde": "Prólogo",
+      "que": "Llega hasta la puerta 4 y no puede. A su mamá le escribe «no sé qué decirle», lo borra y manda «mañana»."
+    },
+    {
+      "momento": "Catalizador",
+      "donde": "Prólogo → Nivel 0",
+      "que": "Se duerme y cae."
+    },
+    {
+      "momento": "Debate",
+      "donde": "Nivel 0",
+      "que": "¿Dónde estoy? Las primeras notas y una sala de espera igual a la del hospital."
+    },
+    {
+      "momento": "Entrada al segundo acto",
+      "donde": "Nivel 1",
+      "que": "La radio dice el nombre de Nico."
+    },
+    {
+      "momento": "Historia B",
+      "donde": "Todos los niveles",
+      "que": "Las notas de N. y los dibujos de Astro: la relación entre los hermanos."
+    },
+    {
+      "momento": "Diversión y juegos",
+      "donde": "Niveles 1 y 2",
+      "que": "Esconderse, la linterna y el cuarto que compartían."
+    },
+    {
+      "momento": "Punto medio",
+      "donde": "Nivel 37",
+      "que": "El recuerdo jugable del accidente. Es una falsa derrota: ya sabe la verdad, pero le pesa más."
+    },
+    {
+      "momento": "Los malos se acercan",
+      "donde": "Nivel 101",
+      "que": "El Inquilino vive en los reflejos. El recuerdo del mini laberinto de PlayLand."
+    },
+    {
+      "momento": "Todo está perdido",
+      "donde": "Nivel 101",
+      "que": "Su reflejo, con la cinta en los ojos, le dice «Quédate»."
+    },
+    {
+      "momento": "Noche oscura del alma",
+      "donde": "Entre el 101 y el 95",
+      "que": "En la oscuridad, el mensaje de voz de mamá: «Falta que le hables tú»."
+    },
+    {
+      "momento": "Entrada al tercer acto",
+      "donde": "Nivel 95",
+      "que": "En la compu de la abuela alguien escribe: «te espero»."
+    },
+    {
+      "momento": "Final",
+      "donde": "Nivel 95",
+      "que": "La persecución hasta la salida."
+    },
+    {
+      "momento": "Imagen final",
+      "donde": "Final «Despertar»",
+      "que": "La misma sala a las 06:40, con los tubos apagados. Las mismas tomas del prólogo, pero esta vez abre la puerta y se sienta junto a Nico."
+    }
+  ],
+  "circulo": [
+    {
+      "paso": "Tú",
+      "que": "Dani en la sala de espera, con el celular, sin entrar."
+    },
+    {
+      "paso": "Necesidad",
+      "que": "Que alguien le diga que no fue su culpa. Sin saberlo, necesita entrar a ver a Nico."
+    },
+    {
+      "paso": "Ir",
+      "que": "Se duerme y cae al Vestíbulo."
+    },
+    {
+      "paso": "Buscar",
+      "que": "Aprende las reglas, sigue a N. y a Astro y conoce a Marta por sus notas."
+    },
+    {
+      "paso": "Encontrar",
+      "que": "En Las Piscinas recuerda lo que pasó: lo que buscaba era la verdad."
+    },
+    {
+      "paso": "Pagar",
+      "que": "En la Casa de Espejos se ve como El Inquilino y casi se queda."
+    },
+    {
+      "paso": "Volver",
+      "que": "En el Nivel 95 corre hacia la salida, hacia el hospital."
+    },
+    {
+      "paso": "Cambiar",
+      "que": "Despierta y, por primera vez en once noches, entra a la habitación."
+    }
+  ],
+  "arcos": [
+    {
+      "personaje": "Dani",
+      "tipo": "Arco de cambio",
+      "herida": "A los 14 perdió a Nico diez minutos en el mini laberinto de PlayLand por distraerse. A los 19, en la piscina grande del mismo parque, estaba con el celular cuando Nico, de 10, se tiró a lo hondo para que lo mirara.",
+      "mentira": "Si no hago nada, no hago daño: mejor esperar afuera.",
+      "quiere": "Salir del laberinto y que todo vuelva a ser como antes.",
+      "necesita": "Dejar de esperar y entrar a ver a su hermano.",
+      "verdad": "Esperar sin hacer nada también es quedarse.",
+      "cambio": "En «Despertar» se levanta sin esperar, abre la misma puerta que no pudo abrir en el prólogo, le pide perdón y le habla. En «Juntos» corre hacia la habitación."
+    },
+    {
+      "personaje": "Nico (N.)",
+      "tipo": "Arco plano: ayuda sin cambiar",
+      "herida": "Se metió a lo hondo para que Dani lo mirara.",
+      "mentira": "Al principio cree que fue su culpa («no le digas a mamá»).",
+      "quiere": "Que su hermano venga, como siempre vino.",
+      "necesita": "Que Dani lo encuentre, y no solo en el laberinto.",
+      "verdad": "No fue culpa de nadie.",
+      "cambio": "Va adelante dejando dibujos de Astro junto a las llaves y escribe «ya sé salir, te espero afuera». En «Juntos» le agarra la mano en el laberinto y, al despertar, lo busca con la mirada."
+    },
+    {
+      "personaje": "Marta Rojas (M.)",
+      "tipo": "Arco negativo: la advertencia",
+      "herida": "En 1996 su esposo, Ernesto, estuvo semanas en terapia intensiva. Ella limpiaba ese piso de noche para estar cerca.",
+      "mentira": "Si espero lo suficiente, alguien me va a avisar.",
+      "quiere": "Que la llamen para pasar a verlo.",
+      "necesita": "Entrar sin esperar permiso, lo mismo que Dani.",
+      "verdad": "Nadie viene a avisar.",
+      "cambio": "Deja de anotar la hora, firma el contrato y se queda. Es lo que le puede pasar a Dani."
+    },
+    {
+      "personaje": "El Inquilino",
+      "tipo": "El reflejo oscuro",
+      "herida": "Es Dani, el que se quedó: la noche que nunca termina. Lleva la ropa del día de la piscina y tres heridas: la cinta en los ojos (miró por la pantalla), la boca cosida (contaba en vez de pedir ayuda) y las orejas arrancadas (oyó «¡Dani, mírame!» y siguió grabando).",
+      "mentira": "Aquí nadie te culpa.",
+      "quiere": "Castigarse. Por eso se golpea, se rasca las heridas y te hunde con él: es Dani hundiéndose a sí mismo.",
+      "necesita": "—",
+      "verdad": "Quedarse no alivia la culpa: la congela.",
+      "cambio": "En los espejos, el reflejo de Dani gana sus heridas de a una: es en lo que se puede convertir. En el final verdadero las heridas se curan: se saca la cinta, oye a Nico y grita «¡Ayuda!»."
+    }
+  ],
+  "motivos": [
+    {
+      "motivo": "El celular",
+      "planta": "Prólogo: no le contesta a su mamá; escribe «no sé qué decirle», lo borra y manda «mañana». Al darlo vuelta aparece la calcomanía de Astro.",
+      "crece": "Nivel 2: su celular muerto, con 11 llamadas perdidas. Nivel 37: en el recuerdo, estaba con el celular.",
+      "paga": "Final «Despertar»: con una mano tomando la de Nico, con la otra es él quien llama: «¿Ma? Estoy adentro, con Nico»."
+    },
+    {
+      "motivo": "«Ya puede pasar»",
+      "planta": "Prólogo: la enfermera se lo ofrece; Dani llega hasta la puerta y dice «No puedo… Mañana». Ella: «Eso mismo me dijo ayer».",
+      "crece": "Nivel 101: nota de D.: «siempre le digo mañana».",
+      "paga": "Final «Despertar»: la misma frase, y él contesta «Sí. Ahora»."
+    },
+    {
+      "motivo": "El zumbido",
+      "planta": "Prólogo: el zumbido de la sala de espera.",
+      "crece": "Todo el juego: el zumbido es la normalidad y su silencio, el peligro.",
+      "paga": "Epílogo: los tubos se apagan al amanecer y el silencio, por primera vez, es paz."
+    },
+    {
+      "motivo": "La hora",
+      "planta": "Prólogo: el reloj de la sala marca 02:13.",
+      "crece": "Nivel 1: Marta anota todo a las 02:14. En el laberinto siempre es un minuto después de dormirse.",
+      "paga": "Epílogo: 06:40."
+    },
+    {
+      "motivo": "Astro",
+      "planta": "Prólogo: un dibujo de Astro pegado en la puerta 4 y una calcomanía en el celular. Nivel 0: la servilleta de N. («sigue los dibujos de Astro»).",
+      "crece": "Cada llave tiene un dibujo de Astro cerca.",
+      "paga": "En la habitación 4, la baranda de la cama tiene una calcomanía de Astro. En «Juntos», la manga que le agarra la mano lleva su parche."
+    },
+    {
+      "motivo": "Las sillas naranjas",
+      "planta": "Prólogo: Dani duerme en una.",
+      "crece": "Nivel 0: la zona segura tiene las mismas sillas.",
+      "paga": "Final «Despertar»: adentro hay otra silla naranja, la de visitas, con la frazada doblada. En el del Inquilino, la de al lado está girada hacia él."
+    },
+    {
+      "motivo": "Los contratos",
+      "planta": "Nivel 2: el de Marta, firmado.",
+      "crece": "Nivel 95: uno con el nombre de Dani y la firma en blanco.",
+      "paga": "Final del Inquilino: se firma solo, con su letra."
+    },
+    {
+      "motivo": "Los recuerdos de agua y de espejos",
+      "planta": "Nivel 37 y Nivel 101: dos recuerdos jugables, uno que no se puede cambiar y otro donde sí lo encuentra.",
+      "crece": "En el laberinto de PlayLand, Nico de 5 le pregunta «¿Me ibas a encontrar?»: «Siempre».",
+      "paga": "«Juntos»: Nico, recién despierto, le hace la misma pregunta y él le da la misma respuesta."
+    },
+    {
+      "motivo": "Mirar",
+      "planta": "Prólogo: con la mano en la manija, un segundo bajo el agua y una voz de niño: «¡Dani, mírame!».",
+      "crece": "Nivel 37: en el recuerdo del borde, cuando levantas la vista del celular, Nico ya no está.",
+      "paga": "«Despertar»: «Ese día no te estaba mirando». «Juntos»: Nico abre los ojos y lo sigue con la mirada."
+    },
+    {
+      "motivo": "El monitor de Nico",
+      "planta": "Prólogo: detrás de la puerta 4 se oye un monitor, a 76 por minuto.",
+      "crece": "El mensaje de voz de mamá suena sobre el mismo pitido.",
+      "paga": "«Despertar»: cuando Nico le aprieta la mano, sube a 86. Nunca suena el pitido continuo de un paro: el monitor siempre dice que está vivo."
+    }
+  ],
+  "escenas": [
+    {
+      "id": "prologo",
+      "nombre": "02:13",
+      "nivel": "antes del Nivel 0",
+      "momento": "Imagen de apertura",
+      "disparador": "Al empezar una partida nueva",
+      "duracion": 72,
+      "control": "Solo mira (se puede saltar desde la segunda vez)",
+      "ve": "La sala de espera a las 02:13. Dani no contesta una llamada de «Mamá». La enfermera le dice que ya puede pasar a ver a su hermanito; él camina hasta la puerta 4, pone la mano en la manija (hay un dibujo de Astro pegado) y por un segundo está bajo el agua. Suelta la manija. De vuelta en la silla, escribe «no sé qué decirle», lo borra y le manda «mañana» a su mamá. Da vuelta el celular.",
+      "oye": "El zumbido, el pasillo, el monitor detrás de la puerta, su corazón, un segundo de agua y una voz de niño: «¡Dani, mírame!». La enfermera: «Eso mismo me dijo ayer… Esperar también cansa». Mamá: «Ya van once noches, Dani».",
+      "revela": "Dani no entra porque no puede, no porque no quiera: algo pasó en el agua mientras no miraba, y lo repite cada noche. No se dice el nombre de Nico ni qué pasó.",
+      "animada": true
+    },
+    {
+      "id": "despertar",
+      "nombre": "¿Dónde estoy?",
+      "nivel": "Nivel 0",
+      "momento": "Catalizador",
+      "disparador": "Después del prólogo",
+      "duracion": 26,
+      "control": "Solo mira",
+      "ve": "El techo, la alfombra, sus manos, los pasillos y una nota.",
+      "oye": "El mismo zumbido de la sala de espera, primero como bajo el agua.",
+      "revela": "El laberinto empieza donde terminó la sala de espera.",
+      "animada": true
+    },
+    {
+      "id": "sala-repetida",
+      "nombre": "Yo estaba sentado aquí",
+      "nivel": "Nivel 0",
+      "momento": "Debate",
+      "disparador": "Al entrar por primera vez a la zona segura",
+      "duracion": 8,
+      "control": "Camina y mira",
+      "ve": "Las mismas sillas naranjas. Durante dos cuadros, la sala real del hospital encima.",
+      "oye": "Un altoparlante, muy lejos.",
+      "revela": "El laberinto copia lugares de la vida de Dani."
+    },
+    {
+      "id": "rondas",
+      "nombre": "Las rondas de las 02:14",
+      "nivel": "Nivel 1",
+      "momento": "Diversión y juegos",
+      "disparador": "Al recoger la primera llave",
+      "duracion": 10,
+      "control": "Camina y mira",
+      "ve": "Al fondo de un pasillo, una mujer bajita con un trapeador mira su reloj y desaparece cuando parpadean las luces. Queda el balde, con el agua todavía moviéndose.",
+      "oye": "El trapeador y un reloj de pulsera.",
+      "revela": "Hay otra persona atrapada, Marta, y no es El Inquilino."
+    },
+    {
+      "id": "radio",
+      "nombre": "Familiares de Nicolás",
+      "nivel": "Nivel 1",
+      "momento": "Entrada al segundo acto",
+      "disparador": "Al entrar al cuarto del conserje",
+      "duracion": 20,
+      "control": "Solo mira (puede girar la cabeza)",
+      "ve": "La radio vieja en el estante.",
+      "oye": "El clima de «Puerto Lindo», estática y después el altoparlante de un hospital: «Familiares de Nicolás, cama cuatro, acercarse a enfermería».",
+      "revela": "Dani recuerda el nombre de su hermano y decide buscarlo."
+    },
+    {
+      "id": "estrellas",
+      "nombre": "Las estrellas",
+      "nivel": "Nivel 2",
+      "momento": "Historia B",
+      "disparador": "Al acostarse en la litera de la habitación infantil (E)",
+      "duracion": 25,
+      "control": "Solo mira",
+      "ve": "El techo con las estrellas que brillan. Una se apaga y se prende, señalando la puerta.",
+      "oye": "La caja musical. Nico de chico, en subtítulos: «¿Dani, estás despierto? ¿Y si arriba del techo hay otro cuarto?». Al final, la cama de arriba cruje.",
+      "revela": "Cómo eran los hermanos. Nico estuvo ahí hace poco: la cama de arriba está tibia."
+    },
+    {
+      "id": "celular",
+      "nombre": "11 llamadas perdidas",
+      "nivel": "Nivel 2",
+      "momento": "Los malos se acercan",
+      "disparador": "Al recoger el celular",
+      "duracion": 12,
+      "control": "Solo mira",
+      "ve": "Su celular con 1 %: las llamadas de mamá y un mensaje de voz escrito en la pantalla: «Dani, ¿dónde estás? Nico se... estamos en emergencias. Contesta».",
+      "oye": "La vibración y el clic al apagarse.",
+      "revela": "Nico tuvo un accidente."
+    },
+    {
+      "id": "borde",
+      "nombre": "El borde (recuerdo jugable)",
+      "nivel": "Nivel 37",
+      "momento": "Punto medio",
+      "disparador": "Al sentarse en el borde de la piscina grande (E)",
+      "duracion": 70,
+      "control": "Juega como Dani el día del accidente",
+      "ve": "Un día de verano en PlayLand, con filtro VHS. El celular ocupa la mitad de abajo; arriba, Nico en la escalera del tobogán grande grita «¡Dani, mírame!» (la misma voz del prólogo). Mires donde mires, cuando levantas la vista Nico ya no está.",
+      "oye": "El chat del celular, chicos jugando, el silbato del salvavidas y el agua. No se ve el accidente.",
+      "revela": "Lo que pasó y por qué Dani se culpa. El recuerdo no se puede cambiar: esa es la idea."
+    },
+    {
+      "id": "laberinto",
+      "nombre": "El laberinto (recuerdo jugable)",
+      "nivel": "Nivel 101",
+      "momento": "Los malos se acercan",
+      "disparador": "Al tocar el espejo del dibujo con crayón",
+      "duracion": 60,
+      "control": "Juega como Dani a los 14",
+      "ve": "El mini laberinto de espejos de PlayLand. En los reflejos aparece Nico de 5, llorando. Cuando lo encuentras te pregunta «¿Me ibas a encontrar?» y Dani le dice «Siempre».",
+      "oye": "La música de los juegos mecánicos y el llanto de Nico, a la izquierda o a la derecha según dónde esté.",
+      "revela": "Esa vez sí lo encontró: siempre lo encontró. Es la pregunta que vuelve en el final «Juntos»."
+    },
+    {
+      "id": "reflejo",
+      "nombre": "Quédate",
+      "nivel": "Nivel 101",
+      "momento": "Todo está perdido",
+      "disparador": "Al llegar al espejo grande junto a la salida",
+      "duracion": 15,
+      "control": "Solo mira",
+      "ve": "Su reflejo deja de imitarlo, se ata la cinta sobre los ojos y es El Inquilino. En el vaho del vidrio aparece una palabra: QUÉDATE.",
+      "oye": "El zumbido se corta y se oye una respiración que no es la suya.",
+      "revela": "El Inquilino es en lo que se convierte Dani si se queda."
+    },
+    {
+      "id": "mensaje",
+      "nombre": "Falta que le hables tú",
+      "nivel": "Entre el 101 y el 95",
+      "momento": "Noche oscura del alma",
+      "disparador": "Al cruzar la salida del Nivel 101",
+      "duracion": 20,
+      "control": "Sin control (pantalla negra)",
+      "ve": "Negro, y el mensaje de voz de mamá escrito en subtítulos.",
+      "oye": "El pitido de un monitor. «Los médicos dicen que le hablemos, que a veces escuchan. Yo ya le hablé. Falta que le hables tú.»",
+      "revela": "Lo que Dani nunca hizo."
+    },
+    {
+      "id": "compu",
+      "nombre": "La compu de la abuela",
+      "nivel": "Nivel 95",
+      "momento": "Entrada al tercer acto",
+      "disparador": "Al sentarse en el escritorio de 1996 (E)",
+      "duracion": 30,
+      "control": "Solo mira (puede levantarse)",
+      "ve": "El protector de pantalla del laberinto con dos puntos: uno es Dani y el otro parpadea junto a la salida. Alguien escribe: «dani? salí por la puerta roja. te espero».",
+      "oye": "El módem y el disco duro.",
+      "revela": "Nico lo espera afuera. Si Dani se queda sentado 60 s, empieza el final del Inquilino."
+    },
+    {
+      "id": "salida",
+      "nombre": "La salida",
+      "nivel": "Nivel 95",
+      "momento": "Final",
+      "disparador": "Al cruzar la última puerta",
+      "duracion": 8,
+      "control": "Sin control",
+      "ve": "El pasillo de ladrillos se llena de luz blanca.",
+      "oye": "Por primera vez, el zumbido se apaga sin peligro.",
+      "revela": "—"
+    },
+    {
+      "id": "epilogo",
+      "nombre": "06:40 (los finales)",
+      "nivel": "después del Nivel 95",
+      "momento": "Imagen final",
+      "disparador": "Al salir",
+      "duracion": 68,
+      "control": "Solo mira; en el juego se camina por el pasillo",
+      "ve": "Hay tres finales y cada uno empieza distinto: en la misma silla («Despertar»), en el laberinto de la mano de Nico («Juntos») o frente a la compu del Nivel 95 (el del Inquilino).",
+      "oye": "Según el final: el silencio cuando se apagan los tubos y los pájaros; la puerta roja y la enfermera que corre; o el lápiz que firma solo.",
+      "revela": "Qué eligió Dani. Los detalles de cada uno están en «Los tres finales».",
+      "animada": true
+    }
+  ],
+  "finales": [
+    {
+      "nombre": "Despertar",
+      "condicion": "El final normal: cruzar la salida del Nivel 95.",
+      "que": "Repite las tomas del prólogo con otra respuesta. Se apagan los tubos y se calla el zumbido. La enfermera dice lo mismo que anoche; Dani contesta «Sí. Ahora». Se detiene en la misma puerta, con la misma mano en la manija, y esta vez la abre. Adentro está la silla de visitas con la frazada doblada: nadie la usó en once noches. Se sienta, le toma la mano: «Perdón por no entrar antes. No sabía qué decirte. Ese día no te estaba mirando». Le pide «Si me escuchas, apriétame la mano»: los dedos de Nico se cierran y el monitor sube de 76 a 86. Con la mano libre llama a su mamá: «Estoy adentro, con Nico. Me apretó la mano». Termina con esperanza, no con un milagro."
+    },
+    {
+      "nombre": "Juntos",
+      "condicion": "Secreto: haber leído las 6 notas de N.",
+      "que": "Empieza en el laberinto: una mano chica con el parche de Astro agarra la de Dani. «Vamos, Dani. Ya sé salir.» Salen por la puerta roja. Dani despierta con la mano todavía cerrada y corre, sin esperar a nadie. La enfermera sale de la habitación: «Abrió los ojos. Lo está buscando». Nico lo sigue con la mirada: «Da… ni». «Hola, enano.» «¿Me… encontraste?» «Siempre.» Las dos manos se juntan como en el laberinto. «Tardaste.» «Ya sé. Perdón.»"
+    },
+    {
+      "nombre": "Inquilino",
+      "condicion": "Oculto: quedarse 60 s sentado frente a la compu del Nivel 95.",
+      "que": "Dani se queda frente a la compu y el contrato se firma solo, con su letra. A las 06:40 la enfermera no logra despertarlo («¡Doctor! ¡Aquí, en la sala de espera!»); entre los párpados ve que la silla de al lado está girada hacia él. Abre los ojos en el Vestíbulo, con la nota de la noche 4 en el piso: es la noche 12. Se ata la cinta sobre los ojos y tararea el zumbido. Ahora es él quien escucha respiraciones. A lo lejos, alguien se despierta."
+    }
+  ]
+}

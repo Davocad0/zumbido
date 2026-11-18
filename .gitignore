@@ -1,0 +1,11 @@
+node_modules/
+.next/
+out/
+# (2026-11-17) Los datos que se copian desde ../planeacion (los niveles, las grabaciones, los créditos) SÍ se suben:
+# en el servidor de internet solo está esta carpeta, sin la planeación. Se vuelven a copiar con «npm run datos».
+# Lo que se guarda al jugar en la computadora de uno no se sube:
+data/niveles-propios/
+# Archivos de Windows y del editor.
+Thumbs.db
+desktop.ini
+*.log

@@ -1,0 +1,1260 @@
+{
+  "id": "nivel-37-b",
+  "numero": "37",
+  "nombre": "Las Piscinas B",
+  "descripcion": "Las piscinas vacías, salvo la grande, y en las paredes la raya de hasta dónde llegaba el agua. Un silbato suena lejos, siempre igual. Ya no da ganas de quedarse.",
+  "tension": 55,
+  "lado": "B",
+  "base": "nivel-37",
+  "semilla": 2034,
+  "ancho": 23,
+  "alto": 23,
+  "mapa": [
+    "#######################",
+    "#@#...................#",
+    "#.#.#...#####.###.#.#.#",
+    "#.#...............#.#.#",
+    "#.###.#...#####.#.#.#.#",
+    "#...#.....#...#.#.#...#",
+    "#...#.#.###.#.#.#.###.#",
+    "#...#.......#.#.#.....#",
+    "#.#.#.....###.#.#.#.#.#",
+    "#...#.......#.........#",
+    "#.###~#.....#.###.....#",
+    "#.#.........#...#.....#",
+    "#.#.#...#.#####.###.#.#",
+    "#.#...........#...#...#",
+    "#.#.......###.###.###.#",
+    "#.#.............#.A.#.#",
+    "#.#######...#.#.###.#.#",
+    "#.......#...#..m#...#.#",
+    "#######.#...#####.###M#",
+    "#a....#.#...#...#.#..X#",
+    "#.#.#.#.#####...#.#.#.#",
+    "#.................#...#",
+    "#######################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 90
+  },
+  "llaves": [
+    {
+      "color": "azul",
+      "x": 1,
+      "y": 19,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 8,
+      "desdeEntrada": 34
+    },
+    {
+      "color": "amarilla",
+      "x": 15,
+      "y": 17,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "desvio": 16,
+      "desdeEntrada": 37
+    }
+  ],
+  "puertas": [
+    {
+      "color": "azul",
+      "x": 18,
+      "y": 15,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": false
+    },
+    {
+      "color": "amarilla",
+      "x": 21,
+      "y": 18,
+      "hex": "#d9a21a",
+      "simbolo": "rombo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 21,
+    "y": 19
+  },
+  "salas": [
+    {
+      "x": 5,
+      "y": 11,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "ancho": 3,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 1,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 13,
+      "y": 19,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 17,
+      "y": 9,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 11,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 9,
+      "ancho": 5,
+      "alto": 5,
+      "agua": true
+    },
+    {
+      "x": 7,
+      "y": 11,
+      "ancho": 3,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 7,
+      "y": 9,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 17,
+      "y": 7,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 1,
+      "y": 5,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 3,
+      "y": 13,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 9,
+      "y": 15,
+      "ancho": 3,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 7,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 7,
+      "y": 3,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Cuarto de la tele",
+    "x": 17,
+    "y": 7,
+    "ancho": 5,
+    "alto": 5
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 17,
+      "y": 7,
+      "ancho": 5,
+      "alto": 5
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 18,
+      "y": 7,
+      "mirando": 0,
+      "cuarto": "Cuarto de la tele",
+      "cinta": null
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "casillero",
+      "x": 20,
+      "y": 7,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 17,
+      "y": 8,
+      "mirando": 90
+    }
+  ],
+  "props": [
+    {
+      "tipo": "tv_crt",
+      "x": 5,
+      "y": 12
+    },
+    {
+      "tipo": "bancas",
+      "x": 8,
+      "y": 13
+    },
+    {
+      "tipo": "toallas",
+      "x": 9,
+      "y": 15
+    },
+    {
+      "tipo": "flotador",
+      "x": 7,
+      "y": 13
+    },
+    {
+      "tipo": "pelota_de_playa",
+      "x": 5,
+      "y": 1
+    },
+    {
+      "tipo": "pelota_de_playa",
+      "x": 15,
+      "y": 19
+    },
+    {
+      "tipo": "escalera_piscina",
+      "x": 5,
+      "y": 11
+    },
+    {
+      "tipo": "flotador",
+      "x": 19,
+      "y": 11
+    },
+    {
+      "tipo": "escalera_piscina",
+      "x": 5,
+      "y": 13
+    },
+    {
+      "tipo": "escalera_piscina",
+      "x": 7,
+      "y": 11
+    },
+    {
+      "tipo": "pelota_de_playa",
+      "x": 3,
+      "y": 7
+    },
+    {
+      "tipo": "flotador",
+      "x": 5,
+      "y": 15
+    },
+    {
+      "tipo": "pelota_de_playa",
+      "x": 9,
+      "y": 17
+    },
+    {
+      "tipo": "flotador",
+      "x": 7,
+      "y": 9
+    },
+    {
+      "tipo": "escalera_piscina",
+      "x": 9,
+      "y": 3
+    },
+    {
+      "tipo": "toalla_mojada",
+      "x": 15,
+      "y": 20,
+      "puesto": "La toalla de la piscina, en una silla, todavía mojada"
+    },
+    {
+      "tipo": "celular_grabando",
+      "x": 11,
+      "y": 16,
+      "puesto": "El celular, apoyado en el borde, grabando la piscina grande"
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "diario",
+      "soporte": "papel duro, como si se hubiera mojado y secado",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada"
+      ],
+      "texto": "las piscinas están vacías. todas menos la grande.\nen las paredes quedó la raya de hasta dónde llegaba el agua. me llega al pecho.\nse oye un silbato lejos. siempre el mismo.",
+      "pensamiento": "El silbato...",
+      "x": 13,
+      "y": 19
+    },
+    {
+      "autor": "D.",
+      "tipo": "regla",
+      "soporte": "escrito con el dedo en el vapor de un espejo del vestuario",
+      "instrumento": "dedo",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "alguien cuenta en voz alta, de cara a la pared. con mi voz.\ncuando llega a cincuenta se da vuelta y busca. si corres cerca, cuenta más rápido. no lo toques.\nsi te alumbra con el celular, te graba: sal de la luz antes de que termine. corriendo es más lento que tú.",
+      "pensamiento": "Cuenta como yo contaba.",
+      "x": 1,
+      "y": 2
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 6,
+      "y": 21,
+      "apunta": 180
+    },
+    {
+      "tipo": "astro",
+      "llave": "amarilla",
+      "x": 9,
+      "y": 8,
+      "apunta": 90
+    }
+  ],
+  "luces": [],
+  "eventos": [
+    {
+      "tipo": "el_contador",
+      "descripcion": "El Contador: cuenta en voz alta hasta cincuenta, de cara a la pared (más rápido si te oye cerca); después se da vuelta y te busca con la luz del celular. Si te ve, te graba; si te quedas en el cuadro, se lanza. Más lento que Dani corriendo. Nunca entra a un refugio.",
+      "x": 11,
+      "y": 19,
+      "puestos": [
+        {
+          "x": 11,
+          "y": 19,
+          "mirando": 0
+        },
+        {
+          "x": 7,
+          "y": 6,
+          "mirando": 180
+        },
+        {
+          "x": 20,
+          "y": 21,
+          "mirando": 90
+        }
+      ],
+      "empieza": 0
+    },
+    {
+      "tipo": "silencio_total",
+      "descripcion": "Todo el audio se corta durante 8 s. Solo se oye la respiración del jugador.",
+      "x": 13,
+      "y": 10
+    },
+    {
+      "tipo": "chapuzon_lejano",
+      "descripcion": "Un chapuzón con eco en una piscina que no se ve.",
+      "x": 18,
+      "y": 17,
+      "objetivo": {
+        "x": 13,
+        "y": 10
+      }
+    },
+    {
+      "tipo": "puerta_que_golpea",
+      "descripcion": "Al pasar al lado, alguien sacude y golpea desde adentro una puerta cerrada (la 11). La puerta tiembla y para cuando la miras.",
+      "x": 13,
+      "y": 8,
+      "forma": "casillero",
+      "piensa": "Golpea como si le faltara el aire.",
+      "objetivo": {
+        "x": 12,
+        "y": 8
+      }
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 5,
+      "y": 21,
+      "sonido": "gente-se-asusta",
+      "donde": "lejos",
+      "vol": 2.4,
+      "piensa": "Así sonó. Cuando lo sacaron."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 17,
+      "y": 19,
+      "sonido": "chapuzon",
+      "donde": "cerca",
+      "vol": 2.8,
+      "piensa": "Ahí no hay agua."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 11,
+      "y": 13,
+      "sonido": "susurro-sesenta",
+      "donde": "atras",
+      "vol": 2.6,
+      "piensa": "Sesenta. Nunca llegó a sesenta."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 9,
+      "y": 9,
+      "sonido": "silbato-eco",
+      "donde": "cerca",
+      "vol": 3,
+      "piensa": "El silbato. Acá, al lado."
+    },
+    {
+      "tipo": "susto_sonoro",
+      "descripcion": "Un susto que es solo sonido: al pasar por ese lugar, algo suena de golpe muy cerca (del otro lado de la pared, a tu espalda, al lado) y no hay nada. Dani se sobresalta y a veces dice qué fue. Una sola vez; si te persiguen, espera.",
+      "x": 21,
+      "y": 13,
+      "sonido": "ahogo",
+      "donde": "pared",
+      "vol": 2.2,
+      "filtro": 1600,
+      "piensa": "Alguien se ahoga del otro lado."
+    }
+  ],
+  "entidad": null,
+  "ambiente": {
+    "paredes": "azulejo_blanco",
+    "piso": "azulejo_mojado",
+    "techo": "azulejo_blanco",
+    "colorNiebla": "#0f1716",
+    "distanciaVision": 8,
+    "luz": 0.4,
+    "agua": 0,
+    "marcaAgua": 0.44
+  },
+  "audio": {
+    "ambiente": "piscinas_vacias",
+    "pasos": "agua",
+    "zonaSegura": "cancion_pop_lejana"
+  },
+  "ladoB": {
+    "noche": 15,
+    "microfono": true,
+    "camaraFalla": 0.38,
+    "silencios": [
+      60,
+      110
+    ],
+    "sinFuente": [
+      {
+        "sonido": "silbato-eco",
+        "donde": "lejos",
+        "cada": [
+          40,
+          70
+        ],
+        "vol": 0.7,
+        "quien": "El silbato del salvavidas, el del día de la piscina"
+      },
+      {
+        "sonido": "chapuzon",
+        "donde": "lejos",
+        "cada": [
+          45,
+          80
+        ],
+        "vol": 0.7,
+        "quien": "Alguien que se mete al agua en la piscina grande"
+      },
+      {
+        "sonido": "burbujas",
+        "donde": "pared",
+        "cada": [
+          35,
+          60
+        ],
+        "vol": 0.8,
+        "quien": "El agua que se va por un desagüe, como si tragara"
+      },
+      {
+        "sonido": "golpe-tuberia",
+        "donde": "lejos",
+        "cada": [
+          30,
+          55
+        ],
+        "vol": 0.8,
+        "quien": "Los caños del vestuario"
+      },
+      {
+        "sonido": "pasos-mojados",
+        "donde": "lejos",
+        "cada": [
+          40,
+          70
+        ],
+        "vol": 0.8,
+        "dur": [
+          3,
+          5
+        ],
+        "quien": "Alguien que camina descalzo por el borde"
+      },
+      {
+        "sonido": "casillero-golpe",
+        "donde": "lejos",
+        "cada": [
+          55,
+          90
+        ],
+        "vol": 0.8,
+        "dur": [
+          1.5,
+          3
+        ],
+        "quien": "Un casillero que se cierra en otro vestuario"
+      }
+    ],
+    "cuartoDeAntes": {
+      "nombre": "Vestuario",
+      "x": 5,
+      "y": 11,
+      "ancho": 5,
+      "alto": 5
+    }
+  },
+  "antes": {
+    "id": "nivel-37",
+    "mapa": [
+      "#######################",
+      "#@#.................#X#",
+      "#.#.#...#####.###.#.#M#",
+      "#.#....~~~......#.#.#.#",
+      "#.###.#~~~#####.#.#.#.#",
+      "#~~~#..~~~#.A.#.#.#...#",
+      "#~~~#.#.###.#.#.#.###.#",
+      "#~~~#~~~~~..#.#.#.....#",
+      "#.#.#~~~~~###.#.#.#.#.#",
+      "#...#~~~~~~~#.#..~~~~~#",
+      "#.###~#~~~~~#.###~~~~~#",
+      "#.#.......~~#...#~~~~~#",
+      "#.#.#...#.#####.###.#.#",
+      "#.#~~.........#...#...#",
+      "#.#~~.....###.###.###.#",
+      "#.#~~.....~~....#...#.#",
+      "#.#######~~~#.#.###.#.#",
+      "#.......#~~~#..m#...#.#",
+      "#######.#~~~#####.###.#",
+      "#a....#.#~~~#~~~#.#...#",
+      "#.#.#.#.#####~~~#.#...#",
+      "#............~~~..#...#",
+      "#######################"
+    ]
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 142,
+    "segundosRutaOptima": 65,
+    "callejones": 1,
+    "porcentajePiso": 56,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "azul",
+      "amarilla"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          20,
+          16
+        ],
+        [
+          13,
+          4
+        ]
+      ],
+      "cierra": [
+        [
+          14,
+          15
+        ],
+        [
+          16,
+          13
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [
+        [
+          2,
+          11
+        ],
+        [
+          14,
+          13
+        ]
+      ],
+      "cierra": [
+        [
+          11,
+          6
+        ],
+        [
+          13,
+          6
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      1,
+      10
+    ],
+    [
+      1,
+      11
+    ],
+    [
+      1,
+      12
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      5,
+      17
+    ],
+    [
+      6,
+      17
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      7,
+      18
+    ],
+    [
+      7,
+      19
+    ],
+    [
+      7,
+      20
+    ],
+    [
+      7,
+      21
+    ],
+    [
+      6,
+      21
+    ],
+    [
+      5,
+      21
+    ],
+    [
+      4,
+      21
+    ],
+    [
+      3,
+      21
+    ],
+    [
+      2,
+      21
+    ],
+    [
+      1,
+      21
+    ],
+    [
+      1,
+      20
+    ],
+    [
+      1,
+      19
+    ],
+    [
+      2,
+      19
+    ],
+    [
+      3,
+      19
+    ],
+    [
+      4,
+      19
+    ],
+    [
+      5,
+      19
+    ],
+    [
+      5,
+      20
+    ],
+    [
+      5,
+      21
+    ],
+    [
+      6,
+      21
+    ],
+    [
+      7,
+      21
+    ],
+    [
+      8,
+      21
+    ],
+    [
+      9,
+      21
+    ],
+    [
+      10,
+      21
+    ],
+    [
+      11,
+      21
+    ],
+    [
+      12,
+      21
+    ],
+    [
+      13,
+      21
+    ],
+    [
+      14,
+      21
+    ],
+    [
+      15,
+      21
+    ],
+    [
+      16,
+      21
+    ],
+    [
+      17,
+      21
+    ],
+    [
+      17,
+      20
+    ],
+    [
+      17,
+      19
+    ],
+    [
+      17,
+      18
+    ],
+    [
+      17,
+      17
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      19,
+      17
+    ],
+    [
+      19,
+      16
+    ],
+    [
+      19,
+      15
+    ],
+    [
+      18,
+      15
+    ],
+    [
+      17,
+      15
+    ],
+    [
+      17,
+      14
+    ],
+    [
+      17,
+      13
+    ],
+    [
+      16,
+      13
+    ],
+    [
+      15,
+      13
+    ],
+    [
+      15,
+      12
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      14,
+      11
+    ],
+    [
+      13,
+      11
+    ],
+    [
+      13,
+      10
+    ],
+    [
+      13,
+      9
+    ],
+    [
+      13,
+      8
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      12,
+      5
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      9,
+      8
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      10,
+      13
+    ],
+    [
+      11,
+      13
+    ],
+    [
+      12,
+      13
+    ],
+    [
+      13,
+      13
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      13,
+      15
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      14,
+      17
+    ],
+    [
+      13,
+      17
+    ],
+    [
+      13,
+      16
+    ],
+    [
+      13,
+      15
+    ],
+    [
+      12,
+      15
+    ],
+    [
+      11,
+      15
+    ],
+    [
+      10,
+      15
+    ],
+    [
+      9,
+      15
+    ],
+    [
+      9,
+      14
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      8
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      12,
+      5
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      13,
+      8
+    ],
+    [
+      13,
+      9
+    ],
+    [
+      14,
+      9
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      16,
+      9
+    ],
+    [
+      17,
+      9
+    ],
+    [
+      18,
+      9
+    ],
+    [
+      19,
+      9
+    ],
+    [
+      20,
+      9
+    ],
+    [
+      21,
+      9
+    ],
+    [
+      21,
+      10
+    ],
+    [
+      21,
+      11
+    ],
+    [
+      21,
+      12
+    ],
+    [
+      21,
+      13
+    ],
+    [
+      21,
+      14
+    ],
+    [
+      21,
+      15
+    ],
+    [
+      21,
+      16
+    ],
+    [
+      21,
+      17
+    ],
+    [
+      21,
+      18
+    ],
+    [
+      21,
+      19
+    ]
+  ]
+}

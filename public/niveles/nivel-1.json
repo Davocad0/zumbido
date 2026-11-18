@@ -1,0 +1,920 @@
+{
+  "id": "nivel-1",
+  "numero": "1",
+  "nombre": "Zona Habitable",
+  "descripcion": "Los pasillos del edificio donde vivían cuando nació Nico: puertas de departamento con número, todas cerradas, papel tapiz despegado y una alfombra gastada. Huele a encierro. En algún departamento llora un bebé.",
+  "tension": 50,
+  "semilla": 2002,
+  "ancho": 21,
+  "alto": 21,
+  "mapa": [
+    "#####################",
+    "#@......#....a......#",
+    "###.....#.#.###.###.#",
+    "#.#.....#.#...#.....#",
+    "#.#.#.#.#.###.#.....#",
+    "#.#...#...#.#.#.....#",
+    "#.#########.#.#.....#",
+    "#...........#.......#",
+    "#.#...#.###.#####.#.#",
+    "#.#...#...#..v#.....#",
+    "#.#######.#####.#####",
+    "#.#.....#.....#.....#",
+    "#.#.###.#####.#####.#",
+    "#.#.....#.......#.A.#",
+    "#.###...#.#.....#.###",
+    "#...#...#.........#X#",
+    "###.###.###.###.###V#",
+    "#.........#.........#",
+    "#.#######.#########.#",
+    "#...................#",
+    "#####################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "llaves": [
+    {
+      "color": "azul",
+      "x": 13,
+      "y": 1,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 2,
+      "desdeEntrada": 20
+    },
+    {
+      "color": "verde",
+      "x": 13,
+      "y": 9,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "desvio": 8,
+      "desdeEntrada": 29
+    }
+  ],
+  "puertas": [
+    {
+      "color": "azul",
+      "x": 18,
+      "y": 13,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": false
+    },
+    {
+      "color": "verde",
+      "x": 19,
+      "y": 16,
+      "hex": "#0f8a6c",
+      "simbolo": "cuadrado",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 19,
+    "y": 15
+  },
+  "salas": [
+    {
+      "x": 3,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 3,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 15,
+      "y": 3,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 5,
+      "y": 13,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 11,
+      "y": 13,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Cuarto del conserje",
+    "x": 15,
+    "y": 3,
+    "ancho": 5,
+    "alto": 5
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Cuarto del conserje",
+      "x": 15,
+      "y": 3,
+      "ancho": 5,
+      "alto": 5
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 15,
+      "y": 3,
+      "mirando": 0,
+      "cuarto": "Cuarto del conserje",
+      "cinta": {
+        "titulo": "PATIO DE LA ABUELA",
+        "descripcion": "Nico, de 4 años, persigue a un perro y se cae. Dani lo levanta y le sacude las rodillas. Risas fuera de cuadro."
+      }
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "casillero",
+      "x": 19,
+      "y": 2,
+      "mirando": 90
+    },
+    {
+      "tipo": "cajas",
+      "x": 9,
+      "y": 13,
+      "mirando": 0
+    },
+    {
+      "tipo": "casillero",
+      "x": 4,
+      "y": 7,
+      "mirando": 0
+    }
+  ],
+  "props": [
+    {
+      "tipo": "radio",
+      "x": 16,
+      "y": 3
+    },
+    {
+      "tipo": "balde_y_trapeador",
+      "x": 18,
+      "y": 4
+    },
+    {
+      "tipo": "estante_latas",
+      "x": 19,
+      "y": 7
+    },
+    {
+      "tipo": "cajas_desarmadas",
+      "x": 5,
+      "y": 7
+    },
+    {
+      "tipo": "cochecito",
+      "x": 5,
+      "y": 3
+    },
+    {
+      "tipo": "cajas_desarmadas",
+      "x": 5,
+      "y": 15
+    },
+    {
+      "tipo": "cochecito",
+      "x": 13,
+      "y": 15
+    },
+    {
+      "tipo": "telefono",
+      "x": 13,
+      "y": 13
+    },
+    {
+      "tipo": "cuna",
+      "x": 3,
+      "y": 9
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "M.",
+      "tipo": "diario",
+      "soporte": "hoja del libro de novedades",
+      "instrumento": "birome negra",
+      "estado": [
+        "vieja",
+        "doblada"
+      ],
+      "texto": "LIBRO DE NOVEDADES — TURNO NOCHE\n02:14 Ronda pasillo B. Sin novedad.\n02:14 Ronda pasillo C. Las luces parpadean. Se avisa a mantenimiento.\n02:14 ¿El reloj está parado? Le cambié la pila.\nM. Rojas, limpieza",
+      "pensamiento": "Todas a las 2:14.",
+      "x": 1,
+      "y": 3
+    },
+    {
+      "autor": "M.",
+      "tipo": "regla",
+      "soporte": "otra hoja del mismo libro",
+      "instrumento": "birome negra",
+      "estado": [
+        "mojada",
+        "rota"
+      ],
+      "texto": "Ya no anoto la hora, para qué.\nHay alguien que camina cuando yo camino. Si me paro, se para.\nEn los casilleros no te encuentra, pero hay que entrar sin que te vea. Si te ve entrar, ya sabe dónde estás.\nNo es del personal. Le digo el Inquilino porque vive aquí y no paga.\nM.",
+      "pensamiento": "El Inquilino...",
+      "x": 11,
+      "y": 5
+    },
+    {
+      "autor": "D.",
+      "noche": 5,
+      "tipo": "regla",
+      "soporte": "pedazo de cartón",
+      "instrumento": "marcador azul",
+      "estado": [
+        "sucia"
+      ],
+      "texto": "noche 5\ncorrí. no sirve correr mucho: te quedas sin aire en nada y él no se cansa nunca.\ncorre solo cuando lo veas, y corre al escondite más cerca.\ncuando ya no puedes más, el cuerpo te da como un último empujón. se siente horrible, el corazón te revienta. ÚSALO PARA ESCONDERTE, no para seguir corriendo.",
+      "pensamiento": "Ojalá no necesite ese empujón.",
+      "x": 10,
+      "y": 13
+    },
+    {
+      "autor": "D.",
+      "tipo": "advertencia",
+      "soporte": "rayado en la puerta de un casillero",
+      "instrumento": "punta de una llave",
+      "estado": [
+        "rayada"
+      ],
+      "texto": "NO USES EL MISMO CASILLERO 2 VECES\nSE ACUERDA",
+      "x": 11,
+      "y": 6
+    },
+    {
+      "autor": "N.",
+      "tipo": "diario",
+      "soporte": "página de una revista de sala de espera",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada"
+      ],
+      "dibujo": "astro",
+      "texto": "aquí hay una radio que dice el clima de una ciudad que no existe. 14 grados y llovizna en «puerto lindo». jaja\nextraño el celu. extraño las sopas de la abuela.\ndani, si estás leyendo esto: ya sé que vas a venir. siempre vienes.",
+      "pensamiento": "«Siempre vienes»... ¿Quién es N.?",
+      "x": 6,
+      "y": 7
+    },
+    {
+      "autor": "M.",
+      "tipo": "regla",
+      "soporte": "cinta de papel pegada en la tele",
+      "instrumento": "birome negra",
+      "estado": [
+        "vieja"
+      ],
+      "texto": "NO APAGAR LA TELE.\nMientras se ven los videos, no entra. Llega hasta donde termina la luz y se queda ahí, mirando.\nCreo que se acuerda de algo.\nM.",
+      "pensamiento": "¿Se acuerda de qué?",
+      "x": 15,
+      "y": 4
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 12,
+      "y": 1,
+      "apunta": 0
+    },
+    {
+      "tipo": "astro",
+      "llave": "verde",
+      "x": 8,
+      "y": 7,
+      "apunta": 0
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 15,
+      "y": 10
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 11,
+      "y": 9
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "apagon_en_fila",
+      "descripcion": "Las luces del pasillo se apagan una por una detrás del jugador.",
+      "x": 9,
+      "y": 1,
+      "objetivo": {
+        "x": 19,
+        "y": 1
+      }
+    },
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 15,
+      "y": 11,
+      "objetivo": {
+        "x": 19,
+        "y": 11
+      }
+    },
+    {
+      "tipo": "telefono",
+      "descripcion": "Un teléfono suena cuando el jugador está a 6 casillas y se calla cuando está a 2.",
+      "x": 19,
+      "y": 13,
+      "objetivo": {
+        "x": 13,
+        "y": 13
+      }
+    },
+    {
+      "tipo": "llanto",
+      "descripcion": "Un bebé llora en algún departamento y el intercomunicador de bebé se prende solo. Si llegas a la cuna, se calla: está vacía y mojada.",
+      "x": 17,
+      "y": 9,
+      "piensa": [
+        "El intercomunicador... el de cuando nació Nico. «Si llora, me avisas.»",
+        "Está vacía. Y mojada.",
+        "Se calló. No fui."
+      ],
+      "objetivo": {
+        "x": 3,
+        "y": 9
+      },
+      "radio": {
+        "x": 16,
+        "y": 9
+      }
+    },
+    {
+      "tipo": "puerta_que_golpea",
+      "descripcion": "Al pasar al lado, alguien sacude y golpea desde adentro una puerta cerrada (la 11). La puerta tiembla y para cuando la miras.",
+      "x": 19,
+      "y": 17,
+      "piensa": "Once... Hay alguien adentro.",
+      "objetivo": {
+        "x": 20,
+        "y": 17
+      }
+    },
+    {
+      "tipo": "cambia_si_no_miras",
+      "descripcion": "Algo cambia mientras no lo miras (aparece una silla, desaparece una puerta). Solo cosas, nunca el camino.",
+      "x": 12,
+      "y": 9,
+      "cambios": [
+        {
+          "tipo": "puerta",
+          "piensa": "¿No había una puerta ahí?"
+        }
+      ]
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "aparece_tras_primera_llave"
+  },
+  "ambiente": {
+    "paredes": "papel_tapiz_edificio",
+    "piso": "alfombra_de_pasillo",
+    "techo": "techo_con_humedad",
+    "colorNiebla": "#120b08",
+    "distanciaVision": 8,
+    "luz": 0.5,
+    "vestirParedes": {
+      "puertas": 0.17,
+      "roto": 0.12
+    }
+  },
+  "audio": {
+    "ambiente": "edificio_de_noche",
+    "pasos": "alfombra",
+    "zonaSegura": "radio_con_estatica"
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 104,
+    "segundosRutaOptima": 47,
+    "callejones": 5,
+    "porcentajePiso": 52,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "azul",
+      "verde"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          8,
+          11
+        ],
+        [
+          9,
+          16
+        ]
+      ],
+      "cierra": [
+        [
+          11,
+          11
+        ],
+        [
+          8,
+          9
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          11
+        ]
+      ],
+      "cierra": [
+        [
+          14,
+          19
+        ],
+        [
+          1,
+          8
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      7,
+      4
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      8,
+      5
+    ],
+    [
+      9,
+      5
+    ],
+    [
+      9,
+      4
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      9,
+      2
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      14,
+      1
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      15,
+      2
+    ],
+    [
+      15,
+      3
+    ],
+    [
+      16,
+      3
+    ],
+    [
+      17,
+      3
+    ],
+    [
+      17,
+      4
+    ],
+    [
+      17,
+      5
+    ],
+    [
+      17,
+      6
+    ],
+    [
+      17,
+      7
+    ],
+    [
+      17,
+      8
+    ],
+    [
+      17,
+      9
+    ],
+    [
+      16,
+      9
+    ],
+    [
+      15,
+      9
+    ],
+    [
+      15,
+      10
+    ],
+    [
+      15,
+      11
+    ],
+    [
+      16,
+      11
+    ],
+    [
+      17,
+      11
+    ],
+    [
+      18,
+      11
+    ],
+    [
+      19,
+      11
+    ],
+    [
+      19,
+      12
+    ],
+    [
+      19,
+      13
+    ],
+    [
+      18,
+      13
+    ],
+    [
+      17,
+      13
+    ],
+    [
+      17,
+      14
+    ],
+    [
+      17,
+      15
+    ],
+    [
+      16,
+      15
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      14,
+      15
+    ],
+    [
+      13,
+      15
+    ],
+    [
+      13,
+      14
+    ],
+    [
+      13,
+      13
+    ],
+    [
+      13,
+      12
+    ],
+    [
+      13,
+      11
+    ],
+    [
+      12,
+      11
+    ],
+    [
+      11,
+      11
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      11,
+      8
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      12,
+      9
+    ],
+    [
+      13,
+      9
+    ],
+    [
+      12,
+      9
+    ],
+    [
+      11,
+      9
+    ],
+    [
+      11,
+      8
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      8,
+      9
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      10,
+      11
+    ],
+    [
+      11,
+      11
+    ],
+    [
+      12,
+      11
+    ],
+    [
+      13,
+      11
+    ],
+    [
+      13,
+      12
+    ],
+    [
+      13,
+      13
+    ],
+    [
+      14,
+      13
+    ],
+    [
+      15,
+      13
+    ],
+    [
+      15,
+      14
+    ],
+    [
+      15,
+      15
+    ],
+    [
+      15,
+      16
+    ],
+    [
+      15,
+      17
+    ],
+    [
+      16,
+      17
+    ],
+    [
+      17,
+      17
+    ],
+    [
+      18,
+      17
+    ],
+    [
+      19,
+      17
+    ],
+    [
+      19,
+      16
+    ],
+    [
+      19,
+      15
+    ]
+  ]
+}

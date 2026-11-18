@@ -1,0 +1,92 @@
+{
+  "juego": "ZUMBIDO",
+  "version": 3,
+  "niveles": [
+    {
+      "id": "nivel-0",
+      "numero": "0",
+      "nombre": "El Vestíbulo",
+      "archivo": "nivel-0.json"
+    },
+    {
+      "id": "nivel-1",
+      "numero": "1",
+      "nombre": "Zona Habitable",
+      "archivo": "nivel-1.json"
+    },
+    {
+      "id": "nivel-2",
+      "numero": "2",
+      "nombre": "Tuberías",
+      "archivo": "nivel-2.json"
+    },
+    {
+      "id": "nivel-37",
+      "numero": "37",
+      "nombre": "Las Piscinas",
+      "archivo": "nivel-37.json"
+    },
+    {
+      "id": "nivel-101",
+      "numero": "101",
+      "nombre": "Casa de Espejos",
+      "archivo": "nivel-101.json"
+    },
+    {
+      "id": "nivel-95",
+      "numero": "95",
+      "nombre": "Protector de Pantalla",
+      "archivo": "nivel-95.json"
+    },
+    {
+      "id": "nivel-0-b",
+      "numero": "0",
+      "nombre": "El Vestíbulo B",
+      "archivo": "nivel-0-b.json",
+      "lado": "B"
+    },
+    {
+      "id": "nivel-1-b",
+      "numero": "1",
+      "nombre": "Zona Habitable B",
+      "archivo": "nivel-1-b.json",
+      "lado": "B"
+    },
+    {
+      "id": "nivel-2-b",
+      "numero": "2",
+      "nombre": "Tuberías B",
+      "archivo": "nivel-2-b.json",
+      "lado": "B"
+    },
+    {
+      "id": "nivel-37-b",
+      "numero": "37",
+      "nombre": "Las Piscinas B",
+      "archivo": "nivel-37-b.json",
+      "lado": "B"
+    },
+    {
+      "id": "nivel-101-b",
+      "numero": "101",
+      "nombre": "Casa de Espejos B",
+      "archivo": "nivel-101-b.json",
+      "lado": "B"
+    },
+    {
+      "id": "nivel-95-b",
+      "numero": "95",
+      "nombre": "Protector de Pantalla B",
+      "archivo": "nivel-95-b.json",
+      "lado": "B"
+    }
+  ],
+  "cooperativo": [
+    {
+      "id": "coop-1",
+      "numero": "C1",
+      "nombre": "La cuenta",
+      "archivo": "coop-1.json"
+    }
+  ]
+}

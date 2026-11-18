@@ -1,0 +1,589 @@
+{
+  "id": "nivel-0-b",
+  "numero": "0",
+  "nombre": "El Vestíbulo B",
+  "descripcion": "El mismo vestíbulo, con agua a los tobillos, manchas de humedad y el zumbido desafinado. Las sillas naranjas de la sala de espera están en el pasillo y la sala ya no es segura: la tele prendida está en otro cuarto.",
+  "tension": 45,
+  "lado": "B",
+  "base": "nivel-0",
+  "semilla": 1995,
+  "ancho": 15,
+  "alto": 15,
+  "mapa": [
+    "###############",
+    "#@..#XR.......#",
+    "#.#.###.....#.#",
+    "#.#...#.....#.#",
+    "#.###.#.#.#.#.#",
+    "#.....#...#.#.#",
+    "#.#########.#.#",
+    "#...........#.#",
+    "#...#.#...###.#",
+    "#.....#.....#.#",
+    "#.#.###.#.#.#.#",
+    "#...#.......#.#",
+    "#####.#.#.#.#.#",
+    "#r........#...#",
+    "###############"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 90
+  },
+  "llaves": [
+    {
+      "color": "roja",
+      "x": 1,
+      "y": 13,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 12,
+      "desdeEntrada": 24
+    }
+  ],
+  "puertas": [
+    {
+      "color": "roja",
+      "x": 6,
+      "y": 1,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 5,
+    "y": 1
+  },
+  "salas": [
+    {
+      "x": 7,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Cuarto de la tele",
+    "x": 7,
+    "y": 7,
+    "ancho": 3,
+    "alto": 3
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 7,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 7,
+      "y": 7,
+      "mirando": 0,
+      "cuarto": "Cuarto de la tele",
+      "cinta": null
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "mesa",
+      "x": 5,
+      "y": 8,
+      "mirando": 90
+    },
+    {
+      "tipo": "mesa",
+      "x": 7,
+      "y": 12,
+      "mirando": 90
+    },
+    {
+      "tipo": "armario",
+      "x": 11,
+      "y": 9,
+      "mirando": 180
+    }
+  ],
+  "props": [
+    {
+      "tipo": "tv_crt",
+      "x": 10,
+      "y": 2
+    },
+    {
+      "tipo": "sillas_plastico",
+      "x": 8,
+      "y": 2
+    },
+    {
+      "tipo": "dispensador_agua",
+      "x": 9,
+      "y": 2
+    },
+    {
+      "tipo": "silla_naranja",
+      "x": 1,
+      "y": 7
+    },
+    {
+      "tipo": "sillas_plastico",
+      "x": 8,
+      "y": 11,
+      "puesto": "Las sillas de la sala de espera del hospital, donde Dani se quedó dormido"
+    },
+    {
+      "tipo": "celular_grabando",
+      "x": 10,
+      "y": 11,
+      "puesto": "El celular de Dani, tirado en el agua, grabando"
+    },
+    {
+      "tipo": "toalla_mojada",
+      "x": 2,
+      "y": 7,
+      "puesto": "La toalla de la piscina, mojada, en una silla"
+    },
+    {
+      "tipo": "silla_naranja",
+      "x": 11,
+      "y": 2,
+      "puesto": "Una silla de la sala de espera, sola, mirando hacia donde vienes"
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "noche": 12,
+      "tipo": "regla",
+      "soporte": "hoja de memorándum, empapada",
+      "instrumento": "birome azul",
+      "estado": [
+        "mojada",
+        "arrugada"
+      ],
+      "texto": "noche 12\notra vez aquí. pero no es aquí: el agua me llega a los tobillos y el zumbido está desafinado.\nla cámara oye antes que yo. mira la rayita del micrófono, al lado del REC:\n— si tiembla un ratito, no es nada.\n— si tiembla y no para, algo viene. escóndete.\naquí el zumbido se calla solo. si la rayita no se mueve, no es nadie. sigue.",
+      "pensamiento": "Noche 12. Ya no son once.",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "autor": "D.",
+      "tipo": "pista",
+      "soporte": "post-it amarillo, despegado",
+      "instrumento": "lápiz",
+      "estado": [
+        "mojada"
+      ],
+      "texto": "la sala de espera ya no es segura. la tele está apagada y alguien sacó las sillas al pasillo.\nhay otra tele prendida, en un cuarto que antes no tenía nada. búscala.",
+      "pensamiento": "Alguien sacó las sillas al pasillo.",
+      "x": 10,
+      "y": 9
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 7,
+      "y": 8,
+      "apunta": 90
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 7,
+      "y": 8
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 3,
+      "y": 13
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 10,
+      "y": 7
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 1,
+      "y": 13,
+      "objetivo": {
+        "x": 9,
+        "y": 13
+      }
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "solo_aparicion"
+  },
+  "ambiente": {
+    "paredes": "papel_amarillo",
+    "piso": "alfombra_humeda",
+    "techo": "placas_fluorescentes",
+    "colorNiebla": "#1d1a0e",
+    "distanciaVision": 9,
+    "luz": 0.72,
+    "agua": 0.07,
+    "marcaAgua": 0.16,
+    "colorAgua": "#3c3a30"
+  },
+  "audio": {
+    "ambiente": "zumbido_desafinado",
+    "pasos": "alfombra",
+    "zonaSegura": "musica_ascensor_lejana"
+  },
+  "ladoB": {
+    "noche": 12,
+    "microfono": true,
+    "camaraFalla": 0.12,
+    "silencios": [
+      75,
+      130
+    ],
+    "sinFuente": [
+      {
+        "sonido": "pasos-piso-arriba",
+        "donde": "arriba",
+        "cada": [
+          45,
+          85
+        ],
+        "vol": 0.6,
+        "dur": [
+          6,
+          10
+        ],
+        "quien": "Nadie: el Vestíbulo no tiene piso de arriba"
+      },
+      {
+        "sonido": "celular-vibra",
+        "donde": "pared",
+        "cada": [
+          70,
+          120
+        ],
+        "vol": 0.8,
+        "dur": [
+          2.5,
+          4
+        ],
+        "quien": "El celular de Dani, que vibra dentro de una pared"
+      }
+    ],
+    "cuartoDeAntes": {
+      "nombre": "Sala de espera",
+      "x": 7,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3
+    }
+  },
+  "antes": {
+    "id": "nivel-0",
+    "mapa": [
+      "###############",
+      "#@..#r........#",
+      "#.#.###.....#.#",
+      "#.#...#.....#.#",
+      "#.###.#.#.#.#.#",
+      "#.....#...#.#.#",
+      "#.#########.#.#",
+      "#...........#.#",
+      "#...#.#...###.#",
+      "#.....#.....#.#",
+      "#.#.###.###.#.#",
+      "#...#...#.#.#.#",
+      "#####.#.#.#.#.#",
+      "#XR.......#...#",
+      "###############"
+    ]
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 52,
+    "segundosRutaOptima": 24,
+    "callejones": 2,
+    "porcentajePiso": 51,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "roja"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          6,
+          5
+        ]
+      ],
+      "cierra": [
+        [
+          11,
+          5
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      7,
+      10
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      5,
+      12
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      6,
+      13
+    ],
+    [
+      7,
+      13
+    ],
+    [
+      8,
+      13
+    ],
+    [
+      9,
+      13
+    ],
+    [
+      9,
+      12
+    ],
+    [
+      9,
+      11
+    ],
+    [
+      9,
+      10
+    ],
+    [
+      9,
+      9
+    ],
+    [
+      9,
+      8
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      5,
+      1
+    ]
+  ]
+}

@@ -1,0 +1,738 @@
+{
+  "id": "nivel-101-b",
+  "numero": "101",
+  "nombre": "Casa de Espejos B",
+  "descripcion": "El mini laberinto de PlayLand con el agua por encima de las rodillas y los espejos empañados. Detrás de las paredes gira la rueda de la fortuna y pasa la montaña rusa, lejos.",
+  "tension": 75,
+  "lado": "B",
+  "base": "nivel-101",
+  "semilla": 1103,
+  "ancho": 19,
+  "alto": 19,
+  "mapa": [
+    "###################",
+    "#@............%...#",
+    "#.%.%%==%%=.%.%r%.#",
+    "#...........%...%.#",
+    "#%==%%%%%.%%%%=%%.#",
+    "#......a%.........#",
+    "#.%%%=%%#%=%%.=.%.#",
+    "#..R..%...........#",
+    "#.%##.%.%=%.%.%.%.#",
+    "#...=...%.%.......#",
+    "#.%.%%%=%.%%%%%%%=#",
+    "#...%.............#",
+    "#%%.%=%.=%%%%%%.%.#",
+    "#.....%...........#",
+    "#.%=%.%%%%%.=.....#",
+    "#.....=...%.......#",
+    "#.%%=%%.%.%=%.....#",
+    "#.......%...AX....#",
+    "###################"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 0
+  },
+  "llaves": [
+    {
+      "color": "roja",
+      "x": 15,
+      "y": 2,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 11,
+      "desdeEntrada": 17
+    },
+    {
+      "color": "azul",
+      "x": 7,
+      "y": 5,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "desvio": 8,
+      "desdeEntrada": 10
+    }
+  ],
+  "puertas": [
+    {
+      "color": "roja",
+      "x": 3,
+      "y": 7,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": false
+    },
+    {
+      "color": "azul",
+      "x": 12,
+      "y": 17,
+      "hex": "#2f63d8",
+      "simbolo": "circulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 13,
+    "y": 17
+  },
+  "salas": [
+    {
+      "x": 13,
+      "y": 13,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    },
+    {
+      "x": 13,
+      "y": 5,
+      "ancho": 5,
+      "alto": 5,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Cuarto de la tele",
+    "x": 13,
+    "y": 5,
+    "ancho": 5,
+    "alto": 5
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Cuarto de la tele",
+      "x": 13,
+      "y": 5,
+      "ancho": 5,
+      "alto": 5
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 14,
+      "y": 5,
+      "mirando": 0,
+      "cuarto": "Cuarto de la tele",
+      "cinta": null
+    }
+  ],
+  "escondites": [],
+  "props": [
+    {
+      "tipo": "tv_crt",
+      "x": 15,
+      "y": 16
+    },
+    {
+      "tipo": "mostrador",
+      "x": 15,
+      "y": 17
+    },
+    {
+      "tipo": "rollo_de_boletos",
+      "x": 15,
+      "y": 15
+    },
+    {
+      "tipo": "adivino_mecanico",
+      "x": 16,
+      "y": 15
+    },
+    {
+      "tipo": "celular_grabando",
+      "x": 1,
+      "y": 10,
+      "puesto": "Un celular grabando, apoyado contra un espejo"
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "tipo": "advertencia",
+      "soporte": "escrito con el dedo en un espejo empañado",
+      "instrumento": "dedo",
+      "estado": [
+        "vaho"
+      ],
+      "texto": "los espejos están empañados. con el agua no se ve el piso.\nla rueda sigue girando. nadie la para.",
+      "pensamiento": "Alguien escribió en el vaho. Con mi letra.",
+      "x": 5,
+      "y": 11
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 10,
+      "y": 3,
+      "apunta": 0
+    },
+    {
+      "tipo": "astro",
+      "llave": "azul",
+      "x": 1,
+      "y": 6,
+      "apunta": -90
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 12,
+      "y": 7
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 1,
+      "y": 7
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "mano_en_el_vidrio",
+      "descripcion": "Al tocar este cristal, del otro lado aparece la huella de una mano que no es la tuya.",
+      "x": 2,
+      "y": 5
+    },
+    {
+      "tipo": "eco_en_los_espejos",
+      "descripcion": "El Inquilino solo existe dentro de los reflejos: desde la primera llave te sigue por detrás, cada vez más cerca. La tele del refugio lo aleja.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "mirada_fija",
+      "descripcion": "Si te quedas mirando de cerca un espejo, adentro todo se deforma, se oscurece y se pone rojo; tu reflejo te señala por dónde ir, deja de copiarte y El Inquilino viene por detrás. Si llega, te atrapa: mirar a otro lado lo corta.",
+      "x": null,
+      "y": null
+    },
+    {
+      "tipo": "pasos_que_corren",
+      "descripcion": "Un chico corre en el pasillo de al lado, donde no se ve, y se ríe; la risa se corta. No llega nadie (Nico a las escondidas).",
+      "x": 11,
+      "y": 7,
+      "piensa": "Se reía así cuando no lo encontraba."
+    },
+    {
+      "tipo": "los_que_miran",
+      "descripcion": "Lado B: Los Espectadores (hasta el 2026-11-14, «Los que miran»): tres personas pegadas por la espalda, con el celular hundido en la mano, que se ríen. Quietas mientras las miras (también en un espejo); si no, se acercan de a una casilla, de a una figura. De espaldas te alcanzan; de frente y de cerca se deshacen; mirarlas mucho llena la cámara de ruido.",
+      "x": null,
+      "y": null,
+      "cantidad": 3,
+      "paso": 0.65
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "solo_en_los_reflejos"
+  },
+  "ambiente": {
+    "paredes": "espejo",
+    "paredesSinEspejo": "triplay_pintado",
+    "piso": "damero_blanco_y_negro",
+    "techo": "lona_de_carpa",
+    "colorNiebla": "#060406",
+    "distanciaVision": 7,
+    "luz": 0.3,
+    "reflejosMaximos": 4,
+    "agua": 0.3,
+    "marcaAgua": 0.4,
+    "colorAgua": "#1f1d1b"
+  },
+  "audio": {
+    "ambiente": "feria_lejana",
+    "pasos": "madera_hueca",
+    "zonaSegura": "radio_de_taquilla"
+  },
+  "ladoB": {
+    "noche": 16,
+    "microfono": true,
+    "camaraFalla": 0.45,
+    "silencios": [
+      70,
+      120
+    ],
+    "sinFuente": [
+      {
+        "sonido": "rueda-cruje",
+        "donde": "lejos",
+        "cada": [
+          40,
+          75
+        ],
+        "vol": 0.6,
+        "quien": "La rueda de la fortuna, que gira detrás de las paredes"
+      }
+    ],
+    "cuartoDeAntes": {
+      "nombre": "Taquilla del parque",
+      "x": 13,
+      "y": 13,
+      "ancho": 5,
+      "alto": 5
+    }
+  },
+  "antes": {
+    "id": "nivel-101",
+    "mapa": [
+      "###################",
+      "#@%...........%...#",
+      "#.%.%==%%=%.%.%.%.#",
+      "#...........%...%.#",
+      "#==%%%%=%.%%%%%%%.#",
+      "#......r%.........#",
+      "#.%%=%%%%=%%=.%.%.#",
+      "#.....%...........#",
+      "#.%#%.%.%%%.%.%.=.#",
+      "#.%.%...%a%.......#",
+      "#R%.%=%%%.%%%%%=%%#",
+      "#...%.............#",
+      "#%%.%%%.%%%%%%%.%.#",
+      "#.....%.AX=.......#",
+      "#.%%%.%==%%.%.....#",
+      "#.....%...%.......#",
+      "#.=%%%%.#.%%%.....#",
+      "#.......%.........#",
+      "###################"
+    ]
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 92,
+    "segundosRutaOptima": 42,
+    "callejones": 3,
+    "porcentajePiso": 50,
+    "espejos": 84,
+    "cristales": 20,
+    "ordenLlaves": [
+      "roja",
+      "azul"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [],
+      "cierra": [
+        [
+          17,
+          3
+        ],
+        [
+          9,
+          13
+        ]
+      ]
+    },
+    {
+      "llaves": 2,
+      "abre": [],
+      "cierra": [
+        [
+          3,
+          10
+        ],
+        [
+          1,
+          14
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      2,
+      1
+    ],
+    [
+      3,
+      1
+    ],
+    [
+      4,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      12,
+      1
+    ],
+    [
+      13,
+      1
+    ],
+    [
+      13,
+      2
+    ],
+    [
+      13,
+      3
+    ],
+    [
+      14,
+      3
+    ],
+    [
+      15,
+      3
+    ],
+    [
+      15,
+      2
+    ],
+    [
+      15,
+      1
+    ],
+    [
+      16,
+      1
+    ],
+    [
+      17,
+      1
+    ],
+    [
+      17,
+      2
+    ],
+    [
+      17,
+      3
+    ],
+    [
+      17,
+      4
+    ],
+    [
+      17,
+      5
+    ],
+    [
+      16,
+      5
+    ],
+    [
+      15,
+      5
+    ],
+    [
+      14,
+      5
+    ],
+    [
+      13,
+      5
+    ],
+    [
+      13,
+      6
+    ],
+    [
+      13,
+      7
+    ],
+    [
+      12,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      6,
+      9
+    ],
+    [
+      5,
+      9
+    ],
+    [
+      5,
+      8
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      7,
+      5
+    ],
+    [
+      6,
+      5
+    ],
+    [
+      5,
+      5
+    ],
+    [
+      4,
+      5
+    ],
+    [
+      3,
+      5
+    ],
+    [
+      2,
+      5
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      1,
+      8
+    ],
+    [
+      1,
+      9
+    ],
+    [
+      2,
+      9
+    ],
+    [
+      3,
+      9
+    ],
+    [
+      3,
+      10
+    ],
+    [
+      3,
+      11
+    ],
+    [
+      3,
+      12
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ],
+    [
+      1,
+      14
+    ],
+    [
+      1,
+      15
+    ],
+    [
+      1,
+      16
+    ],
+    [
+      1,
+      17
+    ],
+    [
+      2,
+      17
+    ],
+    [
+      3,
+      17
+    ],
+    [
+      4,
+      17
+    ],
+    [
+      5,
+      17
+    ],
+    [
+      6,
+      17
+    ],
+    [
+      7,
+      17
+    ],
+    [
+      7,
+      16
+    ],
+    [
+      7,
+      15
+    ],
+    [
+      8,
+      15
+    ],
+    [
+      9,
+      15
+    ],
+    [
+      9,
+      16
+    ],
+    [
+      9,
+      17
+    ],
+    [
+      10,
+      17
+    ],
+    [
+      11,
+      17
+    ],
+    [
+      12,
+      17
+    ],
+    [
+      13,
+      17
+    ]
+  ]
+}

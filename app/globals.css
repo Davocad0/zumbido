@@ -1,0 +1,293 @@
+:root {
+  --fondo: #0b0a06;
+  --fondo-2: #14120c;
+  --linea: #3c3a30;
+  --texto: #f3ecd2;
+  --tenue: #b8b09a;
+  --mostaza: #d9a21a;
+  --rojo: #d9452b;
+  --verde: #1d7a43;
+  --papel: #e9e2c8;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; height: 100%; }
+body {
+  background: var(--fondo);
+  color: var(--texto);
+  font-family: var(--f-plex), ui-monospace, monospace;
+  font-size: 15px;
+  line-height: 1.5;
+}
+a { color: var(--mostaza); }
+button { font: inherit; }
+
+.vt { font-family: var(--f-vt), monospace; }
+
+/* ---------- Botones ---------- */
+.boton {
+  display: inline-flex; align-items: center; justify-content: center; gap: 0.4em;
+  font-family: var(--f-vt), monospace; font-size: 1.5rem; line-height: 1;
+  color: var(--texto); background: transparent; border: 2px solid var(--texto);
+  padding: 0.45em 0.9em; cursor: pointer; text-decoration: none;
+}
+.boton:hover, .boton:focus-visible { background: var(--texto); color: var(--fondo); outline: none; }
+.boton.principal { background: var(--mostaza); border-color: var(--mostaza); color: var(--fondo); }
+.boton.principal:hover, .boton.principal:focus-visible { background: var(--texto); border-color: var(--texto); }
+.boton:disabled { opacity: 0.4; cursor: default; }
+
+/* ---------- Páginas del sitio (menú, niveles, récords, créditos) ---------- */
+.pagina { min-height: 100vh; padding: 32px 20px 60px; max-width: 980px; margin: 0 auto; position: relative; }
+.pagina h1 { font-family: var(--f-vt), monospace; font-weight: 400; font-size: clamp(2.6rem, 9vw, 5rem); line-height: 0.95; margin: 0.2em 0 0.3em; letter-spacing: 0.04em; }
+.pagina h2 { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 2rem; margin: 1.4em 0 0.4em; }
+.ceja { font-family: var(--f-vt), monospace; font-size: 1.2rem; color: var(--tenue); letter-spacing: 0.06em; margin: 0; }
+.volver { font-family: var(--f-vt), monospace; font-size: 1.3rem; text-decoration: none; }
+.tabla { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.tabla th, .tabla td { text-align: left; padding: 6px 8px; border-bottom: 1px solid var(--linea); vertical-align: top; }
+.tabla th { font-family: var(--f-vt), monospace; font-size: 1.15rem; font-weight: 400; color: var(--tenue); }
+.tabla-scroll { overflow-x: auto; }
+.nota-chica { color: var(--tenue); font-size: 0.85rem; }
+
+/* Menú principal con aire de cinta VHS */
+.menu { display: grid; gap: 28px; align-content: center; min-height: 100vh; }
+.menu .titulo { font-size: clamp(3.4rem, 16vw, 8.5rem); text-shadow: 3px 0 0 rgba(217, 69, 43, 0.75), -3px 0 0 rgba(47, 99, 216, 0.6); margin: 0; }
+.menu .lema { max-width: 34em; color: var(--tenue); margin: 0; }
+.menu nav { display: grid; gap: 12px; justify-items: start; }
+.menu .rec { position: fixed; top: 16px; left: 20px; font-family: var(--f-vt), monospace; font-size: 1.4rem; }
+.menu .rec b { color: var(--rojo); font-weight: 400; }
+.aviso { border: 1px solid var(--linea); padding: 12px 14px; max-width: 38em; font-size: 0.85rem; color: var(--tenue); }
+.aviso label { display: flex; gap: 8px; align-items: center; margin-top: 6px; color: var(--texto); }
+.estatica::before { content: ''; position: fixed; inset: 0; pointer-events: none; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.025) 0 1px, transparent 1px 3px); }
+
+.niveles { display: grid; gap: 12px; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); padding: 0; list-style: none; }
+.niveles li { border: 1px solid var(--linea); padding: 14px; display: grid; gap: 6px; }
+.niveles .num { font-family: var(--f-vt), monospace; font-size: 2.4rem; line-height: 1; }
+.niveles .bloqueado { opacity: 0.45; }
+
+/* ---------- Pantalla de juego ---------- */
+.juego { position: fixed; inset: 0; background: #000; overflow: hidden; user-select: none; }
+.phaser { position: absolute; inset: 0; }
+.phaser canvas { image-rendering: pixelated; image-rendering: crisp-edges; }
+
+/* HUD: lo mínimo, encima del juego */
+.hud { position: absolute; inset: 0; pointer-events: none; font-family: var(--f-vt), monospace; color: var(--texto); text-shadow: 0 0 3px #000, 0 0 2px #000; }
+.hud .rec { position: absolute; top: 14px; left: 18px; font-size: 1.35rem; display: flex; align-items: center; gap: 0.3em; }
+.hud .rec b { color: var(--rojo); font-weight: 400; }
+/* Lado B: el micrófono de la cámara (dos rayitas que tiemblan) y el REC que falla. */
+.hud .rec .mic { display: grid; gap: 3px; width: 46px; margin-left: 0.5em; }
+.hud .rec .mic > span { display: block; height: 4px; background: rgba(243, 236, 210, 0.16); box-shadow: 0 0 2px #000; }
+.hud .rec .mic i { display: block; height: 100%; background: var(--texto); transform-origin: left center; transition: transform 70ms linear; }
+.hud .rec .mic i.alto { background: var(--rojo); }
+.hud .rec.apagado b { color: rgba(243, 236, 210, 0.3); }
+.hud .rec.apagado { animation: rec-falla 0.18s steps(2) infinite; }
+.hud .rec.falla { animation: rec-tiembla 0.12s steps(2) infinite; }
+@keyframes rec-falla { 0% { opacity: 1; } 100% { opacity: 0.25; } }
+@keyframes rec-tiembla { 0% { transform: translateX(-3px); } 100% { transform: translateX(4px); } }
+@media (prefers-reduced-motion: reduce) { .hud .rec.apagado, .hud .rec.falla { animation: none; } }
+.boton.lado-b { border-color: var(--rojo); }
+.niveles .lado-b .num { color: var(--rojo); }
+.hud .titulo-nivel { position: absolute; top: 18%; left: 0; right: 0; text-align: center; font-size: clamp(1.6rem, 4vw, 2.8rem); letter-spacing: 0.08em; animation: aparecer 4.5s ease forwards; }
+@keyframes aparecer { 0% { opacity: 0; } 15% { opacity: 1; } 75% { opacity: 1; } 100% { opacity: 0; } }
+.hud .llaves { position: absolute; top: 14px; right: 18px; display: flex; gap: 6px; }
+.hud .llave { width: 34px; height: 34px; border: 2px solid rgba(243, 236, 210, 0.45); display: grid; place-items: center; font-size: 1.3rem; background: rgba(0, 0, 0, 0.35); }
+.hud .llave.tiene { border-color: currentColor; background: rgba(0, 0, 0, 0.55); }
+.hud .aliento { position: absolute; left: 18px; bottom: 18px; width: 150px; transition: opacity 0.6s; }
+.hud .aliento .barra { height: 6px; background: rgba(243, 236, 210, 0.18); margin-top: 3px; }
+.hud .aliento .barra i { display: block; height: 100%; background: var(--texto); transition: width 0.15s linear; }
+.hud .aliento.agotado .barra i { background: var(--rojo); }
+.hud .indicacion { position: absolute; left: 50%; bottom: 23%; transform: translateX(-50%); font-size: 1.35rem; background: rgba(0, 0, 0, 0.55); padding: 0 0.5em; white-space: pre; }
+.hud .indicacion.urgente { color: #f3b4a6; background: rgba(110, 12, 8, 0.7); animation: parpadeo 0.7s steps(2) infinite; }
+.hud .pensamiento { position: absolute; left: 6%; right: 6%; bottom: 7%; text-align: center; font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.1; transition: opacity 0.5s; }
+.hud .pensamiento q { quotes: '«' '»'; }
+/* Otra voz (no es lo que piensa Dani): más arriba, en cursiva y de un celeste frío, como el agua. */
+.hud .voz { position: absolute; left: 6%; right: 6%; bottom: calc(7% + 2.6em); text-align: center; font-size: clamp(1.15rem, 2.4vw, 1.65rem); line-height: 1.1; font-style: italic; color: #bfe0e6; text-shadow: 0 0 6px rgba(0, 0, 0, 0.9); transition: opacity 0.4s; }
+.hud .voz .quien { font-style: normal; color: rgba(191, 224, 230, 0.6); }
+.hud .aviso-hud { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); font-size: 1.4rem; color: var(--rojo); }
+.hud .seguir { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); font-size: 1.5rem; background: rgba(0, 0, 0, 0.6); padding: 0.2em 0.7em; }
+.hud .mira { position: absolute; left: 50%; top: 50%; width: 3px; height: 3px; margin: -1px 0 0 -1px; background: rgba(243, 236, 210, 0.55); }
+.hud .agachado { position: absolute; left: 18px; bottom: 64px; font-size: 1.25rem; color: var(--tenue); letter-spacing: 0.05em; }
+/* El anillo del aire (escondido) */
+.hud .anillo { position: absolute; left: 50%; bottom: 12%; width: 56px; height: 56px; transform: translateX(-50%); opacity: 0.55; transition: opacity 0.3s; }
+.hud .anillo.contiene { opacity: 1; }
+.hud .anillo .fondo { fill: none; stroke: rgba(243, 236, 210, 0.2); stroke-width: 4; }
+.hud .anillo .aire { fill: none; stroke: var(--texto); stroke-width: 4; transition: stroke-dashoffset 0.12s linear; }
+/* La cinta: como el texto en pantalla de una videocasetera */
+.hud .rebobinando { position: absolute; top: 14px; left: 18px; font-size: clamp(1.6rem, 4vw, 2.6rem); letter-spacing: 0.06em; color: #e9ebe2; text-shadow: 2px 0 0 rgba(217, 69, 43, 0.7), -2px 0 0 rgba(47, 99, 216, 0.6); animation: parpadeo 0.9s steps(2) infinite; }
+.hud .rebobinando.play { animation: none; }
+
+/* Ventanas encima del juego (nota, cinta, mapa, diario, pausa) */
+.ventana { position: absolute; inset: 0; display: grid; place-items: center; background: rgba(5, 4, 2, 0.82); padding: 20px; overflow: auto; }
+.ventana .caja { max-width: min(760px, 100%); width: 100%; display: grid; gap: 14px; justify-items: center; }
+.ventana .pie { font-family: var(--f-vt), monospace; font-size: 1.25rem; color: var(--tenue); text-align: center; }
+.ventana h2 { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 2.2rem; margin: 0; letter-spacing: 0.05em; }
+/* La nota entra entera en la pantalla: el ancho sale del alto disponible y de la proporción de la hoja. */
+.lienzo-nota canvas { display: block; width: calc(var(--ancho) * 1.6); width: min(calc(var(--ancho) * 1.6), calc((100dvh - 150px) * var(--proporcion, 1))); max-width: 100%; height: auto; image-rendering: pixelated; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); transform: rotate(-1deg); }
+.transcripcion { max-width: 36em; font-size: 0.9rem; color: var(--tenue); }
+.transcripcion summary { cursor: pointer; font-family: var(--f-vt), monospace; font-size: 1.2rem; }
+.transcripcion del { color: var(--tenue); }
+.meta-nota { font-family: var(--f-vt), monospace; font-size: 1.2rem; color: var(--tenue); text-align: center; }
+
+.tv { width: min(560px, 100%); aspect-ratio: 4 / 3; background: #2338b0; border: 14px solid #3c3a30; border-radius: 18px; box-shadow: inset 0 0 60px rgba(0, 0, 0, 0.6); display: grid; align-content: center; gap: 10px; padding: 24px; font-family: var(--f-vt), monospace; color: #e9ebe2; font-size: 1.5rem; position: relative; overflow: hidden; }
+.tv::after { content: ''; position: absolute; inset: 0; background: repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.06) 0 1px, transparent 1px 3px); pointer-events: none; }
+.tv .rec { color: #e2332b; }
+.tv p { margin: 0; font-size: 1.25rem; line-height: 1.2; }
+/* La cinta en video: la imagen de 320 × 180 agrandada sin suavizar dentro de la tele, con subtítulos abajo. */
+/* La cinta ya trae dibujados el cuarto y la tele (game/cine/cintas.js): acá solo va un borde fino, sin la tele de CSS. */
+.tv.tv-video { aspect-ratio: 16 / 9; padding: 0; background: #0b0a06; width: min(760px, 100%); align-content: stretch; border: 2px solid #3c3a30; border-radius: 4px; box-shadow: none; }
+.tv.tv-video::after { display: none; }
+.tv-video canvas { width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; display: block; }
+.tv-video .tv-texto { position: absolute; inset: 0; display: grid; align-content: center; gap: 10px; padding: 24px; background: #2338b0; }
+.tv-video .tv-fin { position: absolute; left: 0; right: 0; top: 42%; text-align: center; font-size: 1.4rem; text-shadow: 0 0 3px #000; }
+.tv-video .cinta-sub { position: absolute; left: 5%; right: 5%; bottom: 7%; text-align: center; font-size: clamp(1rem, 2.2vw, 1.45rem); line-height: 1.15; text-shadow: 0 0 3px #000, 0 0 2px #000; z-index: 1; }
+.tv-video .cinta-sub p { margin: 0; }
+.tv-video .cinta-sub .quien { color: rgba(191, 224, 230, 0.75); }
+.tv-video .cinta-sub .sonido { font-style: italic; color: var(--tenue); }
+.cinta-titulo { max-width: 40em; text-align: center; margin: 0; }
+.ventana .pie .boton { margin-right: 12px; font-size: 1rem; }
+/* El Archivo (/archivo): lo encontrado de todas las partidas, con contadores. */
+.archivo-pagina section { margin: 26px 0; }
+.archivo-pagina h2 { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 1.8rem; margin: 0 0 10px; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px; }
+.archivo-pagina h2 small { font-size: 1rem; color: var(--tenue); }
+.archivo-pagina h2 .num { font-size: 2.2rem; }
+.archivo-resumen { display: grid; gap: 14px; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+.archivo-resumen .resumen { border: 1px solid var(--linea); padding: 14px; display: grid; gap: 8px; }
+.archivo-resumen .resumen.lado-b h2, .archivo-nivel.lado-b .num { color: var(--rojo); }
+.contador { display: grid; grid-template-columns: auto 1fr; align-items: center; gap: 4px 10px; font-family: var(--f-vt), monospace; font-size: 1.2rem; }
+.contador b { color: var(--texto); font-weight: 400; }
+.contador .barrita { grid-column: 1 / -1; height: 4px; background: rgba(243, 236, 210, 0.12); display: block; }
+.contador .barrita > i { display: block; height: 100%; background: var(--mostaza); }
+.contador.completo .barrita > i { background: #1d7a43; }
+.archivo-nivel .contadores { display: grid; gap: 10px; grid-template-columns: repeat(auto-fit, minmax(200px, 320px)); margin-bottom: 12px; }
+.archivo-notas, .archivo-cintas, .archivo-finales { list-style: none; padding: 0; margin: 0 0 10px; display: grid; gap: 8px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.archivo-notas li, .archivo-cintas li, .archivo-finales li { border: 1px solid var(--linea); min-height: 64px; }
+.archivo-notas button, .archivo-cintas button { all: unset; box-sizing: border-box; cursor: pointer; display: grid; gap: 4px; padding: 10px 12px; width: 100%; height: 100%; }
+.archivo-notas button:hover, .archivo-cintas button:hover, .archivo-notas button:focus-visible, .archivo-cintas button:focus-visible { background: rgba(217, 162, 26, 0.1); outline: 1px solid var(--mostaza); }
+.archivo-pagina .falta { display: grid; place-items: center; color: rgba(184, 176, 154, 0.45); font-family: var(--f-vt), monospace; font-size: 1.1rem; border-style: dashed; }
+.archivo-finales li { display: grid; gap: 4px; padding: 10px 12px; }
+.archivo-finales li b { font-size: 1.4rem; font-weight: 400; color: var(--tenue); }
+.archivo-finales li.visto b { color: var(--mostaza); }
+
+.mapa-papel { background: var(--papel); padding: 14px; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6); max-width: 100%; }
+.mapa-papel canvas { display: block; max-width: 100%; height: auto; image-rendering: pixelated; }
+.leyenda-mapa { display: flex; flex-wrap: wrap; gap: 6px 16px; font-family: var(--f-vt), monospace; font-size: 1.15rem; color: var(--tenue); justify-content: center; }
+.leyenda-mapa .muestra-refugio { display: inline-block; width: 0.8em; height: 0.8em; background: #c6d6ee; border: 1px solid #2f63d8; vertical-align: -0.05em; }
+
+.diario { width: 100%; display: grid; gap: 18px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.diario ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.diario li button { width: 100%; text-align: left; background: rgba(233, 226, 200, 0.06); border: 1px solid var(--linea); color: var(--texto); padding: 8px 10px; cursor: pointer; }
+.diario li button:hover { border-color: var(--texto); }
+.diario h3 { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 1.5rem; margin: 0 0 6px; }
+
+.opciones { display: grid; gap: 10px; width: min(420px, 100%); }
+.opciones label { display: grid; grid-template-columns: 9em 1fr; align-items: center; gap: 10px; }
+.opciones input[type='range'] { width: 100%; accent-color: var(--mostaza); }
+.pausa nav { display: grid; gap: 10px; justify-items: center; }
+.pausa .aviso-pausa { max-width: 34em; text-align: center; margin: 0; }
+.boton.chico { font-size: 1.15rem; padding: 0.3em 0.7em; }
+
+/* Ajustes (en la pausa): pestañas, la tabla de controles con dos casillas por acción, sonido e imagen */
+.ajustes { width: min(720px, 100%); display: grid; gap: 12px; justify-items: center; }
+.ajustes .pestanas { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+.ajustes .pestana { font-family: var(--f-vt), monospace; font-size: 1.3rem; background: transparent; color: var(--tenue); border: 1px solid var(--linea); padding: 0.1em 0.8em; cursor: pointer; }
+.ajustes .pestana:hover, .ajustes .pestana:focus-visible { color: var(--texto); border-color: var(--texto); outline: none; }
+.ajustes .pestana.activa { color: var(--fondo); background: var(--texto); border-color: var(--texto); }
+.ajustes .panel { width: 100%; display: grid; gap: 10px; justify-items: center; }
+.ajustes .panel > .nota-chica { margin: 0; text-align: center; max-width: 40em; }
+.ajustes .opciones label { grid-template-columns: 11em 1fr; }
+.tabla-controles { width: 100%; display: grid; gap: 4px; max-height: 46vh; overflow-y: auto; padding-right: 4px; }
+.tabla-controles .fila { display: grid; grid-template-columns: 1fr 9.5em 9.5em; gap: 6px; align-items: center; font-size: 0.9rem; }
+.tabla-controles .fila.fija b { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 1.15rem; color: var(--tenue); text-align: center; }
+.tabla-controles .tecla { font-family: var(--f-vt), monospace; font-size: 1.15rem; line-height: 1.1; background: rgba(233, 226, 200, 0.06); color: var(--texto); border: 1px solid var(--linea); padding: 3px 6px; cursor: pointer; min-height: 1.9em; }
+.tabla-controles .tecla:hover, .tabla-controles .tecla:focus-visible { border-color: var(--texto); outline: none; }
+.tabla-controles .tecla.vacia { color: var(--tenue); }
+.tabla-controles .tecla.esperando { background: var(--mostaza); color: var(--fondo); border-color: var(--mostaza); animation: parpadeo 1s steps(2) infinite; }
+.ajustes .sensibilidad { display: grid; grid-template-columns: auto 1fr 3.5em; gap: 10px; align-items: center; width: min(520px, 100%); font-size: 0.9rem; }
+.ajustes .sensibilidad input { width: 100%; accent-color: var(--mostaza); }
+.ajustes .mensaje-controles { min-height: 1.4em; font-size: 0.9rem; color: var(--mostaza); text-align: center; }
+@media (max-width: 560px) {
+  .tabla-controles .fila { grid-template-columns: 1fr 6.5em 6.5em; }
+}
+
+/* Jugando no se ve la flecha del mouse encima de la vista. */
+.juego.sin-flecha .phaser canvas { cursor: none; }
+
+/* La linterna: abajo a la derecha, con su tecla, la pila y lo que le pasa; y el consejo encima. */
+.hud .linterna-hud { position: absolute; right: 18px; bottom: 18px; width: 180px; font-size: 1.15rem; }
+.hud .linterna-hud .cabeza { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.hud .linterna-hud kbd { font-family: inherit; font-size: 1rem; line-height: 1.2; border: 1px solid rgba(243, 236, 210, 0.6); padding: 0 0.4em; background: rgba(0, 0, 0, 0.45); }
+.hud .linterna-hud .barra { position: relative; height: 6px; background: rgba(243, 236, 210, 0.18); margin-top: 3px; }
+.hud .linterna-hud .barra i { display: block; height: 100%; background: var(--mostaza); transition: width 0.15s linear; }
+.hud .linterna-hud .barra em { position: absolute; top: -3px; bottom: -3px; width: 2px; margin-left: -1px; background: var(--texto); }
+.hud .linterna-hud .estado { font-size: 1rem; color: var(--tenue); }
+.hud .linterna-hud.prendida .estado { color: var(--texto); }
+.hud .linterna-hud.baja .barra i { background: var(--rojo); }
+.hud .linterna-hud.baja .estado { color: #f3b4a6; }
+.hud .consejo { position: absolute; right: 18px; bottom: 84px; max-width: min(340px, 70vw); font-size: 1.15rem; line-height: 1.15; text-align: right; background: rgba(0, 0, 0, 0.62); padding: 6px 10px; border-right: 2px solid var(--mostaza); }
+.hud.con-linterna .pensamiento, .hud.con-linterna .voz { left: max(6%, 210px); right: max(6%, 210px); }
+.hud .seguir { text-align: center; }
+.hud .seguir small { display: block; max-width: 26em; margin: 4px auto 0; font-family: var(--f-plex), monospace; font-size: 0.8rem; line-height: 1.3; color: var(--tenue); }
+
+/* El cartel del principio deja pasar el clic al lienzo de Phaser (ahí empieza el sonido y se captura el mouse). */
+.ventana.inicio.espera { pointer-events: none; }
+.inicio .tarjeta { text-align: center; display: grid; gap: 14px; justify-items: center; }
+.inicio .numero { font-family: var(--f-vt), monospace; font-size: 1.4rem; color: var(--tenue); letter-spacing: 0.1em; }
+.inicio .nombre { font-family: var(--f-vt), monospace; font-size: clamp(2.6rem, 8vw, 4.6rem); line-height: 1; }
+.inicio .controles { display: grid; grid-template-columns: auto auto; gap: 2px 16px; font-size: 0.85rem; color: var(--tenue); text-align: left; }
+.inicio .controles b { font-family: var(--f-vt), monospace; font-weight: 400; font-size: 1.15rem; color: var(--texto); }
+.parpadeo { animation: parpadeo 1.2s steps(2) infinite; }
+@keyframes parpadeo { 50% { opacity: 0.35; } }
+
+@media (prefers-reduced-motion: reduce) {
+  .parpadeo, .hud .titulo-nivel { animation: none; }
+}
+
+/* La página de prueba de las entidades (/entidades). */
+.galeria-controles { display: flex; flex-wrap: wrap; gap: 10px 18px; align-items: center; margin: 1.2em 0; font-family: var(--f-plex), monospace; font-size: 0.85rem; }
+.galeria-controles button { font: inherit; padding: 6px 12px; border-radius: 6px; border: 1px solid currentColor; background: transparent; color: inherit; cursor: pointer; }
+.galeria-controles button[aria-pressed="true"] { background: #d9a21a; color: #14090a; border-color: #d9a21a; }
+.galeria-controles label { display: inline-flex; gap: 6px; align-items: center; cursor: pointer; }
+.galeria { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 18px; }
+.galeria-pose { margin: 0; }
+.galeria-pose canvas { width: 100%; max-width: 192px; height: auto; image-rendering: pixelated; border: 1px solid rgba(233, 235, 226, 0.15); display: block; }
+.galeria-pose figcaption { font-family: var(--f-vt), monospace; font-size: 1.25rem; margin-top: 4px; }
+.galeria-pose figcaption span { color: var(--tenue); font-size: 1rem; }
+
+/* ---------- Escenas (el prólogo y los finales) ---------- */
+.cinematica { position: fixed; inset: 0; z-index: 50; background: #000; font-family: var(--f-vt), monospace; color: var(--texto); text-shadow: 0 0 3px #000, 0 0 2px #000; }
+.cinematica canvas { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; image-rendering: pixelated; }
+.cinematica .cine-ind { position: absolute; top: 14px; left: 18px; font-size: 1.35rem; letter-spacing: 0.04em; }
+.cinematica .cine-sub { position: absolute; left: 6%; right: 6%; bottom: 7%; text-align: center; font-size: clamp(1.25rem, 2.6vw, 1.8rem); line-height: 1.15; }
+.cinematica .cine-sub p { margin: 0; }
+.cinematica .cine-sub .quien { color: rgba(191, 224, 230, 0.7); }
+.cinematica .cine-sub .sonido { font-style: italic; color: var(--tenue); }
+.cinematica .cine-cargando { position: absolute; inset: 0; display: grid; place-items: center; font-size: 1.4rem; color: var(--tenue); }
+.cinematica .cine-saltar { position: absolute; right: 18px; bottom: 14px; font-size: 1rem; color: var(--tenue); opacity: 0.45; transition: opacity 0.2s; }
+.cinematica .cine-saltar.apretando { opacity: 1; }
+.cinematica .cine-saltar .barra { display: block; height: 2px; margin-top: 3px; background: var(--texto); transform-origin: left; }
+@media (prefers-reduced-motion: reduce) { .cinematica .cine-saltar { transition: none; } }
+
+/* ---------- La compu del Nivel 95 ---------- */
+.ventana .compu { width: min(640px, 92vw); aspect-ratio: 4 / 3; background: #0b0a06; border: 14px solid #c9b8a4; border-radius: 10px; box-shadow: inset 0 0 40px rgba(15, 138, 108, 0.25); position: relative; overflow: hidden; }
+.ventana .compu canvas { position: absolute; inset: 0; width: 100%; height: 100%; image-rendering: pixelated; }
+.ventana .compu .chat { position: absolute; left: 6%; right: 6%; bottom: 6%; font-family: var(--f-vt), monospace; font-size: clamp(1.1rem, 2.6vw, 1.5rem); color: #47afc4; text-shadow: 0 0 4px rgba(71, 175, 196, 0.6); min-height: 1.3em; }
+.ventana .compu .chat::after { content: '_'; animation: titilar 1s steps(1) infinite; }
+@keyframes titilar { 50% { opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .ventana .compu .chat::after { animation: none; } }
+
+/* El lobby del cooperativo (components/Cooperativo.jsx). */
+.boton.coop { border-color: var(--mostaza); }
+.unirse { display: grid; gap: 8px; margin-top: 18px; max-width: 30em; }
+.unirse input { font: inherit; font-size: 1.6rem; letter-spacing: 0.3em; text-transform: uppercase; width: 6.5em; padding: 0.2em 0.4em; background: var(--fondo); color: var(--texto); border: 2px solid var(--tenue); }
+.sala { display: grid; gap: 10px; max-width: 40em; }
+.sala .codigo-sala { font-size: 2.6rem; margin: 0; color: var(--mostaza); }
+.sala ul { margin: 6px 0; padding-left: 1.2em; }
+.sala code { font-size: 1rem; color: var(--texto); }
+
+/* El aire de Nico en el cooperativo (abajo a la izquierda, como el aliento pero celeste; rojo cuando queda poco). */
+.aire-agua { position: absolute; left: 18px; bottom: 48px; font-family: var(--vt, monospace); font-size: 1.1rem; color: #a4b8b3; letter-spacing: 0.08em; }
+.aire-agua .barra { width: 160px; height: 6px; background: rgba(164, 184, 179, 0.2); margin-top: 3px; }
+.aire-agua .barra i { display: block; height: 100%; background: #47afc4; transition: width 0.2s linear; }
+.aire-agua.poco { color: #e2332b; animation: parpadeo-aire 0.6s steps(2) infinite; }
+.aire-agua.poco .barra i { background: #e2332b; }
+@keyframes parpadeo-aire { 50% { opacity: 0.45; } }

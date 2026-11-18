@@ -1,0 +1,670 @@
+{
+  "id": "nivel-0",
+  "numero": "0",
+  "nombre": "El Vestíbulo",
+  "descripcion": "Papel tapiz amarillo, alfombra húmeda y el zumbido eterno de los fluorescentes. Aquí despiertas sin saber cómo llegaste y aprendes las reglas: encontrar la llave roja y salir por la puerta roja.",
+  "tension": 30,
+  "semilla": 1995,
+  "ancho": 15,
+  "alto": 15,
+  "mapa": [
+    "###############",
+    "#@..#r........#",
+    "#.#.###.....#.#",
+    "#.#...#.....#.#",
+    "#.###.#.#.#.#.#",
+    "#.....#...#.#.#",
+    "#.#########.#.#",
+    "#...........#.#",
+    "#...#.#...###.#",
+    "#.....#.....#.#",
+    "#.#.###.###.#.#",
+    "#...#...#.#.#.#",
+    "#####.#.#.#.#.#",
+    "#XR.......#...#",
+    "###############"
+  ],
+  "leyenda": {
+    "#": "pared",
+    "%": "espejo (refleja, no se atraviesa)",
+    "=": "cristal (se ve a través, no se atraviesa)",
+    ".": "piso",
+    "~": "agua (se camina más lento)",
+    "@": "inicio",
+    "X": "salida",
+    "r": "llave roja",
+    "R": "puerta roja",
+    "a": "llave azul",
+    "A": "puerta azul",
+    "v": "llave verde",
+    "V": "puerta verde",
+    "m": "llave amarilla",
+    "M": "puerta amarilla"
+  },
+  "inicio": {
+    "x": 1,
+    "y": 1,
+    "angulo": 90
+  },
+  "intro": {
+    "tipo": "despertar",
+    "pasos": [
+      {
+        "segundo": 0,
+        "accion": "pantalla_negra",
+        "sonido": "zumbido_amortiguado"
+      },
+      {
+        "segundo": 0.6,
+        "sonido": "pitido_oido"
+      },
+      {
+        "segundo": 2,
+        "accion": "abrir_ojos",
+        "vista": "techo",
+        "efecto": "borroso"
+      },
+      {
+        "segundo": 3.4,
+        "accion": "parpadear"
+      },
+      {
+        "segundo": 4.2,
+        "pensamiento": "¿Dónde... estoy?"
+      },
+      {
+        "segundo": 6,
+        "accion": "parpadeo_de_luz",
+        "sonido": "luces_parpadeo"
+      },
+      {
+        "segundo": 7.4,
+        "accion": "girar_la_cabeza",
+        "vista": "alfombra"
+      },
+      {
+        "segundo": 8.6,
+        "pensamiento": "Huele a alfombra mojada."
+      },
+      {
+        "segundo": 10.4,
+        "accion": "incorporarse",
+        "manos": "apoyadas_en_el_piso",
+        "sonido": "ropa"
+      },
+      {
+        "segundo": 12.4,
+        "pensamiento": "Hace un momento estaba en..."
+      },
+      {
+        "segundo": 13.8,
+        "accion": "el_zumbido_sube",
+        "efecto": "corta_el_pensamiento"
+      },
+      {
+        "segundo": 15,
+        "accion": "ponerse_de_pie",
+        "efecto": "mareo",
+        "sonido": "pasos_tambaleo"
+      },
+      {
+        "segundo": 17.6,
+        "accion": "mirar_alrededor"
+      },
+      {
+        "segundo": 20.4,
+        "accion": "mirar_la_nota",
+        "pensamiento": "Hay una nota en el piso."
+      },
+      {
+        "segundo": 22.6,
+        "accion": "control_al_jugador",
+        "indicacion": "E · Leer"
+      }
+    ]
+  },
+  "llaves": [
+    {
+      "color": "roja",
+      "x": 5,
+      "y": 1,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "desvio": 6,
+      "desdeEntrada": 28
+    }
+  ],
+  "puertas": [
+    {
+      "color": "roja",
+      "x": 2,
+      "y": 13,
+      "hex": "#d9452b",
+      "simbolo": "triangulo",
+      "salida": true
+    }
+  ],
+  "salida": {
+    "x": 1,
+    "y": 13
+  },
+  "salas": [
+    {
+      "x": 7,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 7,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3,
+      "agua": false
+    },
+    {
+      "x": 1,
+      "y": 7,
+      "ancho": 3,
+      "alto": 3,
+      "agua": false
+    }
+  ],
+  "zonaSegura": {
+    "nombre": "Sala de espera",
+    "x": 7,
+    "y": 1,
+    "ancho": 5,
+    "alto": 3
+  },
+  "cuartos": [],
+  "refugios": [
+    {
+      "nombre": "Sala de espera",
+      "x": 7,
+      "y": 1,
+      "ancho": 5,
+      "alto": 3
+    }
+  ],
+  "guardado": [
+    {
+      "tipo": "videocasetera",
+      "x": 7,
+      "y": 1,
+      "mirando": 0,
+      "cuarto": "Sala de espera",
+      "cinta": {
+        "titulo": "CUMPLE NICO 6",
+        "descripcion": "Dani, de 15 años, le ayuda a Nico a soplar las velas. Alguien fuera de cuadro dice: «¡Pidan un deseo los dos!»."
+      }
+    }
+  ],
+  "escondites": [
+    {
+      "tipo": "mesa",
+      "x": 10,
+      "y": 9,
+      "mirando": 0
+    },
+    {
+      "tipo": "mesa",
+      "x": 8,
+      "y": 2,
+      "mirando": 0
+    },
+    {
+      "tipo": "armario",
+      "x": 11,
+      "y": 9,
+      "mirando": 180
+    }
+  ],
+  "props": [
+    {
+      "tipo": "sillas_plastico",
+      "x": 9,
+      "y": 1
+    },
+    {
+      "tipo": "tv_crt",
+      "x": 11,
+      "y": 1
+    },
+    {
+      "tipo": "dispensador_agua",
+      "x": 8,
+      "y": 1
+    },
+    {
+      "tipo": "cono_piso_mojado",
+      "x": 7,
+      "y": 7
+    },
+    {
+      "tipo": "silla_oficina",
+      "x": 1,
+      "y": 9
+    }
+  ],
+  "objetos": [],
+  "notas": [
+    {
+      "autor": "D.",
+      "noche": 4,
+      "tipo": "regla",
+      "soporte": "hoja de memorándum",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada",
+        "mojada"
+      ],
+      "texto": "Si te acabas de despertar aquí: respira. Cuenta hasta 4 y suelta. A mí me sirvió (un poco).\nNo sé cómo llegué. Me imagino que tú tampoco.\nLo que sé:\n— el zumbido es bueno. Si se calla, ~~corre~~ NO corras. Escóndete y respira despacio.\n— la puerta roja no abre sin la llave roja. Lo sé porque la pateé como media hora.\n— en la sala de espera hay una tele con videocasetera. Graba la cinta. Después me agradeces.\nNoche 4.",
+      "pensamiento": "¿Noche 4? ¿Quién cuenta las noches aquí?",
+      "x": 1,
+      "y": 2
+    },
+    {
+      "autor": "D.",
+      "tipo": "pista",
+      "soporte": "post-it amarillo",
+      "instrumento": "lápiz",
+      "estado": [
+        "doblada"
+      ],
+      "texto": "ya pasé por aquí\nya pasé por aquí\n¿ya pasé por aquí?\nsi el papel tapiz tiene manchas de humedad, sigue por ahí. la llave estaba al fondo, donde más huele a mojado.",
+      "pensamiento": "Manchas de humedad... Bueno.",
+      "x": 9,
+      "y": 11
+    },
+    {
+      "autor": "desconocido",
+      "tipo": "advertencia",
+      "soporte": "pedazo de cartón",
+      "instrumento": "marcador negro",
+      "estado": [
+        "rota",
+        "sucia"
+      ],
+      "texto": "SI SE APAGAN LAS LUCES NO TE MUEVAS",
+      "respuesta": {
+        "autor": "D.",
+        "instrumento": "birome azul",
+        "texto": "mentira. muévete, pero despacio y pegado a la pared."
+      },
+      "pensamiento": "Dos letras distintas. Alguien le contestó.",
+      "x": 7,
+      "y": 4
+    },
+    {
+      "autor": "N.",
+      "tipo": "diario",
+      "soporte": "servilleta de la máquina de café",
+      "instrumento": "birome azul",
+      "estado": [
+        "arrugada",
+        "cafe"
+      ],
+      "dibujo": "astro",
+      "texto": "si encuentras esto y te llamas dani: no te asustes. bueno, asústate un poquito.\nsigue los dibujos de astro. él sabe.",
+      "pensamiento": "¿Dani? ¿Cómo sabe mi nombre?",
+      "x": 12,
+      "y": 1
+    },
+    {
+      "autor": null,
+      "tipo": "objeto",
+      "soporte": "adhesivo de visita",
+      "instrumento": "impreso y marcador",
+      "estado": [
+        "arrugada"
+      ],
+      "texto": "VISITA\nPISO 3 · CAMA 4\nPARENTESCO:",
+      "respuesta": {
+        "autor": "enfermería",
+        "instrumento": "marcador negro",
+        "texto": "hermano"
+      },
+      "pensamiento": "Un adhesivo de visita. Estaba pegado en mi sudadera.",
+      "x": 7,
+      "y": 12
+    }
+  ],
+  "dibujos": [
+    {
+      "tipo": "astro",
+      "llave": "roja",
+      "x": 10,
+      "y": 1,
+      "apunta": 180
+    }
+  ],
+  "luces": [
+    {
+      "tipo": "parpadeo",
+      "x": 9,
+      "y": 7
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 5,
+      "y": 1
+    },
+    {
+      "tipo": "parpadeo",
+      "x": 9,
+      "y": 7
+    }
+  ],
+  "eventos": [
+    {
+      "tipo": "silueta",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "x": 5,
+      "y": 1,
+      "objetivo": {
+        "x": 13,
+        "y": 1
+      }
+    },
+    {
+      "tipo": "pasos_lejanos",
+      "descripcion": "Pasos lejanos que se detienen cuando el jugador se detiene.",
+      "x": 9,
+      "y": 3,
+      "objetivo": {
+        "x": 5,
+        "y": 1
+      }
+    },
+    {
+      "tipo": "cambia_si_no_miras",
+      "descripcion": "Algo cambia mientras no lo miras (aparece una silla, desaparece una puerta). Solo cosas, nunca el camino.",
+      "x": 11,
+      "y": 5,
+      "cambios": [
+        {
+          "tipo": "aparece",
+          "prop": "silla_naranja",
+          "piensa": "Esa silla no estaba. Es de la sala de espera."
+        }
+      ]
+    }
+  ],
+  "entidad": {
+    "nombre": "El Inquilino",
+    "modo": "solo_aparicion"
+  },
+  "ambiente": {
+    "paredes": "papel_amarillo",
+    "piso": "alfombra_humeda",
+    "techo": "placas_fluorescentes",
+    "colorNiebla": "#2b2412",
+    "distanciaVision": 10,
+    "luz": 0.9
+  },
+  "audio": {
+    "ambiente": "zumbido_fluorescente",
+    "pasos": "alfombra",
+    "zonaSegura": "musica_ascensor_lejana"
+  },
+  "estadisticas": {
+    "pasosRutaOptima": 56,
+    "segundosRutaOptima": 25,
+    "callejones": 3,
+    "porcentajePiso": 49,
+    "espejos": 0,
+    "cristales": 0,
+    "ordenLlaves": [
+      "roja"
+    ]
+  },
+  "cambios": [
+    {
+      "llaves": 1,
+      "abre": [
+        [
+          12,
+          7
+        ]
+      ],
+      "cierra": [
+        [
+          5,
+          12
+        ]
+      ]
+    }
+  ],
+  "solucion": [
+    [
+      1,
+      1
+    ],
+    [
+      1,
+      2
+    ],
+    [
+      1,
+      3
+    ],
+    [
+      1,
+      4
+    ],
+    [
+      1,
+      5
+    ],
+    [
+      1,
+      6
+    ],
+    [
+      1,
+      7
+    ],
+    [
+      2,
+      7
+    ],
+    [
+      3,
+      7
+    ],
+    [
+      4,
+      7
+    ],
+    [
+      5,
+      7
+    ],
+    [
+      6,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      10,
+      3
+    ],
+    [
+      9,
+      3
+    ],
+    [
+      8,
+      3
+    ],
+    [
+      7,
+      3
+    ],
+    [
+      7,
+      2
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      5,
+      1
+    ],
+    [
+      6,
+      1
+    ],
+    [
+      7,
+      1
+    ],
+    [
+      8,
+      1
+    ],
+    [
+      9,
+      1
+    ],
+    [
+      10,
+      1
+    ],
+    [
+      11,
+      1
+    ],
+    [
+      11,
+      2
+    ],
+    [
+      11,
+      3
+    ],
+    [
+      11,
+      4
+    ],
+    [
+      11,
+      5
+    ],
+    [
+      11,
+      6
+    ],
+    [
+      11,
+      7
+    ],
+    [
+      10,
+      7
+    ],
+    [
+      9,
+      7
+    ],
+    [
+      8,
+      7
+    ],
+    [
+      7,
+      7
+    ],
+    [
+      7,
+      8
+    ],
+    [
+      7,
+      9
+    ],
+    [
+      7,
+      10
+    ],
+    [
+      7,
+      11
+    ],
+    [
+      6,
+      11
+    ],
+    [
+      5,
+      11
+    ],
+    [
+      5,
+      12
+    ],
+    [
+      5,
+      13
+    ],
+    [
+      4,
+      13
+    ],
+    [
+      3,
+      13
+    ],
+    [
+      2,
+      13
+    ],
+    [
+      1,
+      13
+    ]
+  ]
+}
