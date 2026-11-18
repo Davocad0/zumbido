@@ -3,6 +3,29 @@
 Laberinto de terror en primera persona (un raycaster en Phaser) con Next.js y React. HITO 4 de Programación
 Gráfica y Multimedia I (Unifranz, 6.º semestre).
 
+**Jugar:** <https://zumbido.onrender.com> (en el navegador de la computadora, con audífonos). Si nadie entró hace rato,
+el servidor tarda cerca de un minuto en despertar.
+
+## Lo que tiene
+
+- **La vista 3D, hecha a mano:**
+  - un raycaster por columnas, con espejos que reflejan, vidrios que se ven a través y agua con reflejos;
+  - paredes que se hunden y suben cuando el laberinto cambia;
+  - todo pasado a una paleta de 48 colores con tramado, en la placa de video.
+- **Enemigos con inteligencia artificial que no hace trampa:**
+  - El Inquilino persigue solo lo que ve y oye;
+  - Los Espectadores se mueven cuando nadie los mira;
+  - El Contador cuenta y graba;
+  - La Cama es el jefe del cooperativo.
+  - Cada uno está probado con partidas simuladas.
+- **Cooperativo en línea para dos** (Server-Sent Events): cada uno en su computadora. Uno abre las compuertas del
+  otro, y se ven por ventanas de vidrio.
+- **Laberintos que cambian con cada llave.** Un verificador recorre el juego como estados (casilla y llaves en la
+  mano) y comprueba que nunca quedas encerrado.
+- **Sonido:** grabaciones CC0 mezcladas con sonidos hechos con código (campanas, tambores, una voz con formantes). La
+  mezcla se ajustó midiendo el volumen por bus.
+- **Pruebas:** `npm run probar` corre 138 pruebas automáticas.
+
 ## Jugar en la computadora
 
 ```bash
