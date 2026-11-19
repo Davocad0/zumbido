@@ -7,7 +7,7 @@ import Link from 'next/link';
 import { EventBus } from '@/game/EventBus';
 import { Sonido } from '@/game/motor/audio';
 import Hud from './Hud';
-import { Nota, Cinta, Mapa, Diario, Pausa, Inicio, Completado, Compu, FinDelJuego } from './Ventanas';
+import { Nota, Cinta, Mapa, Diario, Pausa, Inicio, Completado, Compu, FinDelJuego, AvisoCoop } from './Ventanas';
 import Cinematica from './Cinematica';
 import { empezarPartida, anotarNota, sumarPuntos, marcarQuedarse, finalQueToca, NOMBRE_DEL_FINAL } from '@/lib/finales';
 import { leerPartida, leerOpciones, guardarOpciones, abrirLadoB, ladoDe } from '@/lib/navegador';
@@ -39,12 +39,15 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
   const [play, setPlay] = useState(false); // «▶ PLAY» un momento después de rebobinar la cinta
   const [controles, setControles] = useState(controlesIniciales); // los de siempre hasta leer el navegador
   const [consejo, setConsejo] = useState(''); // al lado de la linterna: qué tecla y por qué se apaga
+  // Cooperativo: la sala se cerró o el compañero se fue (una ventana con qué hacer).
+  const [avisoCoop, setAvisoCoop] = useState(null);
   // Las escenas del hospital (game/cine): el prólogo al empezar una partida nueva y el final al terminar el 95. «despues»
   // = qué se muestra cuando termina la escena; «fin» = el cartel del final cuando Dani no salió (el del Inquilino).
   // (El Lado B todavía no tiene escenas: empieza directo en el 0 B. Sus finales son de la Fase 6.)
   const lado = ladoDe(nivelId);
   const [escena, setEscena] = useState(nueva && lado === 'A' ? 'prologo' : null);
   const [despues, setDespues] = useState(null);
+  const coop = nivel?.coop ?? null;
   const [fin, setFin] = useState(null);
   const uiRef = useRef(null);
   uiRef.current = ui;
@@ -179,6 +182,9 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
       },
       punto: (cambio) => sumarPuntos(cambio),
       compu: (d) => abrir('compu', d),
+      'coop-aviso': (a) => { setUi(null); setAvisoCoop(a); EventBus.emit('ui-abierta', 'aviso'); },
+      // (El compañero que se había ido volvió a entrar con el código: la ventana de «se fue» se cierra sola.)
+      'coop-volvio': () => setAvisoCoop((a) => { if (a?.tipo !== 'se-fue') return a; EventBus.emit('ui-cerrada'); return null; }),
       error: (m) => setError(m),
     };
     for (const [n, fn] of Object.entries(escuchas)) EventBus.on(n, fn);
@@ -194,14 +200,15 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
     <div className={`juego ${fase === 'juego' && puntero !== 'sin-captura' ? 'sin-flecha' : ''}`}>
       {partida !== undefined && escena !== 'prologo' && <PhaserJuego nivelId={nivelId} partida={partida} sala={sala} />}
       <Hud nivel={nivel} llaves={llaves} colores={nivel?.colores || []} cuerpo={cuerpo} indicacion={ui ? '' : indicacion} pensamiento={ui ? '' : pensamiento} voz={ui ? null : voz} aviso={aviso} puntero={ui ? null : puntero} fase={fase} play={play} consejo={ui ? '' : consejo} />
-      {fase === 'espera' && !error && !escena && <Inicio nivel={nivel} continua={!!partida} pausada={!!partida?.suspendida} controles={controles} pantalla={opciones?.pantallaCompleta !== false} />}
+      {fase === 'espera' && !error && !escena && !avisoCoop && <Inicio nivel={nivel} continua={!!partida} pausada={!!partida?.suspendida} controles={controles} pantalla={opciones?.pantallaCompleta !== false} />}
       {ui === 'nota' && dato && <Nota dato={dato} alCerrar={cerrar} controles={controles} />}
       {ui === 'cinta' && dato && <Cinta dato={dato} alCerrar={cerrar} controles={controles} />}
       {ui === 'mapa' && <Mapa alCerrar={cerrar} controles={controles} />}
       {ui === 'diario' && <Diario notas={notas} cintas={cintas} alCerrar={cerrar} controles={controles} alAbrirNota={(d) => { setUi(null); setTimeout(() => abrir('nota', d), 0); }} />}
-      {ui === 'pausa' && opciones && <Pausa opciones={opciones} alCambiar={cambiarOpcion} controles={controles} alCambiarControles={cambiarControles} alContinuar={cerrar} alReiniciar={() => window.location.assign(`/jugar/${nivelId}`)} perseguido={!!cuerpo?.perseguido} />}
+      {ui === 'pausa' && opciones && <Pausa opciones={opciones} alCambiar={cambiarOpcion} controles={controles} alCambiarControles={cambiarControles} alContinuar={cerrar} alReiniciar={() => window.location.assign(`/jugar/${nivelId}`)} perseguido={!!cuerpo?.perseguido} coop={coop} />}
       {ui === 'compu' && dato && <Compu dato={dato} alCerrar={cerrar} alQuedarse={quedarse} controles={controles} />}
-      {resultado && <Completado resultado={resultado} siguiente={siguiente} />}
+      {resultado && <Completado resultado={resultado} siguiente={siguiente} coop={coop} />}
+      {avisoCoop && !resultado && <AvisoCoop aviso={avisoCoop} alSeguir={() => { setAvisoCoop(null); EventBus.emit('ui-cerrada'); }} />}
       {fin && <FinDelJuego final={fin} />}
       {escena && <Cinematica escena={escena} alTerminar={terminoLaEscena} />}
       {error && (

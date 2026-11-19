@@ -36,6 +36,7 @@ import { crearEventos } from '../motor/eventos';
 import { crearTemblor } from '../motor/temblor';
 import { mapaEnFase } from '../motor/cambios.js';
 import { crearCoop, rolEnLaSala } from '../motor/coop';
+import { salirDeSala, olvidarSala } from '@/lib/red';
 import { vistaDe, capaEscondite, manosEnLaBoca, manoQueTantea } from '../motor/escondites';
 import { leerControles, teclasDe, accionDe, etiqueta, codigoDe } from '@/lib/controles';
 import { pantallaCompleta } from '@/lib/pantalla';
@@ -309,6 +310,9 @@ export class Nivel extends Scene {
     this.alIrse = () => this.suspender();
     this.alOcultar = () => { if (document.visibilityState === 'hidden') this.suspender(); };
     document.addEventListener('visibilitychange', this.alOcultar);
+    // (Cooperativo: con la pestaña escondida el juego no dibuja; igual se le manda al otro, una vez por segundo, que
+    // este jugador sigue ahí, en pausa.)
+    if (this.coop) this.latidoCoop = setInterval(() => { if (document.hidden && !this.limpio) this.pasoCoop(0); }, 1000);
     this.escuchasVentana = { keydown: this.alBajar, keyup: this.alSoltar, mousedown: this.alBajar, mouseup: this.alSoltar, auxclick: this.alSoltar, blur: this.alOlvidar, contextmenu: this.alMenu, pagehide: this.alIrse };
     for (const [n, fn] of Object.entries(this.escuchasVentana)) window.addEventListener(n, fn);
     this.input.on('pointerdown', () => this.alApretar('clic'));
@@ -357,6 +361,11 @@ export class Nivel extends Scene {
       'pantalla-completa': (si) => { this.conPantallaCompleta = si !== false; },
       // Cambió un control: los carteles («E · Abrir») se vuelven a escribir con la tecla nueva.
       controles: (c) => { this.controles = c; this.apretadas.clear(); this.indicacion = null; },
+      // Cooperativo (la pausa y las ventanas de aviso): empezar de nuevo los dos, volver los dos a la sala, o salir.
+      // (Les llega a los dos por el servidor; si la red no contesta, esta pestaña va igual.)
+      'coop-reiniciar': () => { if (!this.coop) return; this.coop.enviar('reiniciar', { nivel: this.nivel.id }); this.despuesReal(2500, () => this.irA(`/jugar/${this.nivel.id}?sala=${this.coop.sala.codigo}`)); },
+      'coop-volver-sala': () => { if (!this.coop) return; this.coop.enviar('volver-sala', {}); this.despuesReal(2500, () => this.irA('/cooperativo')); },
+      'coop-salir': () => { const sala = this.coop?.sala; this.coop?.cerrar(); salirDeSala(sala).finally(() => this.irA('/cooperativo')); },
     };
     for (const [nombre, fn] of Object.entries(this.escuchas)) EventBus.on(nombre, fn);
     this.events.once('shutdown', () => this.limpiar());
@@ -370,6 +379,8 @@ export class Nivel extends Scene {
       escondites: this.datosEscondites.length > 0, espejos: this.espejos,
       // (Lado B: el HUD muestra el micrófono de la cámara y la cámara que falla.)
       lado: this.nivel.lado || 'A', ladoB: !!this.nivel.ladoB,
+      // (Cooperativo: quién eres y el código, para la tarjeta del principio y la pausa.)
+      coop: this.coop ? { rol: this.coop.rol, codigo: this.coop.sala.codigo } : null,
     });
     EventBus.emit('fase', this.fase);
     EventBus.emit('escena-lista', this);
@@ -645,6 +656,9 @@ export class Nivel extends Scene {
     const dt = Math.min(0.05, delta / 1000);
     this.t += dt;
     this.leerCola();
+    // (Cooperativo: lo de la red va en cualquier fase —también atrapado, rebobinando o en pausa—, así el otro sabe en
+    // qué estás. Hasta el 2026-11-18 iba solo jugando: si te atrapaban, para el otro te quedabas congelado.)
+    if (this.coop && this.fase !== 'fin') this.pasoCoop(dt);
     if (this.fase === 'intro') this.pasoIntro(dt);
     else if (this.fase === 'llegada') {
       this.blanco = Math.max(0, this.blanco - dt * 0.8);
@@ -775,16 +789,51 @@ export class Nivel extends Scene {
     return l.chispa > 0 ? (this.pocosDestellos ? 0.12 : 0.3) : 0;
   }
 
+  // ---------- Cooperativo: cada cuadro, en cualquier fase ----------
+  // En qué está este jugador, para el otro: jugando, en pausa, leyendo, sin empezar, atrapado o rebobinando.
+  faseCoop() {
+    if (document.hidden) return 'pausa';
+    if (this.fase !== 'juego') return this.fase;
+    if (this.uiAbierta === 'pausa' || this.esperaClic) return 'pausa';
+    return this.bloqueado ? 'leyendo' : 'juego';
+  }
+  pasoCoop(dt) {
+    const j = this.jugador, fase = this.faseCoop();
+    const inq = this.inq?.activo ? { activo: true, x: +this.inq.x.toFixed(2), y: +this.inq.y.toFixed(2) } : null;
+    // (Y Nico manda dónde está El Contador de su lado, con su pose: Dani lo ve por las ventanas.)
+    this.coop.paso(dt, j, { fase, perseguido: this.inq?.estado === 'persigue' || undefined, agachado: !!this.agachado, escondido: !!this.escondido, inq, cont: this.eventosNivel.contador?.() ?? null, miran: this.eventosNivel.espectadores?.() ?? undefined, tapado: !!this.tapado, cama: this.cama?.st ? this.cama.estadoRed : undefined });
+    // La Cama la sigue moviendo la computadora de Dani aunque Dani esté en pausa o atrapado (si no, a Nico se le
+    // congelaba). A quien no está jugando no lo persigue.
+    if (this.cama && this.fase !== 'espera' && this.fase !== 'intro') this.pasoCamaJefe(dt, fase === 'juego');
+    // El HUD: qué le pasa al compañero (unas 4 veces por segundo).
+    this.tCompa = (this.tCompa ?? 0) + dt;
+    if (this.tCompa > 0.25) { this.tCompa = 0; EventBus.emit('compa', this.coop.estadoCompa()); }
+  }
+  // La sala se cerró (o el lugar lo tomó otro): se avisa con una ventana, y el juego queda quieto.
+  salaCerrada(motivo) {
+    olvidarSala();
+    if (document.pointerLockElement) document.exitPointerLock();
+    EventBus.emit('coop-aviso', { tipo: 'cerrada', motivo });
+  }
+  // El compañero salió de la sala (con el botón, o se desconectó hace más de un minuto).
+  compaSeFue(motivo) {
+    if (document.pointerLockElement) document.exitPointerLock();
+    this.decir(`${this.coop.otroRol === 'nico' ? 'Nico' : 'Dani'} se fue.`);
+    EventBus.emit('coop-aviso', { tipo: 'se-fue', motivo, quien: this.coop.otroRol, codigo: this.coop.sala.codigo, rol: this.coop.rol });
+  }
+  // Ir a otra página (empezar de nuevo, volver a la sala): una sola vez.
+  irA(url) {
+    if (this.yendo) return;
+    this.yendo = true;
+    window.location.assign(url);
+  }
+  // (Un temporizador del navegador, no del juego: corre aunque la escena esté quieta.)
+  despuesReal(ms, fn) { setTimeout(fn, ms); }
+
   pasoJuego(dt) {
     const j = this.jugador;
     this.segundos += dt;
-    if (this.coop) {
-      const inq = this.inq?.activo ? { activo: true, x: +this.inq.x.toFixed(2), y: +this.inq.y.toFixed(2) } : null;
-      // (Y Nico manda dónde está El Contador de su lado, con su pose: Dani lo ve por las ventanas.)
-      this.coop.paso(dt, j, { agachado: !!this.agachado, escondido: !!this.escondido, inq, cont: this.eventosNivel.contador?.() ?? null, miran: this.eventosNivel.espectadores?.() ?? undefined, tapado: !!this.tapado, cama: this.cama?.st ? this.cama.estadoRed : undefined });
-      if (this.cama) this.pasoCamaJefe(dt);
-      if (this.coop.pasoAire(dt, j, !!this.uiAbierta) === 'ahogado') this.ahogarse();
-    }
+    if (this.coop && this.coop.pasoAire(dt, j, !!this.uiAbierta) === 'ahogado') this.ahogarse();
     this.pasoPuntos(dt);
     for (const n of Object.keys(this.estimulos)) { this.estimulos[n] -= dt; if (this.estimulos[n] <= 0) delete this.estimulos[n]; }
     let ruido = this.ruidoExtra;
@@ -1295,6 +1344,8 @@ export class Nivel extends Scene {
   // ---------- Atrapado y la cinta que se rebobina ----------
   atrapar() {
     if (this.fase !== 'juego') return;
+    // (Cooperativo: al otro se le avisa en el acto. Antes no se enteraba y quedaba esperando sin saber por qué.)
+    this.coop?.enviar('cayo', { por: this.atrapadoPor === 'contador' ? 'contador' : 'inquilino' });
     this.fase = 'atrapado';
     this.tFase = 0;
     this.vecesAtrapado++;
@@ -1673,15 +1724,16 @@ export class Nivel extends Scene {
   // ---------- La Cama (cooperativo, sala final) ----------
   // Cada cuadro: la computadora de Dani la mueve (cama.js) y la de Nico la sigue con lo que le llega. En las dos, lo
   // mismo: el dibujo, el respirador que la sigue, el monitor (cada vez más rápido) y los crujidos al caminar.
-  pasoCamaJefe(dt) {
+  pasoCamaJefe(dt, juego = true) {
     const c = this.cama, j = this.jugador, S = this.nivel.sala;
     const enSala = (x, y) => x >= S.x0 && x <= S.x1 && y >= S.y0 && y <= S.y1;
     let e;
     if (c.st) {
       const jugadores = [];
-      if (!this.tapado) jugadores.push({ id: this.coop.rol, x: j.x, y: j.y });
+      if (juego && !this.tapado) jugadores.push({ id: this.coop.rol, x: j.x, y: j.y });
+      // (Al otro, solo si está jugando y su posición es reciente: en pausa, atrapado o sin señal no cuenta.)
       const o = this.coop.otro;
-      if (o && this.coop.presente && !o.tapado) jugadores.push({ id: this.coop.otroRol, x: o.x, y: o.y });
+      if (o && this.coop.presente && !o.tapado && (!o.fase || o.fase === 'juego') && performance.now() - o.t < 1500) jugadores.push({ id: this.coop.otroRol, x: o.x, y: o.y });
       const r = pasoCama(c.st, dt, { jugadores, libre: (x, y) => { const ch = celdaDe(this.nivel, x, y); return ch !== undefined && !SOLIDA.has(ch); }, enSala, lineaDeVista: (x0, y0, x1, y1) => lineaDeVista(this.nivel, this.estado, x0, y0, x1, y1) });
       for (const [s, id] of r.sucesos) {
         if (s !== 'atrapa') continue;
@@ -1800,6 +1852,7 @@ export class Nivel extends Scene {
   atrapadoPorCama() {
     if (this.tapado || this.fase !== 'juego') return;
     this.tapado = { t: 0 };
+    this.coop?.enviar('cayo', { por: 'cama' });
     this.toca('cama-sabanas', { bus: 'objetos', vol: 2.4, dur: 1.4 });
     this.toca('monitor-plano', { bus: 'objetos', vol: 1.5 });
     this.toca('inhalacion', { bus: 'cuerpo', vol: 1 });
@@ -1836,7 +1889,7 @@ export class Nivel extends Scene {
     Object.assign(this.jugador, { x: a.ultimo.x, y: a.ultimo.y });
     this.celda = null;
     this.despues(1, () => this.decir(causa === 'contador' ? 'Me alcanzó. Contaba y no paraba. Otra vez.' : 'Sesenta... no llegué. Otra vez.'));
-    this.coop.enviar('ahogo', {});
+    this.coop.enviar('ahogo', { causa });
   }
 
   // Cooperativo: el compañero tomó una llave (sirve para los dos) o abrió una puerta (queda abierta para los dos).
@@ -2243,6 +2296,7 @@ export class Nivel extends Scene {
   limpiar() {
     if (this.limpio) return;
     this.limpio = true;
+    clearInterval(this.latidoCoop);
     this.coop?.cerrar();
     for (const [nombre, fn] of Object.entries(this.escuchas || {})) EventBus.off(nombre, fn);
     document.removeEventListener('pointerlockchange', this.alCambiarPuntero);

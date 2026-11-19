@@ -19,8 +19,10 @@ export default async function Jugar({ params, searchParams }) {
   const { niveles, cooperativo = [] } = await leerIndice();
   // El cooperativo (?sala=ABCD): sus niveles van aparte en el índice y no tienen «siguiente».
   if (cooperativo.some((x) => x.id === nivel)) {
-    if (!/^[A-Z]{4}$/.test(sala || '')) notFound();
-    return <Juego nivelId={nivel} sala={sala} />;
+    // (El código de la sala, como sea que venga escrito: «abcd» es ABCD.)
+    const codigo = String(sala || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!/^[A-Z0-9]{4}$/.test(codigo)) notFound();
+    return <Juego nivelId={nivel} sala={codigo} />;
   }
   const i = niveles.findIndex((x) => x.id === nivel);
   if (i < 0) notFound();

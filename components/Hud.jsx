@@ -37,6 +37,23 @@ function Rec({ segundos, ladoB }) {
   );
 }
 
+// Cooperativo: qué le pasa al compañero (lo manda la escena unas 4 veces por segundo, en cualquier fase). Escucha al
+// juego directo, como el REC, para no volver a dibujar todo el HUD.
+function Compa() {
+  const [c, setC] = useState(null);
+  useEffect(() => {
+    EventBus.on('compa', setC);
+    return () => EventBus.off('compa', setC);
+  }, []);
+  if (!c) return null;
+  return (
+    <div className={`compa-hud ${c.mal ? 'mal' : ''}`} role="status">
+      {c.texto}
+      {c.aire != null && <div className="barra" aria-label={`Aire de Nico: ${Math.round(c.aire * 100)} %`}><i style={{ width: `${c.aire * 100}%` }} /></div>}
+    </div>
+  );
+}
+
 const HEX = { roja: '#d9452b', azul: '#2f63d8', verde: '#0f8a6c', amarilla: '#d9a21a' };
 const SIMBOLO = { roja: '▲', azul: '●', verde: '■', amarilla: '◆' };
 
@@ -78,12 +95,14 @@ export default function Hud({ nivel, llaves, colores, cuerpo, indicacion, pensam
   const mostrarAliento = enJuego && !escondido && (aliento < 99 || cuerpo?.corriendo);
   const aire = cuerpo?.aire ?? 1;
   const linterna = enJuego ? cuerpo?.linterna : null;
-  if (fase === 'atrapado') return <div className="hud" />;
+  // (En el cooperativo, atrapado igual se ve qué le pasa al compañero.)
+  if (fase === 'atrapado') return <div className="hud">{nivel?.coop && <Compa />}</div>;
   return (
     <div className={`hud ${linterna ? 'con-linterna' : ''}`} aria-live="polite">
       {fase === 'rebobinar' && <div className="rebobinando" role="status">◀◀ REBOBINANDO</div>}
       {enJuego && play && <div className="rebobinando play">▶ PLAY</div>}
       {enJuego && !play && <Rec segundos={cuerpo?.segundos ?? 0} ladoB={!!nivel?.ladoB} />}
+      {nivel?.coop && fase !== 'espera' && <Compa />}
       {enJuego && nivel && !tituloVisto && <div className="titulo-nivel">NIVEL {nivel.numero} · {nivel.nombre.toUpperCase()}</div>}
       {enJuego && !escondido && colores.length > 0 && (
         <div className="llaves" aria-label="Llaves">
@@ -101,7 +120,9 @@ export default function Hud({ nivel, llaves, colores, cuerpo, indicacion, pensam
       {/* Cooperativo: el aire de Nico bajo el agua (los 60 segundos de la cuenta). */}
       {enJuego && cuerpo?.aguaAire && (<div className={`aire-agua ${cuerpo.aguaAire.k < 0.34 ? 'poco' : ''}`}>AIRE · {cuerpo.aguaAire.s}<div className="barra"><i style={{ width: `${cuerpo.aguaAire.k * 100}%` }} /></div></div>)}
       {linterna && <Linterna l={linterna} />}
-      {linterna && consejo && <div className="consejo" role="status">{consejo}</div>}
+      {/* (El consejo se ve siempre: hasta el 2026-11-18 solo salía en los niveles con linterna, y los del temblor y el
+          cooperativo no se veían.) */}
+      {consejo && <div className="consejo" role="status">{consejo}</div>}
       {escondido && (cuerpo.contiene || aire < 0.99) && <Anillo aire={aire} contiene={cuerpo.contiene} />}
       {enJuego && !escondido && cuerpo?.agachado && <div className="agachado">◣ AGACHADO</div>}
       {enJuego && !escondido && <span className="mira" />}

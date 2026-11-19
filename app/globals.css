@@ -283,6 +283,22 @@ button { font: inherit; }
 .sala .codigo-sala { font-size: 2.6rem; margin: 0; color: var(--mostaza); }
 .sala ul { margin: 6px 0; padding-left: 1.2em; }
 .sala code { font-size: 1rem; color: var(--texto); }
+.unirse input::placeholder { text-transform: uppercase; }
+/* Cómo se juega de a dos (el lobby): qué le toca a cada uno y cómo se ayudan. */
+.como-coop { border: 1px solid var(--tenue); padding: 10px 14px; background: rgba(0, 0, 0, 0.25); }
+.como-coop > p { margin: 0 0 6px; color: var(--mostaza); font-size: 1.3rem; letter-spacing: 0.08em; }
+.como-coop .roles { display: grid; grid-template-columns: repeat(auto-fit, minmax(14em, 1fr)); gap: 10px; }
+.como-coop .roles > div { border-left: 2px solid var(--tenue); padding-left: 10px; }
+.como-coop .roles > div.tuyo { border-left-color: var(--mostaza); }
+.como-coop .roles b:first-child { letter-spacing: 0.08em; }
+.como-coop ul { margin: 4px 0; padding-left: 1.1em; font-size: 0.95rem; line-height: 1.35; }
+.como-coop .juntos { margin-top: 8px; }
+/* Cooperativo, en el juego: qué le pasa al compañero (arriba a la izquierda, debajo del REC). */
+.hud .compa-hud { position: absolute; left: 18px; top: 52px; font-family: var(--vt, monospace); font-size: 1.15rem; letter-spacing: 0.06em; color: #c9cdbf; background: rgba(0, 0, 0, 0.5); padding: 3px 8px; border-left: 2px solid #47afc4; max-width: min(360px, 70vw); }
+.hud .compa-hud.mal { border-left-color: #e2332b; color: #f0b3a8; }
+.hud .compa-hud .barra { width: 120px; height: 4px; background: rgba(164, 184, 179, 0.2); margin-top: 3px; }
+.hud .compa-hud .barra i { display: block; height: 100%; background: #47afc4; transition: width 0.2s linear; }
+.hud .compa-hud.mal .barra i { background: #e2332b; }
 
 /* El aire de Nico en el cooperativo (abajo a la izquierda, como el aliento pero celeste; rojo cuando queda poco). */
 .aire-agua { position: absolute; left: 18px; bottom: 48px; font-family: var(--vt, monospace); font-size: 1.1rem; color: #a4b8b3; letter-spacing: 0.08em; }
@@ -291,3 +307,5 @@ button { font: inherit; }
 .aire-agua.poco { color: #e2332b; animation: parpadeo-aire 0.6s steps(2) infinite; }
 .aire-agua.poco .barra i { background: #e2332b; }
 @keyframes parpadeo-aire { 50% { opacity: 0.45; } }
+/* Cooperativo: quién eres, en la tarjeta del principio. */
+.tarjeta .rol-coop { max-width: 34em; text-align: left; border-left: 2px solid var(--mostaza); padding-left: 10px; }

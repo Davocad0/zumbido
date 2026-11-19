@@ -214,7 +214,7 @@ export function Diario({ notas, cintas, alAbrirNota, alCerrar, controles = INICI
 }
 
 // ---------- Pausa: seguir, ajustes (controles, sonido, imagen), empezar de nuevo o salir ----------
-export function Pausa({ opciones, alCambiar, controles = INICIALES, alCambiarControles, alContinuar, alReiniciar, perseguido = false }) {
+export function Pausa({ opciones, alCambiar, controles = INICIALES, alCambiarControles, alContinuar, alReiniciar, perseguido = false, coop = null }) {
   const [vista, setVista] = useState('menu');
   // Esc (o la tecla de pausa) vuelve al juego; adentro de Ajustes, Esc vuelve a este menú.
   useTeclas(['Escape', ...teclasDe(controles, 'pausa')], alContinuar, vista === 'menu');
@@ -233,6 +233,21 @@ export function Pausa({ opciones, alCambiar, controles = INICIALES, alCambiarCon
         {vista === 'menu' ? (
           <>
             <h2>PAUSA</h2>
+            {coop ? (
+              // Cooperativo: el juego no se detiene para el otro (se le avisa que estás en pausa). Empezar de nuevo y volver a
+              // la sala son para los dos; salir de la sala te saca solo a ti (si eres Dani, la sala se cierra).
+              <>
+                <nav>
+                  <button type="button" className="boton principal" onClick={alContinuar} autoFocus>Seguir</button>
+                  <button type="button" className="boton" onClick={() => setVista('ajustes')}>Ajustes y controles</button>
+                  <button type="button" className="boton" onClick={() => EventBus.emit('coop-reiniciar')}>Empezar de nuevo (los dos)</button>
+                  <button type="button" className="boton" onClick={() => EventBus.emit('coop-volver-sala')}>Volver a la sala de espera (los dos)</button>
+                  <button type="button" className="boton" onClick={() => EventBus.emit('coop-salir')}>{coop.rol === 'dani' ? 'Salir y cerrar la sala' : 'Salir de la sala'}</button>
+                </nav>
+                <p className="nota-chica aviso-pausa">Sala {coop.codigo}. Para {coop.rol === 'dani' ? 'Nico' : 'Dani'} el juego sigue: le aparece que estás en pausa. «Empezar de nuevo» y «Volver a la sala» los llevan a los dos.</p>
+                <div className="pie">Esc{otra ? ` o ${nombreDe(otra, controles)}` : ''} · Seguir</div>
+              </>
+            ) : (<>
             <nav>
               <button type="button" className="boton principal" onClick={alContinuar} autoFocus>Seguir</button>
               <button type="button" className="boton" onClick={() => setVista('ajustes')}>Ajustes y controles</button>
@@ -246,6 +261,7 @@ export function Pausa({ opciones, alCambiar, controles = INICIALES, alCambiarCon
             </p>
             <div className="pie">Esc{otra ? ` o ${nombreDe(otra, controles)}` : ''} · Seguir</div>
             {/* Fuera de pantalla completa, Esc es del navegador: al volver pide un clic o una tecla (ver lib/pantalla.js). */}
+            </>)}
             {!enPantallaCompleta() && <p className="nota-chica aviso-pausa">Fuera de pantalla completa, al volver con Esc el navegador pide un clic o una tecla para tomar el mouse. En pantalla completa (Ajustes › Imagen) no hace falta.</p>}
           </>
         ) : (
@@ -358,9 +374,18 @@ export function Inicio({ nivel, continua, pausada = false, controles = INICIALES
   return (
     <div className="ventana inicio espera">
       <div className="tarjeta">
-        <div className="numero">NIVEL {nivel?.numero ?? '…'}</div>
+        <div className="numero">{nivel?.coop ? `COOPERATIVO · SALA ${nivel.coop.codigo}` : `NIVEL ${nivel?.numero ?? '…'}`}</div>
         <div className="nombre">{nivel?.nombre ?? 'Cargando'}</div>
         {continua && <div className="nota-chica">{pausada ? 'Sigues donde pausaste la cinta.' : 'Sigues desde el último puesto de guardado.'}</div>}
+        {/* Cooperativo: quién eres y qué tienes que hacer (en la prueba nadie sabía cómo ayudar al otro). */}
+        {nivel?.coop && (
+          <div className="nota-chica rol-coop">
+            {nivel.coop.rol === 'dani'
+              ? <><b>Eres Dani</b>, en el edificio, de noche. Bajas palancas que abren las compuertas de Nico; las tuyas las abre él. Cuidado con El Inquilino (escóndete con {n('usar')}) y con Los Espectadores: se acercan si nadie los mira.</>
+              : <><b>Eres Nico</b>, bajo el agua: 60 segundos de aire, las burbujas te lo devuelven. Bajas palancas que abren las compuertas de Dani; las tuyas las abre él. No te quedes en la luz de El Contador. Si miras a los que se le acercan a Dani, no se mueven.</>}
+            {' '}Arriba a la izquierda vas a ver siempre qué le pasa a tu compañero.
+          </div>
+        )}
         <div className="boton principal parpadeo">Clic para empezar</div>
         <div className="nota-chica">Usa audífonos. Hay luces que parpadean (se puede reducir en la pausa).{pantalla ? ' Se juega en pantalla completa: para salir, mantén apretada Esc.' : ''}</div>
         <div className="controles">
@@ -445,24 +470,64 @@ export function FinDelJuego({ final }) {
   );
 }
 
-export function Completado({ resultado, siguiente }) {
+export function Completado({ resultado, siguiente, coop = null }) {
   const [mejor, setMejor] = useState(null);
   useEffect(() => {
+    // (El cooperativo no tiene récords.)
+    if (coop) return;
     const local = completarNivel(resultado.id, resultado.segundos);
     setMejor(local);
     fetch('/api/records', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nivel: resultado.id, segundos: resultado.segundos }) })
       .then((r) => r.json()).then((r) => { if (typeof r.mejor === 'boolean') setMejor(r.mejor || local); }).catch(() => {});
-  }, [resultado]);
+  }, [resultado, coop]);
   return (
     <div className="ventana inicio" style={{ background: 'rgba(246, 241, 220, 0.96)', color: '#0b0a06' }}>
       <div className="tarjeta">
-        <div className="numero" style={{ color: '#5f655a' }}>NIVEL {resultado.numero} · SUPERADO</div>
+        <div className="numero" style={{ color: '#5f655a' }}>{coop ? 'COOPERATIVO · SALIERON LOS DOS' : `NIVEL ${resultado.numero} · SUPERADO`}</div>
         <div className="nombre">{resultado.nombre}</div>
         <div className="vt" style={{ fontSize: '1.6rem' }}>Tiempo {minutos(resultado.segundos)}{mejor ? ' · ¡récord!' : ''}</div>
         {resultado.final && <div className="vt" style={{ fontSize: '1.4rem', color: '#5f655a' }}>FINAL · {resultado.final.toUpperCase()} · Hay otros finales.</div>}
         <nav style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
-          {siguiente ? <a className="boton principal" href={`/jugar/${siguiente.id}`}>Seguir al Nivel {siguiente.numero}</a> : <span className="vt" style={{ fontSize: '1.4rem' }}>{resultado.final ? 'Fin.' : 'Por ahora el laberinto termina acá.'}</span>}
+          {coop ? <button type="button" className="boton principal" onClick={() => EventBus.emit('coop-volver-sala')}>Volver a la sala (los dos)</button>
+            : siguiente ? <a className="boton principal" href={`/jugar/${siguiente.id}`}>Seguir al Nivel {siguiente.numero}</a> : <span className="vt" style={{ fontSize: '1.4rem' }}>{resultado.final ? 'Fin.' : 'Por ahora el laberinto termina acá.'}</span>}
           <Link className="boton" href="/" style={{ color: '#0b0a06', borderColor: '#0b0a06' }}>Menú</Link>
+        </nav>
+      </div>
+    </div>
+  );
+}
+
+// ---------- Cooperativo: la sala se cerró, o el compañero se fue ----------
+// (2026-11-18: antes no se avisaba nada; el que quedaba seguía jugando solo sin poder salir, sin saber por qué.)
+const CERRADA = {
+  'dani-salio': 'Dani salió y cerró la sala.',
+  'dani-ausente': 'Dani se desconectó hace más de un minuto: la sala se cerró.',
+  reemplazado: 'Otra persona entró a la sala con el código, en tu lugar.',
+  'no-existe': 'La sala ya no existe en el servidor (se reinició, o se cerró mientras no estabas conectado).',
+};
+export function AvisoCoop({ aviso, alSeguir }) {
+  const otro = aviso.quien === 'nico' ? 'Nico' : 'Dani';
+  if (aviso.tipo === 'cerrada') {
+    return (
+      <div className="ventana" role="alertdialog" aria-label="La sala se cerró">
+        <div className="caja">
+          <h2>LA SALA SE CERRÓ</h2>
+          <p>{CERRADA[aviso.motivo] || 'La sala se cerró.'}</p>
+          <nav><a className="boton principal" href="/cooperativo" autoFocus>Volver al cooperativo</a><Link className="boton" href="/">Menú</Link></nav>
+        </div>
+      </div>
+    );
+  }
+  return (
+    <div className="ventana" role="alertdialog" aria-label={`${otro} se fue`}>
+      <div className="caja">
+        <h2>{otro.toUpperCase()} SE FUE</h2>
+        <p>{aviso.motivo === 'salio' ? `${otro} salió de la sala.` : `${otro} se desconectó hace más de un minuto.`} Sin {otro} no se puede salir del laberinto.</p>
+        <p className="nota-chica">Puede volver a entrar: abre «Cooperativo» y escribe el código <b>{aviso.codigo}</b>. Empieza otra vez de su lado, pero con todo lo que ya abrieron.</p>
+        <nav>
+          <button type="button" className="boton principal" onClick={alSeguir} autoFocus>Esperar a que vuelva</button>
+          <button type="button" className="boton" onClick={() => EventBus.emit('coop-volver-sala')}>Volver a la sala de espera</button>
+          <button type="button" className="boton" onClick={() => EventBus.emit('coop-salir')}>{aviso.rol === 'dani' ? 'Salir y cerrar la sala' : 'Salir de la sala'}</button>
         </nav>
       </div>
     </div>

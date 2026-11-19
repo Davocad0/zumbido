@@ -7,7 +7,7 @@ import { readFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { recorridoDeNico, HUECO_AIRE } from '../../planeacion/herramientas/generar-coop.mjs';
-import { crearSala, unirseASala, escuchar, publicar } from '../lib/salas.js';
+import { crearSala, unirseASala, escuchar, publicar, salirDeSala, salaDe, revisarSalas, AUSENTE } from '../lib/salas.js';
 
 const raiz = join(dirname(fileURLToPath(import.meta.url)), '..');
 // (coop.js usa los alias de Next.js y no se puede importar acá: el aire se lee del código.)
@@ -127,9 +127,11 @@ prueba('El Contador de Nico: cuenta de su lado, después de la primera compuerta
 });
 
 prueba('Las salas: dos lugares (Dani crea, Nico se une), un tercero no entra, y lo que manda uno le llega solo al otro', () => {
-  const d = crearSala(), m = unirseASala(d.codigo), tercero = unirseASala(d.codigo);
+  // (Desde el 2026-11-18 el lugar de Nico sin nadie conectado lo puede tomar otro: el tercero prueba con Nico conectado.)
+  const d = crearSala(), m = unirseASala(d.codigo);
   const aDani = [], aNico = [];
   const cerrarD = escuchar(d.codigo, d.id, (x) => aDani.push(x)), cerrarN = escuchar(d.codigo, m.id, (x) => aNico.push(x));
+  const tercero = unirseASala(d.codigo);
   publicar(d.codigo, d.id, 'estado', { x: 1.5, y: 1.5 });
   publicar(d.codigo, m.id, 'palanca', { id: 'p-dani1' });
   const intruso = publicar(d.codigo, 'id-inventado', 'palanca', { id: 'p-nico1' });
@@ -138,6 +140,70 @@ prueba('Las salas: dos lugares (Dani crea, Nico se une), un tercero no entra, y 
   cerrarD(); cerrarN();
   const ok = d.rol === 'dani' && m.rol === 'nico' && !!tercero.error && !intruso && okNico && okDani;
   return [ok, `sala ${d.codigo}; tercero: «${tercero.error}»; el intruso no pudo mandar: ${intruso ? 'no' : 'sí'}`];
+});
+
+prueba('El código no distingue mayúsculas: «abcd», « AbCd » o «ab-cd» entran a la sala ABCD (y se ve en mayúsculas)', () => {
+  const d = crearSala(), escrito = ` ${d.codigo.toLowerCase().slice(0, 2)}-${d.codigo.slice(2).toLowerCase()} `;
+  const m = unirseASala(escrito);
+  const ok = !m.error && m.codigo === d.codigo && m.codigo === m.codigo.toUpperCase() && /^[A-Z2-9]{4}$/.test(d.codigo) && !!salaDe(d.codigo.toLowerCase());
+  salirDeSala(d.codigo, d.id);
+  return [ok, `sala ${d.codigo}; escrito «${escrito}» → ${m.codigo ?? m.error}`];
+});
+
+prueba('Si Nico sale con el botón, su lugar queda libre en el acto: Dani se entera y otro (o el mismo) puede entrar', () => {
+  const d = crearSala(), m = unirseASala(d.codigo);
+  const aDani = [];
+  escuchar(d.codigo, d.id, (x) => aDani.push(x));
+  escuchar(d.codigo, m.id, () => {});
+  const lleno = unirseASala(d.codigo);
+  const salio = salirDeSala(d.codigo, m.id);
+  const otro = unirseASala(d.codigo);
+  const viejoNoSirve = !publicar(d.codigo, m.id, 'estado', { x: 1, y: 1 });
+  const ok = !!lleno.error && salio && !otro.error && otro.rol === 'nico' && viejoNoSirve && aDani.some((x) => x.tipo === 'se-fue' && x.motivo === 'salio');
+  salirDeSala(d.codigo, d.id);
+  return [ok, `lleno antes: ${lleno.error ? 'sí' : 'no'}; después de salir entra otro: ${otro.error ? 'no' : 'sí'}; Dani se enteró: ${aDani.some((x) => x.tipo === 'se-fue') ? 'sí' : 'no'}`];
+});
+
+prueba('Si Nico cerró la pestaña sin salir, vuelve a entrar con el código (toma su propio lugar); el que no está conectado no tapa la sala', () => {
+  const d = crearSala(), m = unirseASala(d.codigo);
+  const cerrar = escuchar(d.codigo, m.id, () => {});
+  cerrar(); // se le cortó (cerró la pestaña)
+  const vuelve = unirseASala(d.codigo);
+  return [!vuelve.error && vuelve.id !== m.id && !publicar(d.codigo, m.id, 'estado', {}), `vuelve: ${vuelve.error ?? 'sí, con un lugar nuevo'}`];
+});
+
+prueba(`Si Dani sale, la sala se cierra y a Nico se le avisa; si nadie vuelve en ${AUSENTE} s, el lugar se libera o la sala se cierra sola`, () => {
+  const d = crearSala(), m = unirseASala(d.codigo), aNico = [];
+  escuchar(d.codigo, m.id, (x) => aNico.push(x));
+  salirDeSala(d.codigo, d.id);
+  const cerrada = !salaDe(d.codigo) && aNico.some((x) => x.tipo === 'sala-cerrada' && x.motivo === 'dani-salio') && !!unirseASala(d.codigo).error;
+  // Sin salir con el botón: Nico desaparece más de un minuto → su lugar queda libre; Dani desaparece → la sala se cierra.
+  const d2 = crearSala(), m2 = unirseASala(d2.codigo), aDani2 = [];
+  escuchar(d2.codigo, d2.id, (x) => aDani2.push(x));
+  escuchar(d2.codigo, m2.id, () => {})();
+  revisarSalas(Date.now() + (AUSENTE + 1) * 1000);
+  const nicoLibre = aDani2.some((x) => x.tipo === 'se-fue' && x.motivo === 'ausente') && !!salaDe(d2.codigo);
+  const d3 = crearSala();
+  revisarSalas(Date.now() + (AUSENTE + 1) * 1000);
+  const solaSeCierra = !salaDe(d3.codigo);
+  salirDeSala(d2.codigo, d2.id);
+  return [cerrada && nicoLibre && solaSeCierra, `sale Dani → cerrada y avisada: ${cerrada ? 'sí' : 'no'}; Nico ausente → lugar libre: ${nicoLibre ? 'sí' : 'no'}; sala sin nadie → cerrada: ${solaSeCierra ? 'sí' : 'no'}`];
+});
+
+prueba('Empezar de nuevo: una ronda nueva, sin las palancas de antes; un mensaje viejo que llega tarde no las vuelve a bajar', () => {
+  const d = crearSala(), m = unirseASala(d.codigo), aDani = [], aNico = [];
+  escuchar(d.codigo, d.id, (x) => aDani.push(x));
+  escuchar(d.codigo, m.id, (x) => aNico.push(x));
+  const r0 = aNico.find((x) => x.tipo === 'hola').ronda;
+  publicar(d.codigo, m.id, 'palanca', { id: 'p-dani1' }, r0);
+  publicar(d.codigo, d.id, 'reiniciar', { nivel: 'coop-1' }, r0);
+  publicar(d.codigo, m.id, 'palanca', { id: 'p-dani2' }, r0); // salió justo antes de enterarse
+  const los2 = aDani.some((x) => x.tipo === 'reiniciar') && aNico.some((x) => x.tipo === 'reiniciar');
+  const hola = []; escuchar(d.codigo, m.id, (x) => hola.push(x));
+  const h = hola[0];
+  const ok = los2 && h.ronda === r0 + 1 && h.palancas.length === 0 && h.ultimo['empezar:dani']?.datos?.nivel === 'coop-1';
+  salirDeSala(d.codigo, d.id);
+  return [ok, `ronda ${r0} → ${h.ronda}; palancas después: ${h.palancas.length}; les llegó a los dos: ${los2 ? 'sí' : 'no'}`];
 });
 
 prueba('Si uno se cae y vuelve a entrar, recibe dónde está el otro y todas las palancas que ya se bajaron', () => {

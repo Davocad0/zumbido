@@ -11,7 +11,13 @@
 //   está y qué hace; los llamadores de enfermera los puede usar cualquiera de los dos (van como palancas «de los dos»).
 //   Ahí Nico ya no está bajo el agua: no se le acaba el aire.
 // · La salida: termina cuando llegaron los dos.
+// · (2026-11-18, la primera prueba de verdad: cuando atrapaban a Dani, Nico no se enteraba y quedaba esperando sin saber
+//   por qué.) Ahora cada uno manda también en qué está (jugando, atrapado, rebobinando, en pausa, sin empezar) y el aire
+//   que le queda: el HUD del otro lo muestra siempre (estadoCompa). Si te atrapan o te ahogas, al otro se le avisa. Si
+//   te quedas frente a una compuerta cerrada, al otro se le avisa y la palanca que la abre brilla de su lado. Si la sala
+//   se cierra o el compañero se va, se avisa con una ventana (Juego.jsx).
 import { conectar, leerSala } from '@/lib/red';
+import { EventBus } from '../EventBus';
 import { dani as spriteDani, nicoCompa, palanca as spritePalanca, burbujasAire, inquilino as spriteInquilino, llamador as spriteLlamador } from './sprites';
 import { SOLIDA, celdaDe } from './reglas';
 import { contador as spriteContador, luzContador } from './figuraContador';
@@ -47,6 +53,8 @@ export function crearCoop(escena, codigo) {
     // Los Espectadores del lado de Dani, vistos por Nico a través del vidrio (cuerpo y luz de cada uno).
     miran: [], nicoVioMiran: false,
     bajoElAgua: !!nivel.ambiente?.bajoElAgua,
+    // Lo que se le avisó al otro (frente a qué compuerta espero) y lo que el otro avisó (qué palanca brilla).
+    espera: { id: null, t: 0, avisada: new Map() }, pedidas: new Map(), vistoCompa: false, cerrada: null,
   };
   const nombreOtro = st.otroRol === 'nico' ? 'Nico' : 'Dani';
 
@@ -88,7 +96,29 @@ export function crearCoop(escena, codigo) {
   };
 
   const recibir = (m) => {
+    const antes = st.presente;
     if (m.presentes) st.presente = m.presentes.includes(st.otroRol);
+    // La sala se cerró (Dani salió, o se desconectó hace rato), o el lugar lo tomó otro.
+    if (m.tipo === 'sala-cerrada') { st.cerrada = m.motivo || 'cerrada'; escena.salaCerrada?.(st.cerrada); return; }
+    // Empezar de nuevo los dos, o volver los dos a la sala (lo pidió cualquiera de los dos: les llega a los dos).
+    if (m.tipo === 'reiniciar') { escena.irA?.(`/jugar/${nivel.id}?sala=${sala.codigo}`); return; }
+    if (m.tipo === 'volver-sala') { escena.irA?.('/cooperativo'); return; }
+    // El otro salió de la sala. (Si lo «reemplazaron», es el mismo que volvió a entrar con el código: no se avisa.)
+    if (m.tipo === 'se-fue' && m.rol === st.otroRol) {
+      st.otro = null; st.vista = null;
+      if (m.motivo !== 'reemplazado') { st.seFue = true; escena.compaSeFue?.(m.motivo); }
+      return;
+    }
+    // Se desconectó o volvió: se dice recién si sigue así unos segundos (al pasar del lobby al juego, o al recargar, se
+    // corta y vuelve en un momento: eso no es irse).
+    if (antes !== st.presente && m.rol === st.otroRol) {
+      if (!st.presente) st.ausenteDesde = st.t;
+      else {
+        if (st.avisoAusente) escena.decir?.(`${nombreOtro} volvió.`);
+        st.avisoAusente = false; st.ausenteDesde = null;
+        if (st.seFue) { st.seFue = false; EventBus.emit('coop-volvio'); }
+      }
+    }
     if (m.tipo === 'hola') {
       const e = m.ultimo?.[`estado:${st.otroRol}`];
       if (e) { st.otro = { ...e.datos, t: performance.now() }; for (const id of e.datos.palancas || []) palancaRemota(id); }
@@ -101,7 +131,25 @@ export function crearCoop(escena, codigo) {
       for (const id of m.datos.palancas || []) palancaRemota(id);
     }
     if (m.tipo === 'palanca') palancaRemota(m.datos.id);
-    if (m.tipo === 'ahogo') escena.decir?.('Nico se quedó sin aire. Tengo que abrirle camino más rápido.');
+    if (m.tipo === 'ahogo') {
+      escena.decir?.(m.datos?.causa === 'contador' ? 'El Contador alcanzó a Nico. Volvió a la última burbuja.' : 'Nico se quedó sin aire: volvió a la última burbuja. Tengo que abrirle camino más rápido.');
+      escena.consejo?.('Nico vuelve a la última burbuja donde respiró. Las palancas que bajaron siguen bajadas.', 7);
+    }
+    // Al otro lo atraparon (El Inquilino, El Contador, La Cama): vuelve atrás, pero nada de lo que abrieron se cierra.
+    if (m.tipo === 'cayo') {
+      const por = { inquilino: 'El Inquilino', contador: 'El Contador', cama: 'La Cama' }[m.datos?.por] || 'Algo';
+      if (!(m.datos?.por === 'cama' && st.rol === 'dani')) escena.decir?.(`${por} atrapó a ${nombreOtro}.`);
+      escena.consejo?.(`A ${nombreOtro} lo atraparon: vuelve a donde estaba antes. Las palancas que bajaron siguen bajadas; espéralo.`, 8);
+    }
+    // El otro espera frente a una compuerta cerrada: la palanca de este lado que la abre brilla.
+    if (m.tipo === 'espera' && typeof m.datos?.id === 'string') {
+      const p = st.palancas.find((q) => !q.bajada && q.abre?.includes(m.datos.id) && q.lado === st.rol);
+      if (p && !st.pedidas.has(p.id)) {
+        st.pedidas.set(p.id, st.t);
+        escena.decir?.(`${nombreOtro} está frente a una compuerta cerrada.`);
+        escena.consejo?.(`${nombreOtro} no puede seguir: la palanca que le abre el paso está de tu lado. Ahora brilla: búscala (${escena.tecla?.('usar') ?? 'E'} para bajarla).`, 10);
+      }
+    }
     // (La Cama la maneja la computadora de Dani: si alcanzó a Nico, se lo avisa.)
     if (m.tipo === 'cama-atrapa' && m.datos?.id === st.rol) escena.atrapadoPorCama?.();
     if (m.tipo === 'salio') {
@@ -110,16 +158,46 @@ export function crearCoop(escena, codigo) {
       else escena.decir?.(`${nombreOtro} llegó a la sala de abajo. Me está esperando.`);
     }
   };
-  st.red = conectar(sala, recibir, (e) => { st.conexion = e; });
+  st.red = conectar(sala, recibir, (e) => {
+    st.conexion = e;
+    // (El servidor ya no tiene la sala: se reinició, o se cerró mientras esta pestaña no estaba conectada.)
+    if (e === 'cerrado' && !st.cerrada) { st.cerrada = 'no-existe'; escena.salaCerrada?.(st.cerrada); }
+  });
 
+  // Frente a una compuerta cerrada de este lado (que se abre con una palanca del otro), más de 2 segundos: se le avisa
+  // al otro (una vez cada 25 s por compuerta) y se dice acá qué pasa.
+  const esperoEnCompuerta = (dt, j) => {
+    const c = (nivel.compuertas || []).find((q) => q.lado === st.rol && !st.abiertas.has(q.id) && Math.hypot(q.x + 0.5 - j.x, q.y + 0.5 - j.y) < 1.7);
+    const e = st.espera;
+    if (!c) { e.id = null; e.t = 0; return; }
+    if (e.id !== c.id) { e.id = c.id; e.t = 0; }
+    e.t += dt;
+    const ultima = e.avisada.get(c.id);
+    if (e.t < 2 || (ultima != null && st.t - ultima < 25)) return;
+    e.avisada.set(c.id, st.t);
+    st.red.enviar('espera', { id: c.id });
+    if (ultima == null) {
+      escena.decir?.(`Cerrada. Esta la abre ${nombreOtro}, desde su lado.`);
+      escena.consejo?.(`Esta compuerta no se abre de tu lado: la abre una palanca del lado de ${nombreOtro}. Ya se le avisó; a ${nombreOtro} su palanca le brilla.`, 9);
+    }
+  };
   st.paso = (dt, j, extra = {}) => {
     st.t += dt;
+    if (st.ausenteDesde != null && !st.avisoAusente && !st.seFue && st.t - st.ausenteDesde > 4) { st.avisoAusente = true; escena.decir?.(`${nombreOtro} se desconectó. Si vuelve en un minuto, seguimos.`); }
     // (Nico dice cuáles de Los Espectadores dibujó su cámara en el último cuadro: si los mira, no se mueven.)
     const C = cuadroDibujado();
     const miranVe = st.rol === 'nico' ? st.miran.map((m, i) => ((m.cuerpo.dibujado ?? -9) >= C - 1 || (m.luz.dibujado ?? -9) >= C - 1 ? i : -1)).filter((i) => i >= 0) : undefined;
     if (miranVe?.length && !st.nicoVioMiran) { st.nicoVioMiran = true; escena.decir?.('Del lado de Dani hay gente quieta, con el celular. Se le acercan cuando nadie los mira... si los miro yo, tampoco se mueven.'); }
-    st.red.estado({ x: +j.x.toFixed(3), y: +j.y.toFixed(3), ang: +j.ang.toFixed(3), palancas: st.palancas.filter((p) => p.bajada && (p.lado === st.rol || p.mia)).map((p) => p.id), ...(miranVe ? { miranVe } : {}), ...extra });
+    st.red.estado({ x: +j.x.toFixed(3), y: +j.y.toFixed(3), ang: +j.ang.toFixed(3), palancas: st.palancas.filter((p) => p.bajada && (p.lado === st.rol || p.mia)).map((p) => p.id), ...(miranVe ? { miranVe } : {}), ...st.extra(), ...extra });
     for (const b of st.burbujas) b.sprite.img = burbujasAire(Math.floor(st.t * 5) % 2);
+    // Las palancas que el otro necesita: brillan (parpadeando) hasta que se bajan.
+    for (const p of st.palancas) {
+      const pedida = st.pedidas.has(p.id) && !p.bajada;
+      p.sprite.brilla = pedida && Math.floor(st.t * 2.5) % 2 === 0;
+      p.sprite.luz = pedida ? 2.6 : undefined;
+    }
+    if (extra.fase === 'juego') esperoEnCompuerta(dt, j);
+    else { st.espera.id = null; st.espera.t = 0; }
     if (!st.otro) return;
     // El compañero, suave (sin saltos entre mensaje y mensaje), y sus pasos para la animación.
     if (!st.vista) st.vista = { x: st.otro.x, y: st.otro.y };
@@ -206,6 +284,11 @@ export function crearCoop(escena, codigo) {
       s.x = st.vista.x; s.y = st.vista.y;
       if (st.otroRol === 'nico') { s.img = nicoCompa(cuadro); s.alto = 0.62; } else { s.img = spriteDani(cuadro, { agachado: !!st.otro?.agachado }); s.alto = 0.92; }
       lista.push(s);
+      // (La primera vez que la cámara lo dibuja: quién es y para qué sirve verlo.)
+      if (!st.vistoCompa && (s.dibujado ?? -9) >= cuadroDibujado() - 1) {
+        st.vistoCompa = true;
+        escena.consejo?.(st.rol === 'dani' ? 'Ese es Nico, del otro lado del vidrio. Las compuertas de tu lado las abre él; las suyas, tú. Si él mira a Los Espectadores, no se mueven.' : 'Ese es Dani, del otro lado del vidrio. Las compuertas de tu lado las abre él; las suyas, tú. Desde acá puedes mirar a los que se le acercan: mirados, no se mueven.', 10);
+      }
     }
     const inq = st.rol === 'nico' ? st.otro?.inq : null;
     if (inq?.activo) { st.spriteInq.x = inq.x; st.spriteInq.y = inq.y; st.spriteInq.img = spriteInquilino(Math.floor(st.t * 4) % 4); lista.push(st.spriteInq); }
@@ -234,10 +317,37 @@ export function crearCoop(escena, codigo) {
     }
     return lista;
   };
+  // Qué le pasa al compañero, para el HUD: { texto, mal, aire (0 a 1, solo Nico bajo el agua) }.
+  st.estadoCompa = () => {
+    const N = nombreOtro.toUpperCase(), o = st.otro;
+    if (st.cerrada) return { texto: `${N} · LA SALA SE CERRÓ`, mal: true };
+    if (st.conexion === 'reconectando') return { texto: 'SIN CONEXIÓN · RECONECTANDO…', mal: true };
+    if (!st.presente) return { texto: `${N} · SE DESCONECTÓ (ESPERANDO…)`, mal: true };
+    if (!o) return { texto: `${N} · ENTRANDO…`, mal: false };
+    if (performance.now() - o.t > 4000) return { texto: `${N} · SIN SEÑAL…`, mal: true };
+    const aire = st.otroRol === 'nico' && typeof o.aire === 'number' ? o.aire : null;
+    const conAire = (texto, mal = false) => ({ texto, mal: mal || (aire != null && aire < 0.25), aire });
+    if (o.fase === 'atrapado' || o.fase === 'rebobinar') return conAire(`${N} · LO ATRAPARON · VUELVE ATRÁS`, true);
+    if (o.tapado) return conAire(`${N} · LA CAMA LO TAPÓ`, true);
+    if (o.fase === 'espera' || o.fase === 'intro' || o.fase === 'llegada') return conAire(`${N} · TODAVÍA NO EMPEZÓ`);
+    if (o.fase === 'pausa') return conAire(`${N} · EN PAUSA`);
+    if (o.fase === 'leyendo') return conAire(`${N} · LEYENDO`);
+    if (st.otroSalio || o.salio) return conAire(`${N} · LLEGÓ A LA SALIDA · TE ESPERA`);
+    if (o.perseguido) return conAire(`${N} · LO PERSIGUE EL INQUILINO`, true);
+    if (o.escondido) return conAire(`${N} · ESCONDIDO`);
+    if (o.esperaEn) return conAire(`${N} · ESPERA QUE LE ABRAS`);
+    return conAire(st.otroRol === 'nico' ? `${N} · BAJO EL AGUA` : `${N} · EN EL EDIFICIO`);
+  };
+  // Lo de este lado que va en el estado: el aire (Nico), si ya llegó a la salida y frente a qué compuerta espera.
+  st.extra = () => ({ aire: st.aire ? +(Math.max(0, st.aire.s) / AIRE).toFixed(2) : undefined, salio: st.salio || undefined, esperaEn: st.espera.id && st.espera.t >= 2 ? st.espera.id : undefined });
   st.enviar = (tipo, datos) => st.red.enviar(tipo, datos);
   st.cerrar = () => st.red.cerrar();
   // Lo que dice cada uno al empezar.
   setTimeout(() => escena.decir?.(st.rol === 'dani' ? 'Noche 11. Del otro lado del vidrio está Nico. Esta vez no voy a contar.' : 'Tengo que llegar a sesenta. Dani está contando.'), 2500);
+  // (Y qué hay que hacer, una vez, apenas se puede caminar: en la prueba nadie sabía para qué estaban las palancas.)
+  setTimeout(() => escena.consejo?.(st.rol === 'dani'
+    ? 'Busca palancas de tu lado: cada una abre una compuerta del lado de Nico. Las compuertas de tu lado las abre él. Arriba a la izquierda ves qué le pasa.'
+    : 'Tienes 60 segundos de aire: las burbujas te lo devuelven. Busca palancas de tu lado: cada una abre una compuerta del lado de Dani. Arriba a la izquierda ves qué le pasa.', 12), 6500);
   return st;
 }
 const j0 = (escena) => escena.jugador;
