@@ -49,3 +49,11 @@ revoke all on public.records from anon, authenticated;
 grant execute on function public.registrar_record(text, integer, text) to service_role;
 grant select on public.records_mejores to service_role;
 grant select, insert on public.records to service_role;
+
+-- (Si el proyecto se creó con «Enable RLS on new tables automatically», Supabase agrega la función rls_auto_enable,
+-- que solo corre como disparador: igual se le saca el permiso público, como pide el control de seguridad.)
+do $$ begin
+  if exists (select 1 from pg_proc p join pg_namespace n on n.oid = p.pronamespace where n.nspname = 'public' and p.proname = 'rls_auto_enable') then
+    revoke execute on function public.rls_auto_enable() from public, anon, authenticated;
+  end if;
+end $$;
