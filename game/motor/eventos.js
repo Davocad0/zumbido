@@ -184,6 +184,7 @@ export function crearEventos(e) {
   // · nunca usa los sonidos de El Inquilino: en el Lado A el sonido no miente sobre él (un chico corre liviano; él
   //   arrastra los pies mojado y tararea);
   // · lo que suena fuerte se ve (la puerta tiembla), y cada cosa pasa una sola vez por nivel (si se repite, se gasta).
+  let risaReloj = 25;
   const tranquilo = () => e.fase === 'juego' && !e.enRefugio && !e.uiAbierta && !(e.inq?.activo && e.inq.estado === 'persigue');
   const enRefugioCelda = (x, y) => (nivel.refugios || []).some((r) => x >= r.x && x < r.x + r.ancho && y >= r.y && y < r.y + r.alto);
   const libreCelda = (x, y) => { const c = celdaDe(nivel, x, y); return c !== undefined && !SOLIDA.has(c); };
@@ -1160,6 +1161,9 @@ export function crearEventos(e) {
     if (e.loops && valsAplicado === etapa && vel !== velVals) { velVals = vel; for (const l of e.loops) l.h.velocidad(vel, 0.4); }
     // Lo que va pasando (la primera vez, Dani lo dice).
     if (k >= 0.3) primera('rojo');
+    // (2026-11-21) Del espejo salen susurros, una vez por cada vez que te quedas mirando.
+    if (k >= 0.25 && !mirada.susurra && f) { mirada.susurra = true; e.tocaEn('susurros', f.hx ?? f.x + 0.5, f.hy ?? f.y + 0.5, { bus: 'inquilino', vol: 1.4, dur: 3.6, fadeOut: 0.8 }); }
+    if (k < 0.1) mirada.susurra = false;
     if (k >= 0.45 && !mirada.pose) { mirada.pose = hacia(j); if (mirada.pose) primera(mirada.pose === 'atras' ? 'atras' : 'senala', 0.2); }
     if (k < 0.4) mirada.pose = null;
     if (k >= 0.6 && !mirada.fijo) { mirada.fijo = { x: j.x, y: j.y }; primera('fijo', 0.1); e.toca('golpe-piano', { bus: 'inquilino', vol: 0.35, dur: 1.6, fadeOut: 1 }); }
@@ -1473,6 +1477,13 @@ export function crearEventos(e) {
         sombras(dt);
       }
       if (espejos) {
+        // Una risa lejos, cada tanto, de algún lado de la casa (no es la de Nico). Solo si está tranquilo.
+        risaReloj -= dt;
+        if (risaReloj <= 0 && tranquilo()) {
+          risaReloj = 40 + Math.random() * 35;
+          const j = e.jugador, a = Math.random() * Math.PI * 2, d = 6 + Math.random() * 3;
+          e.tocaEn('risa-lejos', j.x + Math.cos(a) * d, j.y + Math.sin(a) * d, { bus: 'ambiente', vol: 1.2, ecoMezcla: 0.5, ecoSeg: 2.4 });
+        }
         // El vals de la feria, cada vez más lento y gastado (cuando ya cargó el audio).
         if (e.loops && valsAplicado !== etapa) {
           valsAplicado = etapa;

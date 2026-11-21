@@ -708,10 +708,12 @@ export class Nivel extends Scene {
     if (!lista.length || this.fase !== 'juego') return;
     this.grito = { capas: lista, t: 0, dur, rojo, corte: cabezaDe(lista[0]) };
     if (sonido) {
-      this.toca('golpe-piano', { bus: 'objetos', vol: 2.4, rate: 0.62 });
-      this.toca('casillero-golpe', { bus: 'objetos', vol: 2.2, rate: 0.55, dur: 0.5, fadeOut: 0.1 });
-      this.toca('inquilino-tararea', { bus: 'objetos', vol: 2, rate: 1.9, inicio: 0.2, dur: 0.6, fadeOut: 0.15 });
-      if (this.sonidos?.grito) this.toca('grito', { bus: 'objetos', vol: 1.6, dur: dur + 0.4, fadeOut: 0.2 });
+      // (El golpe del susto, uno y otro de los dos que eligió el usuario, encima del piano y el casillero.)
+      this.gritos = (this.gritos ?? 0) + 1;
+      this.toca(this.gritos % 2 ? 'golpe-susto' : 'golpe-susto-2', { bus: 'objetos', vol: 1.9, dur: Math.max(1.2, dur + 0.8), fadeOut: 0.3 });
+      this.toca('golpe-piano', { bus: 'objetos', vol: 1.6, rate: 0.62 });
+      this.toca('casillero-golpe', { bus: 'objetos', vol: 1.8, rate: 0.55, dur: 0.5, fadeOut: 0.1 });
+      this.toca('inquilino-tararea', { bus: 'objetos', vol: 1.6, rate: 1.9, inicio: 0.2, dur: 0.6, fadeOut: 0.15 });
     }
     this.estimulo('verAlInquilino', 7);
     this.interferir = Math.max(this.interferir, dur);
@@ -931,8 +933,20 @@ export class Nivel extends Scene {
   // (Un temporizador del navegador, no del juego: corre aunque la escena esté quieta.)
   despuesReal(ms, fn) { setTimeout(fn, ms); }
 
+  // El corazón de Dani (2026-11-21): con el que persigue cerca (a menos de 6 casillas) y sin verlo, late; más fuerte
+  // cuanto más cerca. Si lo ves, ya no hace falta: se oye todo lo demás.
+  pasoLatido(dt) {
+    const inq = this.inq, j = this.jugador;
+    this.tLatido = Math.max(0, (this.tLatido ?? 0) - dt);
+    if (!inq?.activo || this.tLatido > 0 || !this.sonidos?.latido) return;
+    const d = Math.hypot(inq.x - j.x, inq.y - j.y);
+    if (d > 6 || this.ve(inq.x, inq.y)) return;
+    this.tLatido = 3.4;
+    this.toca('latido', { bus: 'cuerpo', vol: 0.5 + (1 - d / 6) * 1.1 });
+  }
   pasoJuego(dt) {
     const j = this.jugador;
+    this.pasoLatido(dt);
     this.segundos += dt;
     if (this.coop && this.coop.pasoAire(dt, j, !!this.uiAbierta) === 'ahogado') this.ahogarse();
     this.pasoPuntos(dt);

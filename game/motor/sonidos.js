@@ -106,7 +106,9 @@ export const SINTETICOS = new Set(['golpe-seco', 'raspar', 'respirador', 'obtura
 const CAMA = ['cama-cruje', 'rueda-cruje', 'cama-sabanas', 'monitor-cardiaco', 'hospital', 'amanecer', 'luces-encienden', 'golpe-piano', 'inhalacion', 'dron-tension'];
 
 // Los screamers y el susto de la llave (2026-11-21): el golpe, la respiración a la espalda y el apagón.
-const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino-respira', 'respiracion-asustada', 'luces-apagan', 'luces-encienden', 'luces-parpadeo', 'inhalacion'];
+const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino-respira', 'respiracion-asustada', 'luces-apagan', 'luces-encienden', 'luces-parpadeo', 'inhalacion', 'golpe-susto', 'golpe-susto-2', 'latido'];
+// La Casa de Espejos (2026-11-21, elegidos por el usuario): los susurros del espejo y la risa lejos.
+const ESPEJOS_FERIA = ['susurros', 'risa-lejos'];
 // La Culpa (Las Piscinas, 2026-11-21): se arrastra mojada, gorgotea y llora ahogada; sale del agua con el apagón.
 export const SONIDOS_CULPA = { 'inquilino-pantuflas': 'pasos-mojados', 'inquilino-arrastre': 'gatear-madera', 'inquilino-tararea': 'llanto-ahogado' };
 const CULPA = ['pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
@@ -122,6 +124,7 @@ export function sonidosDelNivel(nivel) {
     ...(nivel.cama ? CAMA : []),
     ...((nivel.eventos || []).some((ev) => ev.tipo === 'silueta') || nivel.ambiente?.paredes === 'espejo' || nivel.entidad ? GRITO : []),
     ...(nivel.entidad?.nombre === 'La Culpa' ? CULPA : []),
+    ...(nivel.ambiente?.paredes === 'espejo' ? ESPEJOS_FERIA : []),
     // (Los sustos por zona: el sonido que pide cada uno, si es una grabación.)
     ...(nivel.eventos || []).filter((ev) => ev.tipo === 'susto_sonoro' && ev.sonido && !SINTETICOS.has(ev.sonido)).map((ev) => ev.sonido),
     // Lado B: el micrófono de la cámara (estática), la cámara que falla y los sonidos sin fuente de ese nivel.
