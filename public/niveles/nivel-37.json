@@ -2,7 +2,7 @@
   "id": "nivel-37",
   "numero": "37",
   "nombre": "Las Piscinas",
-  "descripcion": "Azulejos blancos, agua tibia hasta los tobillos y luz de mediodía sin sol. Nada te persigue, y por eso cuesta tanto relajarse.",
+  "descripcion": "Azulejos blancos, agua tibia hasta los tobillos y luz de mediodía sin sol. Nada te persigue... hasta que tomas la primera llave y se apaga todo.",
   "tension": 25,
   "semilla": 2034,
   "ancho": 23,
@@ -489,16 +489,25 @@
         "x": 13,
         "y": 9
       }
+    },
+    {
+      "tipo": "apagon_piscinas",
+      "descripcion": "Con la primera llave se apagan todas las luces de golpe (quedan las de emergencia, rojas), sube el agua oscura y sale La Culpa de la piscina: te persigue hasta la salida, con las mismas reglas que El Inquilino.",
+      "x": null,
+      "y": null
     }
   ],
-  "entidad": null,
+  "entidad": {
+    "nombre": "La Culpa",
+    "modo": "aparece_tras_primera_llave"
+  },
   "ambiente": {
     "paredes": "azulejo_blanco",
     "piso": "azulejo_mojado",
     "techo": "azulejo_blanco",
-    "colorNiebla": "#d9eef0",
-    "distanciaVision": 12,
-    "luz": 1
+    "colorNiebla": "#a4b8b3",
+    "distanciaVision": 11,
+    "luz": 0.82
   },
   "audio": {
     "ambiente": "piscina_con_eco",

@@ -19,3 +19,5 @@ services:
         value: "24"
       - key: NEXT_TELEMETRY_DISABLED
         value: "1"
+      # (Los récords en línea, 2026-11-21: SUPABASE_URL y SUPABASE_CLAVE se agregan a mano en el panel de Render,
+      # Environment. No van acá: la clave secreta nunca va en el código. Sin ellas, records.json como antes.)

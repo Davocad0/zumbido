@@ -472,10 +472,26 @@ export const PINTORES = {
     }
     ctx.fillStyle = 'rgba(156, 205, 214, 0.25)'; ctx.fillRect(4, 0, 56, 6);
   },
+  // (2026-11-21, «más sangriento»: además de la mano y la mancha, una mano grande arrastrada hacia abajo, chorros que
+  // bajan hasta el piso y salpicaduras.)
   sangreEspejo(ctx, azar) {
     PINTORES.grietasEspejo(ctx, azar);
     manoChica(ctx, 12 + azar() * 14, 20 + azar() * 14, 'rgba(120, 12, 8, 0.9)');
     manchaDeSangre(ctx, azar, 36 + azar() * 12, 18 + azar() * 16);
+    // La mano grande que se arrastró: cuatro dedos que bajan.
+    const mx = 30 + Math.floor(azar() * 18), my = 8 + Math.floor(azar() * 8);
+    ctx.fillStyle = 'rgba(104, 8, 6, 0.85)';
+    ctx.fillRect(mx - 1, my, 11, 8);
+    for (let d = 0; d < 4; d++) { const largo = 16 + Math.floor(azar() * 22); ctx.fillRect(mx + d * 3, my + 7, 2, largo); ctx.fillRect(mx + d * 3 - (azar() < 0.4 ? 1 : 0), my + 7 + largo, 3, 2); }
+    // Chorros que bajan hasta abajo.
+    for (let i = 0; i < 7; i++) {
+      const x = 4 + Math.floor(azar() * 56), y0 = Math.floor(azar() * 30), largo = 20 + Math.floor(azar() * (60 - y0));
+      ctx.fillStyle = `rgba(${110 + Math.floor(azar() * 40)}, 10, 8, ${0.65 + azar() * 0.3})`;
+      ctx.fillRect(x, y0, 1 + (azar() < 0.3 ? 1 : 0), Math.min(64 - y0, largo));
+      ctx.fillRect(x - 1, Math.min(62, y0 + largo), 3, 2);
+    }
+    // Salpicaduras.
+    for (let i = 0; i < 26; i++) { ctx.fillStyle = `rgba(130, 14, 10, ${0.5 + azar() * 0.45})`; ctx.fillRect(Math.floor(azar() * 64), Math.floor(azar() * 48), 1 + Math.floor(azar() * 2), 1 + Math.floor(azar() * 2)); }
   },
   // Manos chiquitas apoyadas del otro lado del espejo, a la altura de un nene de cinco años: Nico perdido en la
   // mini laberinto de espejos de PlayLand, golpeando para que lo encuentren. Empañadas, como si respirara contra el vidrio.

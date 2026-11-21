@@ -14,7 +14,7 @@
 //   se pone rojo, tu reflejo te señala el camino… y deja de copiarte.
 import { SOLIDA, PUERTA, celdaDe, buscar } from './reglas';
 import { lineaDeVista } from './inquilino';
-import { inquilino, celularLlamando, huellaAjena, nicoReflejo, sombraNino, intercomunicador, prop, ninoConGlobo, bebeEnElAgua } from './sprites';
+import { inquilino, caraInquilino, celularLlamando, huellaAjena, nicoReflejo, sombraNino, intercomunicador, prop, ninoConGlobo, bebeEnElAgua } from './sprites';
 import { crearLosQueMiran, pasoLosQueMiran, reiniciarLosQueMiran, masCercana } from './losQueMiran';
 import { espectadores, luzEspectadores, poseSegunDistancia } from './figuraEspectadores';
 import { crearContador, pasoContador, reiniciarContador, enPalabras, teEstaGrabando } from './contador';
@@ -56,10 +56,12 @@ const PALABRAS = { '¥': 'MIRAME', '¢': 'NICO', '±': 'DANI' };
 // (más lento, gastado y apagado); cuántos segundos mirando fijo un espejo hasta que El Inquilino te alcanza en el
 // reflejo (trance); cuántas casillas por segundo se te acerca por detrás en los reflejos (sigue: nunca a menos de
 // CERCA por sí solo) y cada cuánto hay un susto (segundos, entre y entre).
+// (2026-11-21, «no es lo suficientemente terrorífico; nadie ve tanto tiempo el espejo»: el trance pasó de 12/9/7 s a
+// 7/6/5; los sustos salen casi el doble de seguido, también antes de la primera llave; y hay más sangre.)
 export const ESPEJOS = [
-  { grietas: 0, agua: 0, sangre: 0, vals: 1, cinta: 0, frec: 20000, trance: 12, sigue: 0, sustos: null },
-  { grietas: 0.3, agua: 0.22, sangre: 0, vals: 0.93, cinta: 0.45, frec: 6000, trance: 9, sigue: 0.035, sustos: [20, 32] },
-  { grietas: 0.34, agua: 0.2, sangre: 0.34, vals: 0.84, cinta: 1, frec: 3200, trance: 7, sigue: 0.06, sustos: [13, 21] },
+  { grietas: 0.08, agua: 0, sangre: 0.06, vals: 1, cinta: 0, frec: 20000, trance: 7, sigue: 0, sustos: [14, 22] },
+  { grietas: 0.3, agua: 0.2, sangre: 0.28, vals: 0.93, cinta: 0.45, frec: 6000, trance: 6, sigue: 0.035, sustos: [9, 15] },
+  { grietas: 0.36, agua: 0.16, sangre: 0.6, vals: 0.84, cinta: 1, frec: 3200, trance: 5, sigue: 0.06, sustos: [6, 11] },
 ];
 const CERCA = 2.2, LEJOS_ESPEJO = 7;
 const PIENSA_101 = [null, 'Aquí lo perdí la primera vez. Diez minutos.', null];
@@ -105,9 +107,66 @@ export function crearEventos(e) {
     if (vioAlInquilino) return;
     vioAlInquilino = true;
     e.toca('inhalacion', { bus: 'cuerpo', vol: 0.9 });
-    e.decir(PERSONAJE.frases.primeraVezQueLoVe);
+    // (En Las Piscinas no es él: es La Culpa.)
+    e.decir(nivel.entidad?.nombre === 'La Culpa' ? 'Eso salió del agua. Tiene mi celular en la cara.' : PERSONAJE.frases.primeraVezQueLoVe);
   };
   const sacar = (s) => { const i = extra.indexOf(s); if (i >= 0) extra.splice(i, 1); };
+
+  // El susto de la llave (2026-11-21). Al tomarla: un apagón de un segundo y silencio. Cuando vuelve la luz, El Inquilino
+  // está a dos o tres pasos detrás de Dani, iluminado, y se oye su respiración a la espalda. Si Dani se da vuelta y lo
+  // ve: el screamer (la cara encima de todo, con el golpe) y desaparece en otro apagón. Si no se da vuelta, a los 6 s
+  // tararea pegado al oído y se va. No te atrapa: es un susto, no una persecución (el perseguidor no hace trampa).
+  const libreEn = (x, y) => { const c = celdaDe(nivel, Math.floor(x), Math.floor(y)); return c !== undefined && !SOLIDA.has(c); };
+  function sustoALaEspalda(ev) {
+    const j = e.jugador, atras = j.ang + Math.PI;
+    let pos = null;
+    for (const d of [2.4, 3, 2, 3.6]) for (const da of [0, 0.3, -0.3, 0.6, -0.6]) {
+      if (pos) break;
+      const x = j.x + Math.cos(atras + da) * d, y = j.y + Math.sin(atras + da) * d;
+      if (libreEn(x, y) && lineaDeVista(nivel, e.estado, j.x, j.y, x, y)) pos = { x, y };
+    }
+    pos ??= { x: ev.objetivo.x + 0.5, y: ev.objetivo.y + 0.5 };
+    const s = { tipo: 'silueta', x: pos.x, y: pos.y, alto: 0.98, img: inquilino(0, true), luz: 2.2 };
+    const brillo = { tipo: 'silueta', x: pos.x, y: pos.y, alto: 0.98, img: caraInquilino(0), brilla: true, luz: 2 };
+    let t = 0, visto = false, fuera = false;
+    // El apagón: todo se corta.
+    e.toca('luces-apagan', { bus: 'ambiente', vol: 1.3 });
+    e.parpadear(1.2);
+    e.estimulo('zumbidoSeCorta', 4);
+    e.apagon?.(1.1);
+    return (dt) => {
+      t += dt;
+      if (fuera) return false;
+      // Vuelve la luz: ya está ahí.
+      if (t >= 1.1 && !extra.includes(s)) {
+        extra.push(s, brillo);
+        e.toca('luces-encienden', { bus: 'ambiente', vol: 0.9 });
+        e.tocaEn('inquilino-respira', s.x, s.y, { bus: 'inquilino', vol: 2.2, dur: 3.5, fadeOut: 0.6 });
+        e.despues(1.4, () => { if (!visto && !fuera) e.decir('Hay alguien detrás de mí.'); });
+      }
+      if (t < 1.1) return true;
+      // Se dio vuelta: la cara encima de todo, el golpe, y se va con otro apagón.
+      if (!visto && e.ve(s.x, s.y)) {
+        visto = true;
+        primeraVezQueLoVe();
+        e.screamer?.([inquilino(0, true), caraInquilino(0)], { dur: 0.65 });
+        e.despues(0.6, () => { fuera = true; sacar(s); sacar(brillo); e.parpadear(0.9); e.toca('luces-parpadeo', { bus: 'ambiente', vol: 1 }); });
+        e.despues(2.2, () => e.toca('respiracion-asustada', { bus: 'cuerpo', vol: 0.9, dur: 3, fadeOut: 0.8 }));
+        return true;
+      }
+      // No se dio vuelta: tararea pegado al oído y se va.
+      if (!visto && t > 7.2) {
+        fuera = true;
+        e.tocaEn('inquilino-tararea', j.x + Math.cos(atras) * 0.4, j.y + Math.sin(atras) * 0.4, { bus: 'inquilino', vol: 2.2, dur: 1.6, fadeOut: 0.4 });
+        e.parpadear(1);
+        e.toca('luces-parpadeo', { bus: 'ambiente', vol: 1 });
+        sacar(s); sacar(brillo);
+        e.despues(1.8, () => e.decir('Estaba ahí. Pegado a mí.'));
+        return false;
+      }
+      return true;
+    };
+  }
 
   // El celular que vibra en el Nivel 1 ya está tirado en el piso desde el principio (reemplaza al teléfono de utilería).
   const celulares = new Map();
@@ -517,6 +576,9 @@ export function crearEventos(e) {
     // Las luces parpadean y El Inquilino está al fondo. Espera a que Dani lo vea; recién entonces se va.
     silueta(ev) {
       if (!ev.objetivo) return null;
+      // En la casilla de una llave (la del Nivel 0): el susto a la espalda. (Hasta el 2026-11-21 aparecía al fondo del
+      // pasillo, a 8 casillas, en la penumbra: «apenas se nota y no da miedo».)
+      if ((nivel.llaves || []).some((l) => l.x === ev.x && l.y === ev.y)) return sustoALaEspalda(ev);
       const s = { tipo: 'silueta', x: ev.objetivo.x + 0.5, y: ev.objetivo.y + 0.5, alto: 0.92, img: inquilino(0) };
       extra.push(s);
       e.parpadear(0.9);
@@ -1103,6 +1165,9 @@ export function crearEventos(e) {
     if (k >= 0.6 && !mirada.fijo) { mirada.fijo = { x: j.x, y: j.y }; primera('fijo', 0.1); e.toca('golpe-piano', { bus: 'inquilino', vol: 0.35, dur: 1.6, fadeOut: 1 }); }
     if (k < 0.45) mirada.fijo = null;
     if (k >= 0.7 && !mirada.vino) { mirada.vino = true; e.toca('inhalacion', { bus: 'cuerpo', vol: 0.8 }); e.estimulo('verAlInquilino', 4); }
+    // (2026-11-21) Último aviso: su cara se te tira encima desde el espejo. Si después sigues mirando, te alcanza.
+    if (k >= 0.82 && !mirada.grito) { mirada.grito = true; e.screamer?.([inquilino(1, true), caraInquilino(1)], { dur: 0.7, rojo: e.sinSangre ? 0.15 : 0.5 }); }
+    if (k < 0.5) mirada.grito = false;
     if (mirada.vino && k < 0.6) {
       mirada.vino = false;
       e.toca('respiracion-asustada', { bus: 'cuerpo', vol: 0.7, dur: 2, fadeOut: 0.6 });
@@ -1177,9 +1242,9 @@ export function crearEventos(e) {
     if (!s.cloro && s.reloj > 6 && f && f.d < 2.6 && e.mundo.mapa[f.y][f.x] === '÷') { s.cloro = true; e.despues(0.6, () => e.decir('Huele a cloro.')); }
     if (etapa >= 2 && !s.quedate && salida && f && Math.hypot(j.x - salida[0] - 0.5, j.y - salida[1] - 0.5) < 3.4) { quedate(); return; }
     if (!f || f.d > 2.4 || s.reloj < s.proximo || s.frenteT < 0.5) return;
-    const tipo = s.cuantos === 0 ? 'manitos' : ['golpe', 'vacio', 'manitos'][(s.cuantos - 1) % 3];
-    if (tipo === 'golpe' && f.d > 1.4) return; // el golpe, solo en un espejo cercano (más lejos, la figura sale chica)
-    if (tipo === 'golpe' ? golpe(f, celda) : tipo === 'vacio' ? vacio(f, celda) : manitos(f)) {
+    const tipo = s.cuantos === 0 ? 'manitos' : ['golpe', 'grito', 'vacio', 'manitos', 'grito'][(s.cuantos - 1) % 5];
+    if ((tipo === 'golpe' || tipo === 'grito') && f.d > 1.6) return; // solo en un espejo cercano (más lejos, la figura sale chica)
+    if (tipo === 'golpe' ? golpe(f, celda) : tipo === 'grito' ? grito(f, celda) : tipo === 'vacio' ? vacio(f, celda) : manitos(f)) {
       s.cuantos++;
       s.reloj = 0;
       s.proximo = q.sustos[0] + Math.random() * (q.sustos[1] - q.sustos[0]);
@@ -1232,6 +1297,19 @@ export function crearEventos(e) {
     e.toca('golpe-piano', { bus: 'inquilino', vol: 0.95, dur: 2.6, fadeOut: 1.4 });
     e.toca('inhalacion', { bus: 'cuerpo', vol: 0.9 });
     e.estimulo('verAlInquilino', 5);
+    return true;
+  }
+  // El grito (2026-11-21): en el reflejo, El Inquilino aparece pegado a la espalda de Dani, el espejo se mancha de sangre
+  // y, un instante después, su cara se te viene encima (el screamer). Al darse vuelta no hay nadie.
+  function grito(f, celda) {
+    const p = detrasEnElEspejo(nivel, e.estado, f, 0.5, 0.3);
+    if (!p) return false;
+    const k = f.y * e.mundo.ancho + f.x;
+    temporales.set(k, '¶'); quebrar(etapa); e.despues(7, () => { temporales.delete(k); quebrar(etapa); });
+    mostrar({ tipo: 'reflejo', ...p, alto: 0.95, img: inquilino(2, true), soloReflejo: true, enEspejo: celda, brilla: true }, 0.5);
+    e.despues(0.28, () => e.screamer?.([inquilino(2, true), caraInquilino(2)], { dur: 0.6, rojo: e.sinSangre ? 0.15 : 0.5 }));
+    e.despues(1.2, () => e.toca('respiracion-asustada', { bus: 'cuerpo', vol: 0.85, dur: 2.4, fadeOut: 0.6 }));
+    if (!sustos.grito) { sustos.grito = true; e.despues(2.4, () => e.decir('Estaba pegado a mí. En el espejo... sangraba.')); }
     return true;
   }
   // El vacío: en el espejo, Dani no está. Donde debería estar su reflejo está El Inquilino, quieto, mirándolo: en eso
@@ -1296,9 +1374,54 @@ export function crearEventos(e) {
     });
   }
 
+  // El apagón de Las Piscinas (2026-11-21). Antes de la primera llave: blanco y tranquilo. Con la primera llave se
+  // apaga todo de golpe, por partes; quedan las luces de emergencia (todo rojo y oscuro), sube un poco de agua negra y
+  // sale La Culpa de la piscina (la despierta la llave, como a El Inquilino en el Nivel 1: misma IA, mismas reglas).
+  // Al rebobinar a antes de la llave, la luz vuelve.
+  const apagonPiscinas = (nivel.eventos || []).some((ev) => ev.tipo === 'apagon_piscinas');
+  const piscinas = { antes: null, hecho: false, h: 0, objetivo: 0 };
+  const OSCURO_PISCINAS = { luz: 0.26, niebla: [8, 16, 14], vision: 6, tinte: [1.3, 0.74, 0.7], agua: 0.16 };
+  function luzPiscinas(apagada) {
+    const m = e.mundo;
+    if (!m) return;
+    piscinas.antes ??= { niebla: m.niebla, tinte: m.tinte, agua: m.agua };
+    const a = piscinas.antes, luzSola = nivel.ambiente?.luz ?? 1, vistaSola = nivel.ambiente?.distanciaVision || 10;
+    // (La luz y la vista las recalcula la escena en cada cuadro: se bajan con sus multiplicadores, como en el 95.)
+    e.oscurecer = apagada ? OSCURO_PISCINAS.luz / luzSola : 1;
+    e.acercarNiebla = apagada ? OSCURO_PISCINAS.vision / vistaSola : 1;
+    if (apagada) Object.assign(m, { niebla: OSCURO_PISCINAS.niebla, tinte: OSCURO_PISCINAS.tinte });
+    else Object.assign(m, { niebla: a.niebla, tinte: a.tinte, agua: a.agua });
+    piscinas.objetivo = apagada ? OSCURO_PISCINAS.agua : 0;
+    if (!apagada) { piscinas.h = 0; e.agua = 0; }
+  }
+  function apagarPiscinas() {
+    const j = e.jugador;
+    piscinas.hecho = true;
+    // Tres golpes de luces que se apagan, cada uno más cerca, y en el medio se hace negro.
+    [[8, 0], [4, 0.45], [1.5, 0.9]].forEach(([d, t], k) => e.despues(t, () => {
+      const a = j.ang + (k - 1) * 1.6;
+      e.tocaEn('luces-apagan', j.x + Math.cos(a) * d, j.y + Math.sin(a) * d, { bus: 'ambiente', vol: 1.4 + k * 0.4 });
+      e.parpadear(0.5);
+    }));
+    e.despues(0.9, () => { e.apagon?.(1.4); luzPiscinas(true); for (const l of e.loops || []) l.h.volumen(l.v * 0.2, 1.5); e.estimulo('zumbidoSeCorta', 6); });
+    // En la piscina grande, lejos: algo enorme sale del agua.
+    const lejos = [...(nivel.mapa || [])].flatMap((f, y) => [...f].map((c, x) => [c, x, y])).filter(([c]) => c === '~')
+      .sort((p, q) => Math.hypot(q[1] - j.x, q[2] - j.y) - Math.hypot(p[1] - j.x, p[2] - j.y))[0];
+    const [, px, py] = lejos || [null, j.x + 6, j.y];
+    e.despues(2.4, () => {
+      e.tocaEn('chapuzon', px + 0.5, py + 0.5, { bus: 'objetos', vol: 2.4, rate: 0.55, ecoMezcla: 0.6, ecoSeg: 3 });
+      e.tocaEn('agua-inunda', px + 0.5, py + 0.5, { bus: 'objetos', vol: 1.6, dur: 8, fadeOut: 3 });
+    });
+    e.despues(3.2, () => e.toca('dron-tension', { bus: 'musica', vol: 0.9, dur: 6, fadeIn: 1, fadeOut: 3 }));
+    e.despues(4.2, () => { if (e.fase === 'juego') e.decir('Se apagó todo. Algo salió del agua.'); });
+    // (Toda mecánica se explica en el juego: qué hacer ahora.)
+    e.despues(7, () => e.consejo?.(`Algo te busca en lo oscuro. Si te ve, corre. Escóndete en un casillero (${e.tecla?.('usar') ?? 'E'}) o vuelve al vestuario, donde está la tele: ahí no entra.`, 11));
+  }
+
   function aplicar(n) {
     if (corrupcion) corromper(Math.min(CORRUPCION.length - 1, n));
     if (espejos) quebrar(Math.min(ESPEJOS.length - 1, n));
+    if (apagonPiscinas) luzPiscinas(n >= 1);
   }
 
   return {
@@ -1316,6 +1439,14 @@ export function crearEventos(e) {
     },
     paso(dt) {
       for (let k = enCurso.length - 1; k >= 0; k--) if (!enCurso[k](dt)) enCurso.splice(k, 1);
+      // El agua negra de Las Piscinas, que sube despacio después del apagón.
+      if (apagonPiscinas && piscinas.h !== piscinas.objetivo && piscinas.objetivo > 0) {
+        piscinas.h = Math.min(piscinas.objetivo, piscinas.h + dt * 0.02);
+        e.agua = piscinas.h;
+        const m = e.mundo;
+        if (!m.agua || !m.agua.negra) m.agua = { h: 0, marca: 0, tex: crearTextura('superficie:#1f1d1b').px, t: 0, onda: 0, negra: true };
+        m.agua.h = piscinas.h; m.agua.marca = piscinas.h + 0.05;
+      }
       if (miran) pasoMiran(dt);
       if (cont) pasoCont(dt);
       if (corrupcion) {
@@ -1361,7 +1492,8 @@ export function crearEventos(e) {
     aplicar,
     // Lo que pasa al recoger una llave: el nivel cambia y Dani lo nota.
     llave(n) {
-      aplicar(n);
+      if (apagonPiscinas && n >= 1 && !piscinas.hecho) { apagarPiscinas(); if (corrupcion) corromper(Math.min(CORRUPCION.length - 1, n)); }
+      else aplicar(n);
       if (corrupcion) {
         const k = Math.min(CORRUPCION.length - 1, n);
         e.interferencia(k >= 3 ? 1.3 : 0.9);

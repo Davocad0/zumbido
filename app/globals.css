@@ -309,3 +309,40 @@ button { font: inherit; }
 @keyframes parpadeo-aire { 50% { opacity: 0.45; } }
 /* Cooperativo: quién eres, en la tarjeta del principio. */
 .tarjeta .rol-coop { max-width: 34em; text-align: left; border-left: 2px solid var(--mostaza); padding-left: 10px; }
+/* El despertar del Nivel 0: cómo saltarlo (abajo a la derecha, discreto). */
+.hud .saltar-intro { position: absolute; right: 18px; bottom: 18px; font-family: var(--vt, monospace); font-size: 1.1rem; letter-spacing: 0.08em; color: rgba(243, 236, 210, 0.55); }
+/* El cartel del final: el nickname y la tabla del nivel. */
+.tarjeta .nick { display: grid; gap: 6px; justify-items: center; }
+.tarjeta .nick > div { display: flex; gap: 8px; flex-wrap: wrap; justify-content: center; }
+.tarjeta .nick input { font: inherit; font-size: 1.2rem; padding: 0.25em 0.5em; width: 12em; border: 2px solid #0b0a06; background: #fffdf2; color: #0b0a06; }
+.tarjeta .tabla-nivel { list-style: decimal; margin: 4px auto; padding-left: 1.6em; min-width: 16em; text-align: left; }
+.tarjeta .tabla-nivel li { display: list-item; }
+.tarjeta .tabla-nivel li span { display: inline-block; min-width: 9em; }
+.tarjeta .tabla-nivel li b { font-size: 1.2rem; font-weight: normal; }
+.tarjeta .tabla-nivel li.tuyo { color: #b3261e; }
+.enlace-chico { background: none; border: none; color: #5f655a; text-decoration: underline; cursor: pointer; font: inherit; font-size: 0.85rem; }
+.records-niveles { display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 22em), 1fr)); gap: 18px; }
+.records-niveles h2 { font-size: 1.1rem; margin: 0 0 6px; }
+.tabla tr.tuyo td { color: #e2332b; }
+/* Los pies de las ventanas («E · Cerrar») también se tocan, para el celular. */
+.ventana button.pie { display: block; margin: 0 auto; background: none; border: none; cursor: pointer; padding: 6px 12px; }
+/* ---------- El celular (components/Tactil.jsx) ---------- */
+.tactil { position: absolute; inset: 0; z-index: 5; touch-action: none; user-select: none; -webkit-user-select: none; -webkit-touch-callout: none; }
+.tactil .zona-joystick { position: absolute; left: 0; top: 18%; bottom: 0; width: 42%; touch-action: none; }
+.tactil .zona-mirar { position: absolute; right: 0; top: 18%; bottom: 0; width: 58%; touch-action: none; }
+.tactil .joystick { position: fixed; width: 112px; height: 112px; margin: -56px 0 0 -56px; border-radius: 50%; border: 2px solid rgba(243, 236, 210, 0.35); background: rgba(0, 0, 0, 0.25); pointer-events: none; }
+.tactil .joystick.fantasma { left: 90px; top: auto; bottom: 34px; margin: 0; position: absolute; opacity: 0.45; }
+.tactil .joystick i { position: absolute; left: 50%; top: 50%; width: 48px; height: 48px; margin: -24px 0 0 -24px; border-radius: 50%; background: rgba(243, 236, 210, 0.55); }
+.tactil .joystick i.corre { background: rgba(217, 162, 26, 0.85); }
+.tactil .arriba-tactil { position: absolute; right: 10px; top: 52px; display: flex; gap: 8px; }
+.tactil .acciones-tactil { position: absolute; right: 14px; bottom: 16px; display: flex; flex-direction: column-reverse; align-items: flex-end; gap: 10px; pointer-events: none; }
+.boton-tactil { pointer-events: auto; font-family: var(--f-vt), monospace; font-size: 1.15rem; letter-spacing: 0.06em; color: var(--texto); background: rgba(0, 0, 0, 0.5); border: 2px solid rgba(243, 236, 210, 0.45); border-radius: 10px; padding: 10px 14px; min-width: 64px; min-height: 44px; touch-action: none; }
+.boton-tactil.cuadrado { min-width: 44px; padding: 8px; }
+.boton-tactil.principal { font-size: 1.4rem; padding: 16px 20px; border-color: var(--mostaza); color: var(--mostaza); max-width: 46vw; }
+.boton-tactil.activo { background: rgba(217, 162, 26, 0.35); border-color: var(--mostaza); }
+.arriba-tactil .boton-tactil { font-size: 0.95rem; padding: 6px 10px; min-height: 36px; }
+/* En el celular parado, se pide girarlo (el juego es de costado). */
+.gira-el-celular { display: none; }
+@media (hover: none) and (pointer: coarse) and (orientation: portrait) {
+  .gira-el-celular { display: flex; position: fixed; inset: 0; z-index: 50; align-items: center; justify-content: center; padding: 24px; text-align: center; background: #0b0a06; color: var(--texto); font-family: var(--f-vt), monospace; font-size: 1.6rem; }
+}

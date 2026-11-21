@@ -4,7 +4,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { EventBus } from '@/game/EventBus';
-import { minutos, completarNivel } from '@/lib/navegador';
+import { minutos, completarNivel, leerNick, guardarNick } from '@/lib/navegador';
 import { ACCIONES, controlesIniciales, teclasDe, etiqueta, nombreDe, asignar, codigoDe, etiquetaDeEvento } from '@/lib/controles';
 import { pantallaCompleta, enPantallaCompleta, hayBloqueoDeTeclas } from '@/lib/pantalla';
 import VideoCinta from './VideoCinta';
@@ -68,7 +68,7 @@ export function Nota({ dato, alCerrar, controles = INICIALES }) {
           <summary>Transcripción</summary>
           <p><Texto texto={(nota.impreso ? `${nota.impreso}\n` : '') + nota.texto} />{nota.respuesta && <i><Texto texto={nota.respuesta.texto} /></i>}</p>
         </details>
-        <div className="pie">{etiqueta(controles, 'usar')} · Cerrar</div>
+        <button type="button" className="pie" onClick={alCerrar}>{etiqueta(controles, 'usar')} · Cerrar</button>
       </div>
     </div>
   );
@@ -100,7 +100,7 @@ export function CintaSoloTexto({ dato, alCerrar, controles = INICIALES }) {
             </>
           )}
         </div>
-        <div className="pie">{lista ? `${etiqueta(controles, 'usar')} · Seguir` : `Grabando en: ${dato.cuarto}`}</div>
+        {lista ? <button type="button" className="pie" onClick={alCerrar}>{etiqueta(controles, 'usar')} · Seguir</button> : <div className="pie">Grabando en: {dato.cuarto}</div>}
       </div>
     </div>
   );
@@ -172,7 +172,7 @@ export function Mapa({ alCerrar, controles = INICIALES }) {
           <span><i className="muestra-refugio" /> refugio <b style={{ color: '#2f63d8' }}>▣</b> tele</span><span>▤ escondite</span>
           <span>Solo se dibuja lo que ya viste</span>
         </div>
-        <div className="pie">{etiqueta(controles, 'mapa')} · Cerrar</div>
+        <button type="button" className="pie" onClick={alCerrar}>{etiqueta(controles, 'mapa')} · Cerrar</button>
       </div>
     </div>
   );
@@ -207,7 +207,7 @@ export function Diario({ notas, cintas, alAbrirNota, alCerrar, controles = INICI
           </section>
         </div>
         <p className="nota-chica">Aquí están las de este nivel. Las de todos los niveles (y las cintas, para volver a verlas) quedan en el Archivo del menú principal.</p>
-        <div className="pie">{etiqueta(controles, 'diario')} · Cerrar</div>
+        <button type="button" className="pie" onClick={alCerrar}>{etiqueta(controles, 'diario')} · Cerrar</button>
       </div>
     </div>
   );
@@ -369,7 +369,7 @@ function Ajustes({ opciones, alCambiar, controles, alCambiarControles, alVolver 
 }
 
 // ---------- El cartel del principio (hace falta un clic para que el navegador deje sonar el audio) ----------
-export function Inicio({ nivel, continua, pausada = false, controles = INICIALES, pantalla = true }) {
+export function Inicio({ nivel, continua, pausada = false, controles = INICIALES, pantalla = true, tactil = false }) {
   const n = (accion) => etiqueta(controles, accion);
   return (
     <div className="ventana inicio espera">
@@ -386,8 +386,16 @@ export function Inicio({ nivel, continua, pausada = false, controles = INICIALES
             {' '}Arriba a la izquierda vas a ver siempre qué le pasa a tu compañero.
           </div>
         )}
-        <div className="boton principal parpadeo">Clic para empezar</div>
+        <div className="boton principal parpadeo">{tactil ? 'Toca para empezar' : 'Clic para empezar'}</div>
         <div className="nota-chica">Usa audífonos. Hay luces que parpadean (se puede reducir en la pausa).{pantalla ? ' Se juega en pantalla completa: para salir, mantén apretada Esc.' : ''}</div>
+        {tactil ? (
+          <div className="controles">
+            <b>Dedo izquierdo</b><span>caminar (empujado hasta el borde, corres)</span>
+            <b>Dedo derecho</b><span>arrastrar para mirar</span>
+            <b>Botones</b><span>aparecen cuando sirven: usar, esconderse, contener, linterna</span>
+            <b>❚❚</b><span>pausa, mapa y diario (arriba)</span>
+          </div>
+        ) : (
         <div className="controles">
           <b>{[n('adelante'), n('izquierda'), n('atras'), n('derecha')].join(' ')}</b><span>caminar</span>
           <b>Mouse · {n('girarIzquierda')} {n('girarDerecha')}</b><span>mirar</span>
@@ -399,6 +407,7 @@ export function Inicio({ nivel, continua, pausada = false, controles = INICIALES
           {nivel?.linterna && <><b>{n('linterna')}</b><span>linterna (gasta pila)</span></>}
           <b>Esc</b><span>pausa · ahí se cambian los controles</span>
         </div>
+        )}
       </div>
     </div>
   );
@@ -447,7 +456,7 @@ export function Compu({ dato, alCerrar, alQuedarse, controles = INICIALES }) {
           <canvas ref={ref} width={160} height={120} aria-label="Protector de pantalla: el laberinto, con un punto quieto y otro que parpadea junto a la salida" />
           <div className="chat">{escrito}</div>
         </div>
-        <div className="pie">{etiqueta(controles, 'usar')} · Levantarse</div>
+        <button type="button" className="pie" onClick={alCerrar}>{etiqueta(controles, 'usar')} · Levantarse</button>
       </div>
     </div>
   );
@@ -470,27 +479,78 @@ export function FinDelJuego({ final }) {
   );
 }
 
+// (2026-11-21: con nickname. Antes decía «¡récord!» cuando era el mejor tiempo de este navegador, aunque otro ya tuviera
+// uno mejor en línea. Ahora se separan: «tu mejor tiempo» y «récord de todos», con el puesto y la tabla del nivel.)
 export function Completado({ resultado, siguiente, coop = null }) {
-  const [mejor, setMejor] = useState(null);
+  const [propio, setPropio] = useState(false); // es tu mejor tiempo en este navegador
+  const [nick, setNick] = useState(null); // null = todavía no se leyó
+  const [escrito, setEscrito] = useState('');
+  const [envio, setEnvio] = useState(null); // { puesto, total, mejor } | { error }
+  const [tabla, setTabla] = useState([]);
+  const enviado = useRef(false);
   useEffect(() => {
-    // (El cooperativo no tiene récords.)
     if (coop) return;
-    const local = completarNivel(resultado.id, resultado.segundos);
-    setMejor(local);
-    fetch('/api/records', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nivel: resultado.id, segundos: resultado.segundos }) })
-      .then((r) => r.json()).then((r) => { if (typeof r.mejor === 'boolean') setMejor(r.mejor || local); }).catch(() => {});
+    setPropio(completarNivel(resultado.id, resultado.segundos));
+    setNick(leerNick());
   }, [resultado, coop]);
+  const cargarTabla = useCallback(() => {
+    fetch(`/api/records?nivel=${encodeURIComponent(resultado.id)}`).then((r) => r.json()).then((l) => setTabla(Array.isArray(l) ? l : [])).catch(() => {});
+  }, [resultado.id]);
+  const mandar = useCallback((nombre) => {
+    if (enviado.current) return;
+    enviado.current = true;
+    fetch('/api/records', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ nivel: resultado.id, segundos: resultado.segundos, nombre }) })
+      .then((r) => r.json())
+      .then((r) => {
+        if (r.ok) { setEnvio(r); cargarTabla(); return; }
+        enviado.current = false;
+        // (Un nickname que no pasa el filtro: se vuelve a pedir.)
+        if (r.error === 'Elige otro nickname.') { guardarNick(''); setNick(''); }
+        setEnvio({ error: r.error || 'No se pudo guardar.' });
+      })
+      .catch(() => { enviado.current = false; setEnvio({ error: 'Sin conexión: el tiempo quedó solo en este navegador.' }); });
+  }, [resultado, cargarTabla]);
+  // Con el nickname ya guardado, el tiempo se manda solo.
+  useEffect(() => { if (!coop && nick) mandar(nick); }, [nick, coop, mandar]);
+  const confirmar = (ev) => {
+    ev.preventDefault();
+    const n = escrito.replace(/[^\p{L}\p{N} ._-]/gu, '').replace(/\s+/g, ' ').trim().slice(0, 16);
+    if (!n) return;
+    guardarNick(n);
+    setEnvio(null);
+    setNick(n);
+  };
+  const tinta = { color: '#0b0a06', borderColor: '#0b0a06' };
   return (
     <div className="ventana inicio" style={{ background: 'rgba(246, 241, 220, 0.96)', color: '#0b0a06' }}>
       <div className="tarjeta">
         <div className="numero" style={{ color: '#5f655a' }}>{coop ? 'COOPERATIVO · SALIERON LOS DOS' : `NIVEL ${resultado.numero} · SUPERADO`}</div>
         <div className="nombre">{resultado.nombre}</div>
-        <div className="vt" style={{ fontSize: '1.6rem' }}>Tiempo {minutos(resultado.segundos)}{mejor ? ' · ¡récord!' : ''}</div>
+        <div className="vt" style={{ fontSize: '1.6rem' }}>
+          Tiempo {minutos(resultado.segundos)}
+          {envio?.mejor ? ' · ¡RÉCORD DE TODOS!' : propio ? ' · tu mejor tiempo' : ''}
+        </div>
         {resultado.final && <div className="vt" style={{ fontSize: '1.4rem', color: '#5f655a' }}>FINAL · {resultado.final.toUpperCase()} · Hay otros finales.</div>}
+        {!coop && nick === '' && (
+          <form className="nick" onSubmit={confirmar}>
+            <label htmlFor="nick">Tu nickname para la tabla de récords (lo ven todos):</label>
+            <div><input id="nick" value={escrito} onChange={(e) => setEscrito(e.target.value.slice(0, 16))} maxLength={16} autoComplete="nickname" autoFocus placeholder="Tu nombre" />
+              <button type="submit" className="boton" style={tinta} disabled={!escrito.trim()}>Guardar</button></div>
+          </form>
+        )}
+        {envio?.puesto && <div className="nota-chica">{nick}: puesto {envio.puesto} de {envio.total} en este nivel.</div>}
+        {envio?.error && <div className="nota-chica">{envio.error}</div>}
+        {tabla.length > 0 && (
+          <ol className="tabla-nivel">
+            {tabla.slice(0, 5).map((r, i) => <li key={i} className={r.nombre === nick && r.segundos === Math.round(resultado.segundos) ? 'tuyo' : ''}><span>{r.nombre}</span><b className="vt">{minutos(r.segundos)}</b></li>)}
+          </ol>
+        )}
+        {!coop && nick && <button type="button" className="enlace-chico" onClick={() => { guardarNick(''); setNick(''); setEscrito(''); }}>Cambiar de nickname (para la próxima)</button>}
         <nav style={{ display: 'flex', gap: 10, flexWrap: 'wrap', justifyContent: 'center' }}>
           {coop ? <button type="button" className="boton principal" onClick={() => EventBus.emit('coop-volver-sala')}>Volver a la sala (los dos)</button>
             : siguiente ? <a className="boton principal" href={`/jugar/${siguiente.id}`}>Seguir al Nivel {siguiente.numero}</a> : <span className="vt" style={{ fontSize: '1.4rem' }}>{resultado.final ? 'Fin.' : 'Por ahora el laberinto termina acá.'}</span>}
-          <Link className="boton" href="/" style={{ color: '#0b0a06', borderColor: '#0b0a06' }}>Menú</Link>
+          <Link className="boton" href="/records" style={tinta}>Récords</Link>
+          <Link className="boton" href="/" style={tinta}>Menú</Link>
         </nav>
       </div>
     </div>

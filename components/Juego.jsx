@@ -7,6 +7,8 @@ import Link from 'next/link';
 import { EventBus } from '@/game/EventBus';
 import { Sonido } from '@/game/motor/audio';
 import Hud from './Hud';
+import Tactil from './Tactil';
+import { esTactil } from '@/lib/tactil';
 import { Nota, Cinta, Mapa, Diario, Pausa, Inicio, Completado, Compu, FinDelJuego, AvisoCoop } from './Ventanas';
 import Cinematica from './Cinematica';
 import { empezarPartida, anotarNota, sumarPuntos, marcarQuedarse, finalQueToca, NOMBRE_DEL_FINAL } from '@/lib/finales';
@@ -48,6 +50,9 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
   const [escena, setEscena] = useState(nueva && lado === 'A' ? 'prologo' : null);
   const [despues, setDespues] = useState(null);
   const coop = nivel?.coop ?? null;
+  // En el celular: los controles con los dedos (components/Tactil.jsx).
+  const [tactil, setTactil] = useState(false);
+  useEffect(() => setTactil(esTactil()), []);
   const [fin, setFin] = useState(null);
   const uiRef = useRef(null);
   uiRef.current = ui;
@@ -200,7 +205,9 @@ export default function Juego({ nivelId, continuar, siguiente, nueva = false, sa
     <div className={`juego ${fase === 'juego' && puntero !== 'sin-captura' ? 'sin-flecha' : ''}`}>
       {partida !== undefined && escena !== 'prologo' && <PhaserJuego nivelId={nivelId} partida={partida} sala={sala} />}
       <Hud nivel={nivel} llaves={llaves} colores={nivel?.colores || []} cuerpo={cuerpo} indicacion={ui ? '' : indicacion} pensamiento={ui ? '' : pensamiento} voz={ui ? null : voz} aviso={aviso} puntero={ui ? null : puntero} fase={fase} play={play} consejo={ui ? '' : consejo} />
-      {fase === 'espera' && !error && !escena && !avisoCoop && <Inicio nivel={nivel} continua={!!partida} pausada={!!partida?.suspendida} controles={controles} pantalla={opciones?.pantallaCompleta !== false} />}
+      {fase === 'espera' && !error && !escena && !avisoCoop && <Inicio nivel={nivel} continua={!!partida} pausada={!!partida?.suspendida} controles={controles} pantalla={opciones?.pantallaCompleta !== false} tactil={tactil} />}
+      {tactil && fase === 'juego' && !ui && !resultado && !avisoCoop && !escena && <Tactil indicacion={indicacion} cuerpo={cuerpo} />}
+      {tactil && <div className="gira-el-celular">Gira el celular: se juega de costado.</div>}
       {ui === 'nota' && dato && <Nota dato={dato} alCerrar={cerrar} controles={controles} />}
       {ui === 'cinta' && dato && <Cinta dato={dato} alCerrar={cerrar} controles={controles} />}
       {ui === 'mapa' && <Mapa alCerrar={cerrar} controles={controles} />}

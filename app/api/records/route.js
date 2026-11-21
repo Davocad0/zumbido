@@ -1,31 +1,27 @@
-// GET /api/records → los mejores tiempos por nivel. POST /api/records { nivel, segundos, nombre } → guarda uno.
-// Se guardan en un archivo JSON: data/records.json en la computadora de uno, o en la carpeta de ZUMBIDO_DATOS si el
-// hosting tiene un disco que no se borra (2026-11-17). Si el disco es de solo lectura (como Vercel), el juego se
-// queda con los récords del navegador (localStorage).
+// GET /api/records[?nivel=…] → los 10 mejores tiempos de cada nivel (o de uno), con el nickname de cada uno.
+// POST /api/records { nivel, segundos, nombre } → guarda uno y dice { puesto, total, mejor }.
+// Dónde se guardan: lib/records.js (Supabase en línea; data/records.json en la compu de uno).
 //
 // En línea (2026-11-17), para que nadie ensucie la tabla: el nivel tiene que existir; el tiempo no puede ser más
-// rápido que lo posible (la ruta más corta del nivel, corriendo todo el camino, con margen); el nombre solo letras,
-// números y espacios; y cada uno puede mandar pocos por minuto.
-import { readFile, writeFile, mkdir } from 'node:fs/promises';
-import { join } from 'node:path';
+// rápido que lo posible (la ruta más corta del nivel, corriendo todo el camino, con margen); el nickname solo letras,
+// números y espacios, sin insultos (2026-11-21); y cada uno puede mandar pocos por minuto.
 import { cors, ID_VALIDO, leerNivel } from '@/lib/niveles';
-import { quien, limitar, demasiado, nombreLimpio, cuerpoJSON } from '@/lib/proteccion';
+import { quien, limitar, demasiado, nombreLimpio, nombreFeo, cuerpoJSON } from '@/lib/proteccion';
+import { mejores, guardar } from '@/lib/records';
 
 export const dynamic = 'force-dynamic';
-const CARPETA = process.env.ZUMBIDO_DATOS || join(process.cwd(), 'data');
-const ARCHIVO = join(CARPETA, 'records.json');
 // Dani corriendo: 3,6 casillas por segundo (data/personaje.json). Con los cambios de las llaves, el camino más corto
 // puede ser un 8 % más corto que el de la solución; y un margen más.
 const CORRE = 3.6, MARGEN = 0.7;
 
-async function leer() {
-  try { return JSON.parse(await readFile(ARCHIVO, 'utf8')); } catch { return []; }
-}
-
-export async function GET() {
-  const lista = await leer();
-  lista.sort((a, b) => a.nivel.localeCompare(b.nivel) || a.segundos - b.segundos);
-  return Response.json(lista, { headers: cors });
+export async function GET(request) {
+  const nivel = new URL(request.url).searchParams.get('nivel');
+  if (nivel && !ID_VALIDO.test(nivel)) return Response.json([], { headers: cors });
+  try {
+    return Response.json(await mejores(nivel), { headers: cors });
+  } catch {
+    return Response.json({ error: 'No se pudieron leer los récords.' }, { status: 503, headers: cors });
+  }
 }
 
 export async function POST(request) {
@@ -35,22 +31,15 @@ export async function POST(request) {
   const { nivel, segundos } = datos || {};
   if (!ID_VALIDO.test(nivel || '') || !Number.isFinite(segundos) || segundos <= 0 || segundos > 86400) return Response.json({ ok: false, error: 'Faltan el nivel o los segundos.' }, { status: 400, headers: cors });
   const n = await leerNivel(nivel);
-  if (!n) return Response.json({ ok: false, error: 'Ese nivel no existe.' }, { status: 400, headers: cors });
+  if (!n || n.coop) return Response.json({ ok: false, error: 'Ese nivel no existe.' }, { status: 400, headers: cors });
   const pasos = n.estadisticas?.pasosRutaOptima ?? Math.min(n.estadisticas?.pasosDani ?? Infinity, n.estadisticas?.pasosNico ?? Infinity);
   const minimo = Number.isFinite(pasos) ? (pasos / CORRE) * MARGEN : 10;
   if (segundos < minimo) return Response.json({ ok: false, error: 'Ese tiempo no se puede.' }, { status: 400, headers: cors });
   const nombre = nombreLimpio(datos.nombre);
-  const lista = await leer();
-  const anteriores = lista.filter((r) => r.nivel === nivel);
-  const mejor = !anteriores.length || segundos < Math.min(...anteriores.map((r) => r.segundos));
-  // Solo los 10 mejores de cada nivel.
-  const delNivel = [...anteriores, { nivel, segundos: Math.round(segundos), nombre, fecha: new Date().toISOString() }].sort((a, b) => a.segundos - b.segundos).slice(0, 10);
-  const nueva = [...lista.filter((r) => r.nivel !== nivel), ...delNivel];
+  if (nombreFeo(nombre)) return Response.json({ ok: false, error: 'Elige otro nickname.' }, { status: 400, headers: cors });
   try {
-    await mkdir(CARPETA, { recursive: true });
-    await writeFile(ARCHIVO, JSON.stringify(nueva, null, 2) + '\n');
-    return Response.json({ ok: true, mejor }, { headers: cors });
+    return Response.json({ ok: true, ...(await guardar({ nivel, segundos, nombre })) }, { headers: cors });
   } catch {
-    return Response.json({ ok: false, mejor, error: 'Solo lectura' }, { status: 503, headers: cors });
+    return Response.json({ ok: false, error: 'No se pudo guardar el récord.' }, { status: 503, headers: cors });
   }
 }

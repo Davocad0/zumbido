@@ -11,7 +11,7 @@
     "prebuild": "node scripts/copiar-datos.mjs && node scripts/copiar-escenas.mjs",
     "build": "next build",
     "start": "next start",
-    "probar": "node scripts/probar-niveles.mjs && node scripts/probar-inquilino.mjs && node scripts/probar-animacion.mjs && node scripts/probar-rastros.mjs && node scripts/probar-finales.mjs && node scripts/probar-lado-b.mjs && node scripts/probar-ambiente.mjs && node scripts/probar-los-que-miran.mjs && node scripts/probar-contador.mjs && node scripts/probar-cama.mjs && node scripts/probar-coop.mjs && node scripts/probar-cambios.mjs && node scripts/probar-espectadores-coop.mjs && node scripts/probar-escondites.mjs",
+    "probar": "node scripts/probar-niveles.mjs && node scripts/probar-inquilino.mjs && node scripts/probar-animacion.mjs && node scripts/probar-rastros.mjs && node scripts/probar-finales.mjs && node scripts/probar-lado-b.mjs && node scripts/probar-ambiente.mjs && node scripts/probar-los-que-miran.mjs && node scripts/probar-contador.mjs && node scripts/probar-cama.mjs && node scripts/probar-coop.mjs && node scripts/probar-cambios.mjs && node scripts/probar-espectadores-coop.mjs && node scripts/probar-escondites.mjs && node scripts/probar-records.mjs",
     "escenas": "node scripts/copiar-escenas.mjs"
   },
   "dependencies": {

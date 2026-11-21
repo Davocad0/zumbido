@@ -105,6 +105,12 @@ export const SINTETICOS = new Set(['golpe-seco', 'raspar', 'respirador', 'obtura
 // amanecer del final. (El respirador, el timbre, el monitor plano, los golpes de metal y el ahogo, con código.)
 const CAMA = ['cama-cruje', 'rueda-cruje', 'cama-sabanas', 'monitor-cardiaco', 'hospital', 'amanecer', 'luces-encienden', 'golpe-piano', 'inhalacion', 'dron-tension'];
 
+// Los screamers y el susto de la llave (2026-11-21): el golpe, la respiración a la espalda y el apagón.
+const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino-respira', 'respiracion-asustada', 'luces-apagan', 'luces-encienden', 'luces-parpadeo', 'inhalacion'];
+// La Culpa (Las Piscinas, 2026-11-21): se arrastra mojada, gorgotea y llora ahogada; sale del agua con el apagón.
+export const SONIDOS_CULPA = { 'inquilino-pantuflas': 'pasos-mojados', 'inquilino-arrastre': 'gatear-madera', 'inquilino-tararea': 'llanto-ahogado' };
+const CULPA = ['pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
+
 // Todo lo que puede sonar en un nivel (para cargarlo al entrar).
 export function sonidosDelNivel(nivel) {
   const amb = AMBIENTE[nivel.audio?.ambiente] || AMBIENTE.zumbido_fluorescente;
@@ -114,6 +120,8 @@ export function sonidosDelNivel(nivel) {
     PASOS[nivel.audio?.pasos] || 'pasos-alfombra', ...SIEMPRE, ...(amenaza ? AMENAZA : []),
     ...(nivel.eventos || []).flatMap((ev) => POR_EVENTO[ev.tipo] || []),
     ...(nivel.cama ? CAMA : []),
+    ...((nivel.eventos || []).some((ev) => ev.tipo === 'silueta') || nivel.ambiente?.paredes === 'espejo' || nivel.entidad ? GRITO : []),
+    ...(nivel.entidad?.nombre === 'La Culpa' ? CULPA : []),
     // (Los sustos por zona: el sonido que pide cada uno, si es una grabación.)
     ...(nivel.eventos || []).filter((ev) => ev.tipo === 'susto_sonoro' && ev.sonido && !SINTETICOS.has(ev.sonido)).map((ev) => ev.sonido),
     // Lado B: el micrófono de la cámara (estática), la cámara que falla y los sonidos sin fuente de ese nivel.

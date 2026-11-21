@@ -26,7 +26,10 @@ import { crearTextura } from '../motor/texturas';
 import { cama as figuraCama, luzCama } from '../motor/figuraCama';
 import { enPalabras } from '../motor/contador';
 import { cuerpoInquilino, caraDelInquilino, OPCIONES_FIGURA } from '../motor/figuraInquilino';
+import { cuerpoCulpa, brilloCulpa, ALTO_CULPA } from '../motor/figuraCulpa';
+import { cuerpoInquilinoB, brilloInquilinoB, ESCALA_B } from '../motor/figuraInquilinoB';
 import { FASES, faseDelNivel } from '../motor/fasesInquilino';
+import { SONIDOS_CULPA } from '../motor/sonidos';
 import { musicaDeLaFase, respiracionDeLaFase, pasoDelInquilino, golpeDelInquilino, golpesLejos, vozDelInquilino, tarareoDeLaFase, temaDeLaFase, golpeDeLaFase, camaraDeLaFase, raspon } from '../motor/sonidoInquilino';
 import { crearAnimacion, animar, CUADROS } from '../motor/animInquilino';
 import { crearHuellas, pisar as pisarHuella, secar, borrarHuellas, charco, onda } from '../motor/huellas';
@@ -37,6 +40,7 @@ import { crearTemblor } from '../motor/temblor';
 import { mapaEnFase } from '../motor/cambios.js';
 import { crearCoop, rolEnLaSala } from '../motor/coop';
 import { salirDeSala, olvidarSala } from '@/lib/red';
+import { esTactil } from '@/lib/tactil';
 import { vistaDe, capaEscondite, manosEnLaBoca, manoQueTantea } from '../motor/escondites';
 import { leerControles, teclasDe, accionDe, etiqueta, codigoDe } from '@/lib/controles';
 import { pantallaCompleta } from '@/lib/pantalla';
@@ -92,6 +96,29 @@ function manoQueHunde(ctx, lado, k, t) {
       fila(x, y, 1, luz);
     }
   }
+}
+const raton0 = (e) => e.type === 'mousedown' || e.type === 'mouseup';
+// Dónde está la cabeza en el lienzo de un sprite: desde la primera fila con algo dibujado, un 26 % del alto (la cabeza
+// y los hombros), centrado en lo dibujado de esa franja. (Para el screamer; se calcula una vez por lienzo.)
+const cortes = new WeakMap();
+function cabezaDe(lienzoSprite) {
+  if (cortes.has(lienzoSprite)) return cortes.get(lienzoSprite);
+  const w = lienzoSprite.width, h = lienzoSprite.height;
+  let c = { x: 0, y: 0, w, h: Math.round(h * 0.3) };
+  try {
+    const px = lienzoSprite.getContext('2d').getImageData(0, 0, w, h).data;
+    let y0 = -1;
+    for (let y = 0; y < h && y0 < 0; y++) for (let x = 0; x < w; x++) if (px[(y * w + x) * 4 + 3] > 40) { y0 = y; break; }
+    if (y0 >= 0) {
+      const alto = Math.max(8, Math.round(h * 0.26)), y1 = Math.min(h, y0 + alto);
+      let x0 = w, x1 = 0;
+      for (let y = y0; y < y1; y++) for (let x = 0; x < w; x++) if (px[(y * w + x) * 4 + 3] > 40) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); }
+      const cx = (x0 + x1) / 2, ancho = Math.max(x1 - x0 + 4, alto * (W / H));
+      c = { x: Math.round(cx - ancho / 2), y: Math.max(0, y0 - 2), w: Math.round(ancho), h: y1 - y0 + 2 };
+    }
+  } catch { /* lienzo sin acceso: el recorte de siempre */ }
+  cortes.set(lienzoSprite, c);
+  return c;
 }
 // Un bucle que no se pudo cargar no rompe nada: responde a todo sin sonar.
 const MUDO = { volumen() {}, filtro() {}, parar() {}, velocidad() {}, cadena: {} };
@@ -162,6 +189,11 @@ export class Nivel extends Scene {
     this.fase = 'espera';
     this.t = 0;
     this.tFase = 0;
+    // En el celular no hay mouse que capturar: se mira con el dedo (components/Tactil.jsx).
+    this.tactil = esTactil();
+    if (this.tactil) this.sinCaptura = true;
+    this.mando = { adelante: 0, lado: 0 };
+    this.tactilMantiene = new Set();
     this.bloqueado = false;
     this.indicacion = '';
     this.celda = null;
@@ -189,8 +221,15 @@ export class Nivel extends Scene {
     // La fase (fasesInquilino.js): cuanto más recuerda Dani, más se castiga El Inquilino y se le nota en todo (el
     // cuerpo, cómo se mueve, lo que le hace al lugar y cómo suena). También la usan los reflejos de los espejos.
     this.faseInq = faseDelNivel(this.nivel.id);
+    // (Las Piscinas, 2026-11-21: el que persigue es La Culpa, con la misma IA —que no hace trampa— pero otro cuerpo,
+    // otro tamaño y otros sonidos; suena como El Inquilino del fondo, ahogado.)
+    this.culpa = this.nivel.entidad?.nombre === 'La Culpa';
+    if (this.culpa) this.faseInq = 2;
     this.F = FASES[this.faseInq];
-    this.altoInq = this.F.alto;
+    // (Lado B, 2026-11-21: más grande y más asqueroso: figuraInquilinoB.js.)
+    this.inqB = !this.culpa && this.nivel.lado === 'B';
+    this.altoInq = this.culpa ? ALTO_CULPA : this.F.alto * (this.inqB ? ESCALA_B : 1);
+    this.remapSonidos = this.culpa ? SONIDOS_CULPA : null;
     OPCIONES_FIGURA.fase = this.faseInq;
     // Lo que deja a su paso: huellas mojadas que se secan y tubos que se apagan.
     this.huellas = crearHuellas(this.mundo);
@@ -288,6 +327,8 @@ export class Nivel extends Scene {
     const capturado = () => document.pointerLockElement === lienzoJuego;
     const lateral = (e) => e.button === 3 || e.button === 4;
     this.alBajar = (e) => {
+      // (Escribiendo en un cuadro de texto —el nickname al terminar—, las teclas son del cuadro, no del juego.)
+      if (!raton0(e) && e.target?.closest?.('input, textarea, select, [contenteditable="true"]')) return;
       const codigo = codigoDe(e), raton = e.type === 'mousedown';
       // Los botones laterales del mouse son «Atrás» y «Adelante» del navegador: en el juego no cambian de página.
       if (raton && lateral(e)) { e.preventDefault(); e.__zumbido = true; }
@@ -361,6 +402,14 @@ export class Nivel extends Scene {
       'pantalla-completa': (si) => { this.conPantallaCompleta = si !== false; },
       // Cambió un control: los carteles («E · Abrir») se vuelven a escribir con la tecla nueva.
       controles: (c) => { this.controles = c; this.apretadas.clear(); this.indicacion = null; },
+      // El celular (components/Tactil.jsx): el joystick, mirar arrastrando y los botones.
+      'tactil-mover': ({ adelante, lado, correr }) => {
+        this.mando = { adelante: limitar(adelante, -1, 1), lado: limitar(lado, -1, 1) };
+        if (correr) this.tactilMantiene.add('correr'); else this.tactilMantiene.delete('correr');
+      },
+      'tactil-mirar': ({ dx, dy }) => { if (!this.bloqueado && this.fase === 'juego') this.mirar(dx * SENSIBILIDAD * 1.25 * this.sensibilidad, dy * 0.28 * this.sensibilidad); },
+      'tactil-accion': (accion) => this.alApretar(accion),
+      'tactil-mantener': ({ accion, si }) => { if (si) this.tactilMantiene.add(accion); else this.tactilMantiene.delete(accion); },
       // Cooperativo (la pausa y las ventanas de aviso): empezar de nuevo los dos, volver los dos a la sala, o salir.
       // (Les llega a los dos por el servidor; si la red no contesta, esta pestaña va igual.)
       'coop-reiniciar': () => { if (!this.coop) return; this.coop.enviar('reiniciar', { nivel: this.nivel.id }); this.despuesReal(2500, () => this.irA(`/jugar/${this.nivel.id}?sala=${this.coop.sala.codigo}`)); },
@@ -397,6 +446,7 @@ export class Nivel extends Scene {
   }
   // ¿Se mantiene apretada alguna de las teclas (o botones) de esta acción?
   mantiene(accion) {
+    if (this.tactilMantiene?.has(accion)) return true;
     for (const c of teclasDe(this.controles, accion)) if (this.apretadas.has(c)) return true;
     return false;
   }
@@ -404,6 +454,8 @@ export class Nivel extends Scene {
 
   alApretar(accion) {
     if (this.fase === 'espera') { if (accion === 'clic' || accion === 'usar' || accion === 'enter') this.empezar(); return; }
+    // El despertar del Nivel 0 se puede saltar siempre (hasta el 2026-11-21 solo se saltaba el prólogo de «Nueva partida»).
+    if (this.fase === 'intro') { if (['clic', 'usar', 'enter', 'pausa', 'contener'].includes(accion)) this.saltarIntro(); return; }
     if (accion === 'clic') { if (!this.bloqueado && this.fase === 'juego') this.capturarPuntero(true); return; }
     if (this.bloqueado || this.fase !== 'juego') return;
     if (accion === 'pausa') { EventBus.emit('ui', 'pausa'); return; }
@@ -557,6 +609,7 @@ export class Nivel extends Scene {
     }
   }
   toca(nombre, op = {}) {
+    nombre = this.remapSonidos?.[nombre] ?? nombre;
     const d = this.sonidos?.[nombre];
     if (!d) return null;
     return op.paso ? Sonido.golpe(d, op) : Sonido.sonar(d, op);
@@ -564,6 +617,7 @@ export class Nivel extends Scene {
   // Un sonido que viene de un punto del mapa: más bajo cuanto más lejos y del lado que corresponde.
   // Si hay paredes en el medio, llega apagado (filtro de graves).
   tocaEn(nombre, x, y, op = {}) {
+    nombre = this.remapSonidos?.[nombre] ?? nombre;
     const j = this.jugador, dx = x - j.x, dy = y - j.y, d = Math.hypot(dx, dy);
     let rel = Math.atan2(dy, dx) - j.ang;
     rel = Math.atan2(Math.sin(rel), Math.cos(rel));
@@ -577,6 +631,7 @@ export class Nivel extends Scene {
   // Un loop que la escena puede mover por el mapa con ubicar() (empieza callado). Va en 3D salvo el cuerpo de Dani y
   // la música, que no vienen de ningún lugar.
   bucleEn(nombre, op = {}) {
+    nombre = this.remapSonidos?.[nombre] ?? nombre;
     const d = this.sonidos?.[nombre];
     if (!d) return MUDO;
     const lugar = op.bus === 'cuerpo' || op.bus === 'musica' ? {} : { rel: 0 };
@@ -638,6 +693,45 @@ export class Nivel extends Scene {
   estimulo(nombre, segundos) { this.estimulos[nombre] = Math.max(this.estimulos[nombre] || 0, segundos); }
   despues(segundos, fn) { this.time.delayedCall(segundos * 1000, fn); }
   interferencia(segundos) { this.interferir = segundos; this.toca('tv-estatica', { bus: 'objetos', vol: 0.5, dur: segundos }); }
+  // El cuerpo del que persigue (El Inquilino, o La Culpa en Las Piscinas) y su brillo cuando te ve.
+  cuerpoPerseguidor(pose, i, op) {
+    if (this.culpa) return cuerpoCulpa(pose, i, { sangre: !this.sinSangre });
+    return this.inqB ? cuerpoInquilinoB(pose, i, { ...op, sangre: !this.sinSangre }) : cuerpoInquilino(pose, i, op);
+  }
+  brilloPerseguidor(pose, i, op) { return this.culpa ? brilloCulpa(pose, i) : this.inqB ? brilloInquilinoB(pose, i, op) : caraDelInquilino(pose, i, op); }
+  apagon(segundos) { this.apagado = Math.max(this.apagado || 0, segundos); }
+  // Un screamer (2026-11-21; «nadie ve tanto tiempo el espejo», «apenas se nota»): la cara de algo, de golpe, encima de
+  // todo, temblando y acercándose, con un golpe de sonido. capas: los lienzos del sprite (el cuerpo y su brillo); se
+  // recorta solo la cabeza. Con «Reducir destellos», sin el rojo que parpadea.
+  screamer(capas, { dur = 0.6, sonido = true, rojo = 0.4 } = {}) {
+    const lista = (Array.isArray(capas) ? capas : [capas]).filter(Boolean).map((c) => c.canvas ?? c);
+    if (!lista.length || this.fase !== 'juego') return;
+    this.grito = { capas: lista, t: 0, dur, rojo, corte: cabezaDe(lista[0]) };
+    if (sonido) {
+      this.toca('golpe-piano', { bus: 'objetos', vol: 2.4, rate: 0.62 });
+      this.toca('casillero-golpe', { bus: 'objetos', vol: 2.2, rate: 0.55, dur: 0.5, fadeOut: 0.1 });
+      this.toca('inquilino-tararea', { bus: 'objetos', vol: 2, rate: 1.9, inicio: 0.2, dur: 0.6, fadeOut: 0.15 });
+      if (this.sonidos?.grito) this.toca('grito', { bus: 'objetos', vol: 1.6, dur: dur + 0.4, fadeOut: 0.2 });
+    }
+    this.estimulo('verAlInquilino', 7);
+    this.interferir = Math.max(this.interferir, dur);
+  }
+  dibujarGrito(ctx, dt) {
+    const g = this.grito;
+    g.t += dt;
+    if (g.t > g.dur) { this.grito = null; return; }
+    const k = g.t / g.dur, c = g.corte;
+    // La cabeza llena la pantalla y se viene encima (un 30 % más grande al final).
+    const esc = (H / c.h) * (1.05 + 0.3 * suave(k)), w = c.w * esc, h = c.h * esc;
+    const jx = (Math.random() - 0.5) * 12, jy = (Math.random() - 0.5) * 9;
+    ctx.save();
+    ctx.imageSmoothingEnabled = false;
+    ctx.fillStyle = 'rgba(5, 3, 3, 0.9)';
+    ctx.fillRect(0, 0, W, H);
+    for (const capa of g.capas) ctx.drawImage(capa, c.x, c.y, c.w, c.h, W / 2 - w / 2 + jx, H / 2 - h * 0.46 + jy, w, h);
+    if (!this.pocosDestellos && Math.floor(g.t * 18) % 2 === 0) { ctx.fillStyle = `rgba(150, 12, 10, ${g.rojo})`; ctx.fillRect(0, 0, W, H); }
+    ctx.restore();
+  }
   quitarProp(x, y) { this.sprites = this.sprites.filter((s) => !(s.tipo === 'prop' && Math.floor(s.x) === x && Math.floor(s.y) === y)); }
   inquilinoAparece() {
     if (!this.inq || this.inq.activo) return;
@@ -679,6 +773,13 @@ export class Nivel extends Scene {
     this.dibujar(dt);
   }
 
+  // Saltar el despertar: va directo al final (la cámara donde termina, el sonido como al dar el control).
+  saltarIntro() {
+    if (this.fase !== 'intro' || !this.intro || this.t < 0.6) return;
+    for (const ev of this.intro.eventos) ev.hecho = true;
+    EventBus.emit('pensamiento', '');
+    this.t = this.intro.duracion;
+  }
   pasoIntro(dt) {
     if (!this.sonidos) { this.t -= dt; return; } // espera a que cargue el audio para que todo vaya junto
     for (const ev of this.intro.eventos) {
@@ -845,8 +946,8 @@ export class Nivel extends Scene {
       const giro = (this.mantiene('girarDerecha') ? 1 : 0) - (this.mantiene('girarIzquierda') ? 1 : 0);
       j.ang += giro * GIRO_TECLAS * dt;
       const entrada = {
-        adelante: (this.mantiene('adelante') ? 1 : 0) - (this.mantiene('atras') ? 1 : 0),
-        lado: (this.mantiene('derecha') ? 1 : 0) - (this.mantiene('izquierda') ? 1 : 0),
+        adelante: (this.mantiene('adelante') ? 1 : 0) - (this.mantiene('atras') ? 1 : 0) || this.mando.adelante,
+        lado: (this.mantiene('derecha') ? 1 : 0) - (this.mantiene('izquierda') ? 1 : 0) || this.mando.lado,
         correr: this.mantiene('correr'),
       };
       // Correr endereza a Dani; agachado, camina despacio.
@@ -2058,9 +2159,9 @@ export class Nivel extends Scene {
         cam = { ...cam, z: cam.z - 0.3 * hunde, ang: cam.ang + sacudon + a.lado * 0.05 * hunde, pitch: cam.pitch + 30 + 40 * hunde };
         const x = j.x + Math.cos(j.ang) * cerca, y = j.y + Math.sin(j.ang) * cerca;
         const cuadro = Math.min(CUADROS.atrapar - 1, t < 0.3 ? 0 : t < 0.7 ? 1 : 2), op = { fase: this.faseInq };
-        sprites.push({ x, y, alto: this.altoInq, img: cuerpoInquilino('atrapar', cuadro, op) });
+        sprites.push({ x, y, alto: this.altoInq, img: this.cuerpoPerseguidor('atrapar', cuadro, op) });
         // La cinta brilla rojo hasta que quedan bajo el agua.
-        if (t < 0.75) sprites.push({ x: x - Math.cos(j.ang) * 0.02, y: y - Math.sin(j.ang) * 0.02, alto: this.altoInq, img: caraDelInquilino('atrapar', cuadro, op), brilla: true });
+        if (t < 0.75) sprites.push({ x: x - Math.cos(j.ang) * 0.02, y: y - Math.sin(j.ang) * 0.02, alto: this.altoInq, img: this.brilloPerseguidor('atrapar', cuadro, op), brilla: true });
       }
       p.mundo(this.mundo, cam, sprites);
       p.componer({ giro: this.inclinacion + temblor + (sacude?.ladeo || 0), cubrir: sacude ? Math.max(this.cubre, 1 + 0.014 * (W / H)) : this.cubre, zoom: this.fase === 'atrapado' ? 1 + Math.min(1, this.tFase / 0.5) * 0.25 : 1 });
@@ -2089,6 +2190,13 @@ export class Nivel extends Scene {
       }
       if (this.blanco > 0.01) { ctx.fillStyle = `rgba(246, 241, 220, ${this.blanco})`; ctx.fillRect(0, 0, W, H); }
       if (this.fase === 'atrapado') this.dibujarAtrapada(ctx, this.tFase);
+      // Un apagón de golpe (el susto de la llave): todo negro, y la luz vuelve en un instante.
+      if (this.apagado > 0) {
+        this.apagado = Math.max(0, this.apagado - dt);
+        ctx.fillStyle = `rgba(0, 0, 0, ${Math.min(0.97, this.apagado / 0.12)})`;
+        ctx.fillRect(0, 0, W, H);
+      }
+      if (this.grito) this.dibujarGrito(ctx, dt);
       if (this.fase === 'rebobinar' || this.interferir > 0) this.vhs(ctx, this.fase === 'rebobinar' ? 1 : this.interferir);
       // Cerca de él, la cámara de Dani se ensucia (líneas de tracking): el aviso de que está cerca aunque no lo veas.
       else if (this.fase === 'juego' && this.inq?.activo) {
@@ -2268,10 +2376,10 @@ export class Nivel extends Scene {
       // (Con la cinta trabada, de lejos se lo dibuja donde se congeló: al seguir la cinta, aparece donde está.)
       const x = v.x ?? inq.x, y = v.y ?? inq.y, op = { ...v, fase: this.faseInq };
       OPCIONES_FIGURA.sangre = !this.sinSangre;
-      lista.push({ x, y, alto: this.altoInq, img: cuerpoInquilino(v.pose, v.i, op), sinReflejo: false });
+      lista.push({ x, y, alto: this.altoInq, img: this.cuerpoPerseguidor(v.pose, v.i, op), sinReflejo: false });
       // Mientras te mira, la cinta de sus ojos brilla rojo aunque esté oscuro (si te ve, lo ves). Va un poquito más
       // cerca de la cámara para quedar encima del cuerpo.
-      const brillo = loMira(inq) ? caraDelInquilino(v.pose, v.i, op) : null;
+      const brillo = loMira(inq) ? this.brilloPerseguidor(v.pose, v.i, op) : null;
       if (brillo) {
         const j = this.jugador, d = Math.hypot(x - j.x, y - j.y) || 1;
         lista.push({ x: x - ((x - j.x) / d) * 0.03, y: y - ((y - j.y) / d) * 0.03, alto: this.altoInq, img: brillo, brilla: true });

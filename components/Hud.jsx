@@ -100,6 +100,7 @@ export default function Hud({ nivel, llaves, colores, cuerpo, indicacion, pensam
   return (
     <div className={`hud ${linterna ? 'con-linterna' : ''}`} aria-live="polite">
       {fase === 'rebobinar' && <div className="rebobinando" role="status">◀◀ REBOBINANDO</div>}
+      {fase === 'intro' && <div className="saltar-intro">Clic, Enter o E · saltar</div>}
       {enJuego && play && <div className="rebobinando play">▶ PLAY</div>}
       {enJuego && !play && <Rec segundos={cuerpo?.segundos ?? 0} ladoB={!!nivel?.ladoB} />}
       {nivel?.coop && fase !== 'espera' && <Compa />}

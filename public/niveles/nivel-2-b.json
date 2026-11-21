@@ -311,7 +311,7 @@
     },
     {
       "tipo": "silueta",
-      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s.",
+      "descripcion": "Al pisar la casilla las luces parpadean y El Inquilino aparece al fondo del pasillo durante 1,5 s. Si en la casilla hay una llave (Nivel 0): apagón, y al volver la luz está a dos pasos detrás de Dani; si te das vuelta, se te tira encima.",
       "x": 1,
       "y": 15,
       "objetivo": {
