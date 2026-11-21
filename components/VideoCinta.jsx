@@ -87,7 +87,8 @@ export default function VideoCinta({ dato, alCerrar, controles = INICIALES, repe
   }, [listo, controles]);
 
   return (
-    <div className="ventana" role="dialog" aria-label={`Cinta «${dato.titulo}»`}>
+    // (2026-11-21, en el iPhone: solo se cerraba con el teclado. Ahora el pie es un botón, y tocar fuera también cierra.)
+    <div className="ventana" role="dialog" aria-label={`Cinta «${dato.titulo}»`} onClick={(ev) => { if (listo && ev.target === ev.currentTarget) cerrar.current?.(); }}>
       <div className="caja cinta-caja">
         <div className="tv tv-video">
           <canvas ref={lienzo} width={320} height={180} style={{ visibility: estado === 'sinVideo' ? 'hidden' : 'visible' }} />
@@ -98,7 +99,7 @@ export default function VideoCinta({ dato, alCerrar, controles = INICIALES, repe
         <p className="nota-chica cinta-titulo"><b className="vt">«{dato.titulo}»</b> {dato.descripcion}</p>
         <div className="pie">
           {repetir && estado === 'fin' && <button type="button" className="boton" onClick={() => { setEstado('cargando'); setVuelta((v) => v + 1); }}>Ver de nuevo</button>}
-          {listo ? `${etiqueta(controles, 'usar')} · ${repetir ? 'Cerrar' : estado === 'fin' ? 'Seguir' : 'Seguir (la cinta ya quedó grabada)'}` : repetir ? '' : `Grabando en: ${dato.cuarto}`}
+          {listo ? <button type="button" className="pie" onClick={() => cerrar.current?.()}>{`${etiqueta(controles, 'usar')} · ${repetir ? 'Cerrar' : estado === 'fin' ? 'Seguir' : 'Seguir (la cinta ya quedó grabada)'}`}</button> : repetir ? '' : `Grabando en: ${dato.cuarto}`}
         </div>
       </div>
     </div>

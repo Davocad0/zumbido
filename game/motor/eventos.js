@@ -1407,6 +1407,7 @@ export function crearEventos(e) {
       e.tocaEn('luces-apagan', j.x + Math.cos(a) * d, j.y + Math.sin(a) * d, { bus: 'ambiente', vol: 1.4 + k * 0.4 });
       e.parpadear(0.5);
     }));
+    e.despues(0.85, () => e.toca('corte-de-luz', { bus: 'objetos', vol: 1.7 }));
     e.despues(0.9, () => { e.apagon?.(1.4); luzPiscinas(true); for (const l of e.loops || []) l.h.volumen(l.v * 0.2, 1.5); e.estimulo('zumbidoSeCorta', 6); });
     // En la piscina grande, lejos: algo enorme sale del agua.
     const lejos = [...(nivel.mapa || [])].flatMap((f, y) => [...f].map((c, x) => [c, x, y])).filter(([c]) => c === '~')

@@ -711,6 +711,7 @@ export class Nivel extends Scene {
       // (El golpe del susto, uno y otro de los dos que eligió el usuario, encima del piano y el casillero.)
       this.gritos = (this.gritos ?? 0) + 1;
       this.toca(this.gritos % 2 ? 'golpe-susto' : 'golpe-susto-2', { bus: 'objetos', vol: 1.9, dur: Math.max(1.2, dur + 0.8), fadeOut: 0.3 });
+      this.toca('grito', { bus: 'objetos', vol: 1.5, dur: Math.max(1, dur + 0.6), fadeOut: 0.25 });
       this.toca('golpe-piano', { bus: 'objetos', vol: 1.6, rate: 0.62 });
       this.toca('casillero-golpe', { bus: 'objetos', vol: 1.8, rate: 0.55, dur: 0.5, fadeOut: 0.1 });
       this.toca('inquilino-tararea', { bus: 'objetos', vol: 1.6, rate: 1.9, inicio: 0.2, dur: 0.6, fadeOut: 0.15 });
@@ -1193,6 +1194,17 @@ export class Nivel extends Scene {
       if (inq.activo) this.ubicar(this.respInq, inq.x, inq.y, inq.estado === 'persigue' ? 1.4 : 0.9);
       else if (this.respInq.ultimo) { this.respInq.ultimo = 0; this.respInq.volumen(0, 1); }
     }
+    // El Inquilino del Lado B: las moscas que lo siguen (2026-11-21).
+    if (this.inqB && this.sonidos?.moscas) {
+      this.moscasInq ??= this.bucleEn('moscas', { bus: 'inquilino', hrtf: true });
+      if (inq.activo) this.ubicar(this.moscasInq, inq.x, inq.y, 0.9);
+      else if (this.moscasInq.ultimo) { this.moscasInq.ultimo = 0; this.moscasInq.volumen(0, 1); }
+    }
+    // La Culpa (y El Inquilino B), cuando te descubre: un bramido.
+    if ((this.culpa || this.inqB) && inq.estado === 'persigue' && this.estadoInqAntes !== 'persigue' && this.sonidos?.['monstruo-gime']) {
+      this.tocaEn('monstruo-gime', inq.x, inq.y, { bus: 'inquilino', vol: 1.8, rate: this.culpa ? 0.85 : 1 });
+    }
+    this.estadoInqAntes = inq.estado;
     if (this.gorgoteoInq) {
       if (inq.activo) this.ubicar(this.gorgoteoInq, inq.x, inq.y, respiracionDeLaFase(this.faseInq).gorgoteo);
       else if (this.gorgoteoInq.ultimo) { this.gorgoteoInq.ultimo = 0; this.gorgoteoInq.volumen(0, 1); }

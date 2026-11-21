@@ -5,6 +5,7 @@
 import { useEffect, useState } from 'react';
 import { minutos } from '@/lib/navegador';
 import { EventBus } from '@/game/EventBus';
+import { esTactil } from '@/lib/tactil';
 
 // El REC de la cámara de Dani. En el Lado B tiene al lado el medidor del micrófono (dos rayitas, como en una cámara de
 // verdad: izquierda y derecha) y falla: el REC se apaga y el tiempo se rompe, o todo tiembla un momento. Escucha al
@@ -84,6 +85,8 @@ function Linterna({ l }) {
 export default function Hud({ nivel, llaves, colores, cuerpo, indicacion, pensamiento, voz, aviso, puntero, fase, play, consejo }) {
   // El nombre del nivel aparece una sola vez (no de nuevo después de rebobinar).
   const [tituloVisto, setTituloVisto] = useState(false);
+  const [tactil, setTactil] = useState(false);
+  useEffect(() => setTactil(esTactil()), []);
   const enJuego = fase === 'juego';
   useEffect(() => {
     if (!enJuego || tituloVisto) return undefined;
@@ -100,7 +103,7 @@ export default function Hud({ nivel, llaves, colores, cuerpo, indicacion, pensam
   return (
     <div className={`hud ${linterna ? 'con-linterna' : ''}`} aria-live="polite">
       {fase === 'rebobinar' && <div className="rebobinando" role="status">◀◀ REBOBINANDO</div>}
-      {fase === 'intro' && <div className="saltar-intro">Clic, Enter o E · saltar</div>}
+      {fase === 'intro' && <div className="saltar-intro">{tactil ? 'Toca la pantalla para saltar' : 'Clic, Enter o E · saltar'}</div>}
       {enJuego && play && <div className="rebobinando play">▶ PLAY</div>}
       {enJuego && !play && <Rec segundos={cuerpo?.segundos ?? 0} ladoB={!!nivel?.ladoB} />}
       {nivel?.coop && fase !== 'espera' && <Compa />}

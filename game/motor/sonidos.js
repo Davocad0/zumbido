@@ -6,7 +6,8 @@
 // «golpes» = sonidos sueltos cada tanto: [archivo, volumen, mínimo, máximo de segundos entre uno y otro].
 // «colchon» = un acorde suave sintetizado. «calma» = un nivel sin amenaza: el refugio no corta el ambiente.
 export const AMBIENTE = {
-  zumbido_fluorescente: { loops: [['zumbido', 0.5]] },
+  // (2026-11-21, elegido por el usuario: el aire que se mueve en los pasillos, por debajo del zumbido.)
+  zumbido_fluorescente: { loops: [['zumbido', 0.5], ['viento-pasillo', 0.16, { frec: 1800 }]] },
   ventilacion_y_goteo: { loops: [['ventilacion-deposito', 0.42]], golpes: [['gota', 0.5, 6, 12]] },
   vapor_y_golpes_metal: { loops: [['sala-de-calderas', 0.34]], golpes: [['golpe-tuberia', 0.45, 9, 20], ['gota', 0.4, 5, 11]] },
   // Las Piscinas es el descanso: el agua sin agudos que cansen, un rumor grave como de estar bajo el agua,
@@ -22,7 +23,7 @@ export const AMBIENTE = {
   // de las cañerías detrás de la pared (los ventiladores, muy apagados), la tele de algún vecino que se oye a través de
   // la pared sin que se entienda (voces y estática, lejos) y, cada tanto, una gota o el piso de arriba que cruje.
   edificio_de_noche: {
-    loops: [['ventilacion-deposito', 0.2, { frec: 650 }], ['radio-voces', 0.07, { frec: 520, eco: [0.35, 1.4] }]],
+    loops: [['ventilacion-deposito', 0.2, { frec: 650 }], ['radio-voces', 0.07, { frec: 520, eco: [0.35, 1.4] }], ['viento-pasillo', 0.12, { frec: 1400 }]],
     golpes: [['gota', 0.35, 9, 17], ['cama-cruje', 0.3, 16, 34]],
   },
   vals_de_feria_desafinado: { loops: [['carrusel', 0.28]] },
@@ -106,12 +107,12 @@ export const SINTETICOS = new Set(['golpe-seco', 'raspar', 'respirador', 'obtura
 const CAMA = ['cama-cruje', 'rueda-cruje', 'cama-sabanas', 'monitor-cardiaco', 'hospital', 'amanecer', 'luces-encienden', 'golpe-piano', 'inhalacion', 'dron-tension'];
 
 // Los screamers y el susto de la llave (2026-11-21): el golpe, la respiración a la espalda y el apagón.
-const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino-respira', 'respiracion-asustada', 'luces-apagan', 'luces-encienden', 'luces-parpadeo', 'inhalacion', 'golpe-susto', 'golpe-susto-2', 'latido'];
+const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino-respira', 'respiracion-asustada', 'luces-apagan', 'luces-encienden', 'luces-parpadeo', 'inhalacion', 'golpe-susto', 'golpe-susto-2', 'latido', 'grito', 'monstruo-gime'];
 // La Casa de Espejos (2026-11-21, elegidos por el usuario): los susurros del espejo y la risa lejos.
 const ESPEJOS_FERIA = ['susurros', 'risa-lejos'];
 // La Culpa (Las Piscinas, 2026-11-21): se arrastra mojada, gorgotea y llora ahogada; sale del agua con el apagón.
 export const SONIDOS_CULPA = { 'inquilino-pantuflas': 'pasos-mojados', 'inquilino-arrastre': 'gatear-madera', 'inquilino-tararea': 'llanto-ahogado' };
-const CULPA = ['pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
+const CULPA = ['corte-de-luz', 'pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
 
 // Todo lo que puede sonar en un nivel (para cargarlo al entrar).
 export function sonidosDelNivel(nivel) {
@@ -125,6 +126,8 @@ export function sonidosDelNivel(nivel) {
     ...((nivel.eventos || []).some((ev) => ev.tipo === 'silueta') || nivel.ambiente?.paredes === 'espejo' || nivel.entidad ? GRITO : []),
     ...(nivel.entidad?.nombre === 'La Culpa' ? CULPA : []),
     ...(nivel.ambiente?.paredes === 'espejo' ? ESPEJOS_FERIA : []),
+    // (El Inquilino del Lado B lleva moscas.)
+    ...(nivel.lado === 'B' && nivel.entidad && nivel.entidad.nombre !== 'La Culpa' ? ['moscas'] : []),
     // (Los sustos por zona: el sonido que pide cada uno, si es una grabación.)
     ...(nivel.eventos || []).filter((ev) => ev.tipo === 'susto_sonoro' && ev.sonido && !SINTETICOS.has(ev.sonido)).map((ev) => ev.sonido),
     // Lado B: el micrófono de la cámara (estática), la cámara que falla y los sonidos sin fuente de ese nivel.

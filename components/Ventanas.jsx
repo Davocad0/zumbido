@@ -163,7 +163,7 @@ export function Mapa({ alCerrar, controles = INICIALES }) {
     x.restore();
   }, [datos]);
   return (
-    <div className="ventana" role="dialog" aria-label="Mapa">
+    <div className="ventana" role="dialog" aria-label="Mapa" onClick={(ev) => { if (ev.target === ev.currentTarget) alCerrar(); }}>
       <div className="caja">
         <h2>MAPA{datos ? ` · NIVEL ${datos.numero}` : ''}</h2>
         <div className="mapa-papel"><canvas ref={lienzo} style={{ width: datos ? datos.mapa[0].length * 24 : 0 }} /></div>
@@ -182,7 +182,7 @@ export function Mapa({ alCerrar, controles = INICIALES }) {
 export function Diario({ notas, cintas, alAbrirNota, alCerrar, controles = INICIALES }) {
   useTeclas([...teclasDe(controles, 'diario'), 'Escape'], alCerrar);
   return (
-    <div className="ventana" role="dialog" aria-label="Diario">
+    <div className="ventana" role="dialog" aria-label="Diario" onClick={(ev) => { if (ev.target === ev.currentTarget) alCerrar(); }}>
       <div className="caja">
         <h2>DIARIO</h2>
         <div className="diario">

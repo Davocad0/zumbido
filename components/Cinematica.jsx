@@ -5,6 +5,7 @@
 // documento de diseño con scripts/copiar-escenas.mjs.
 import { useEffect, useRef, useState } from 'react';
 import { modulosEscenas } from '@/lib/cargar';
+import { esTactil } from '@/lib/tactil';
 
 const SALTAR = 1; // segundos que hay que mantener la tecla para saltar
 const TECLAS = ['Escape', 'Space'];
@@ -24,6 +25,9 @@ export default function Cinematica({ escena: nombre, alTerminar }) {
   const [ind, setInd] = useState('');
   const [listo, setListo] = useState(false);
   const [salto, setSalto] = useState(0);
+  const mantener = useRef(null);
+  const [tactil, setTactil] = useState(false);
+  useEffect(() => setTactil(esTactil()), []);
   const terminar = useRef(alTerminar);
   terminar.current = alTerminar;
 
@@ -70,11 +74,10 @@ export default function Cinematica({ escena: nombre, alTerminar }) {
       // (En desarrollo, para revisar un momento sin esperar: __cine.pintar(segundos).)
       if (process.env.NODE_ENV !== 'production') window.__cine = { escena: nombre, duracion: escena.duracion, pintar: (t) => { e.t0 = performance.now() - t * 1000; pintar(t); } };
     })();
-    // Mantener Esc o la barra un segundo: saltar.
+    // Mantener Esc o la barra un segundo: saltar. (2026-11-21: también manteniendo el dedo —o el clic— en la pantalla:
+    // en el iPhone no había cómo saltarla.)
     let apretada = null, reloj = 0;
-    const abajo = (ev) => {
-      if (!TECLAS.includes(ev.code)) return;
-      ev.preventDefault();
+    const empezar = () => {
       if (apretada) return;
       apretada = performance.now();
       reloj = setInterval(() => {
@@ -83,7 +86,14 @@ export default function Cinematica({ escena: nombre, alTerminar }) {
         if (k >= 1) { clearInterval(reloj); cerrar(); }
       }, 50);
     };
-    const arriba = (ev) => { if (!TECLAS.includes(ev.code)) return; apretada = null; clearInterval(reloj); setSalto(0); };
+    const soltar = () => { apretada = null; clearInterval(reloj); setSalto(0); };
+    mantener.current = { empezar, soltar };
+    const abajo = (ev) => {
+      if (!TECLAS.includes(ev.code)) return;
+      ev.preventDefault();
+      empezar();
+    };
+    const arriba = (ev) => { if (!TECLAS.includes(ev.code)) return; soltar(); };
     window.addEventListener('keydown', abajo);
     window.addEventListener('keyup', arriba);
     return () => {
@@ -97,13 +107,15 @@ export default function Cinematica({ escena: nombre, alTerminar }) {
   }, [nombre]);
 
   return (
-    <div className="cinematica" role="dialog" aria-label="Escena">
+    <div className="cinematica" role="dialog" aria-label="Escena"
+      onPointerDown={() => mantener.current?.empezar()} onPointerUp={() => mantener.current?.soltar()}
+      onPointerCancel={() => mantener.current?.soltar()} onPointerLeave={() => mantener.current?.soltar()} onContextMenu={(e) => e.preventDefault()}>
       <canvas ref={lienzo} width={320} height={180} />
       {ind && <div className="cine-ind">{ind}</div>}
       <div className="cine-sub" aria-live="polite"><Subtitulo texto={sub} /></div>
       {!listo && <div className="cine-cargando">Cargando…</div>}
       <div className={`cine-saltar ${salto > 0 ? 'apretando' : ''}`}>
-        Mantén Esc para saltar
+        {tactil ? 'Mantén el dedo en la pantalla para saltar' : 'Mantén Esc (o el clic) para saltar'}
         <span className="barra" style={{ transform: `scaleX(${salto})` }} />
       </div>
     </div>
