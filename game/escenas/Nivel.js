@@ -26,7 +26,7 @@ import { crearTextura } from '../motor/texturas';
 import { cama as figuraCama, luzCama } from '../motor/figuraCama';
 import { enPalabras } from '../motor/contador';
 import { cuerpoInquilino, caraDelInquilino, OPCIONES_FIGURA } from '../motor/figuraInquilino';
-import { cuerpoCulpa, brilloCulpa, ALTO_CULPA } from '../motor/figuraCulpa';
+import { cuerpoCulpa, brilloCulpa, ALTO_CULPA, VELOCIDAD_CULPA } from '../motor/figuraCulpa';
 import { cuerpoInquilinoB, brilloInquilinoB, ESCALA_B } from '../motor/figuraInquilinoB';
 import { FASES, faseDelNivel } from '../motor/fasesInquilino';
 import { SONIDOS_CULPA } from '../motor/sonidos';
@@ -694,11 +694,13 @@ export class Nivel extends Scene {
   despues(segundos, fn) { this.time.delayedCall(segundos * 1000, fn); }
   interferencia(segundos) { this.interferir = segundos; this.toca('tv-estatica', { bus: 'objetos', vol: 0.5, dur: segundos }); }
   // El cuerpo del que persigue (El Inquilino, o La Culpa en Las Piscinas) y su brillo cuando te ve.
+  // (La Culpa tiene más cuadros que El Inquilino al caminar y correr: los pasa con su propio reloj.)
+  cuadroCulpa(pose, i) { const v = VELOCIDAD_CULPA[pose]; return v ? Math.floor(this.t * v) : i; }
   cuerpoPerseguidor(pose, i, op) {
-    if (this.culpa) return cuerpoCulpa(pose, i, { sangre: !this.sinSangre });
+    if (this.culpa) return cuerpoCulpa(pose, this.cuadroCulpa(pose, i), { sangre: !this.sinSangre });
     return this.inqB ? cuerpoInquilinoB(pose, i, { ...op, sangre: !this.sinSangre }) : cuerpoInquilino(pose, i, op);
   }
-  brilloPerseguidor(pose, i, op) { return this.culpa ? brilloCulpa(pose, i) : this.inqB ? brilloInquilinoB(pose, i, op) : caraDelInquilino(pose, i, op); }
+  brilloPerseguidor(pose, i, op) { return this.culpa ? brilloCulpa(pose, this.cuadroCulpa(pose, i)) : this.inqB ? brilloInquilinoB(pose, i, op) : caraDelInquilino(pose, i, op); }
   apagon(segundos) { this.apagado = Math.max(this.apagado || 0, segundos); }
   // Un screamer (2026-11-21; «nadie ve tanto tiempo el espejo», «apenas se nota»): la cara de algo, de golpe, encima de
   // todo, temblando y acercándose, con un golpe de sonido. capas: los lienzos del sprite (el cuerpo y su brillo); se

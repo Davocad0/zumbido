@@ -108,7 +108,7 @@ export function crearEventos(e) {
     vioAlInquilino = true;
     e.toca('inhalacion', { bus: 'cuerpo', vol: 0.9 });
     // (En Las Piscinas no es él: es La Culpa.)
-    e.decir(nivel.entidad?.nombre === 'La Culpa' ? 'Eso salió del agua. Tiene mi celular en la cara.' : PERSONAJE.frases.primeraVezQueLoVe);
+    e.decir(nivel.entidad?.nombre === 'La Culpa' ? 'Eso salió del agua. Está lleno de ojos... y me miran a mí.' : PERSONAJE.frases.primeraVezQueLoVe);
   };
   const sacar = (s) => { const i = extra.indexOf(s); if (i >= 0) extra.splice(i, 1); };
 
