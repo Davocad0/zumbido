@@ -9,7 +9,8 @@ export const AMBIENTE = {
   // (2026-11-21, elegido por el usuario: el aire que se mueve en los pasillos, por debajo del zumbido.)
   zumbido_fluorescente: { loops: [['zumbido', 0.5], ['viento-pasillo', 0.16, { frec: 1800 }]] },
   ventilacion_y_goteo: { loops: [['ventilacion-deposito', 0.42]], golpes: [['gota', 0.5, 6, 12]] },
-  vapor_y_golpes_metal: { loops: [['sala-de-calderas', 0.34]], golpes: [['golpe-tuberia', 0.45, 9, 20], ['gota', 0.4, 5, 11]] },
+  // (2026-11-21, elegido por el usuario: los caños que gimen, cada tanto.)
+  vapor_y_golpes_metal: { loops: [['sala-de-calderas', 0.34]], golpes: [['golpe-tuberia', 0.45, 9, 20], ['gota', 0.4, 5, 11], ['tuberia-gime', 0.5, 18, 36]] },
   // Las Piscinas es el descanso: el agua sin agudos que cansen, un rumor grave como de estar bajo el agua,
   // gotas sueltas con eco y un acorde que entra y sale. Un lugar donde dan ganas de quedarse (y ese es el peligro).
   piscina_con_eco: {
@@ -30,17 +31,17 @@ export const AMBIENTE = {
   zumbido_crt_y_ventilador_pc: { loops: [['disco-duro', 0.3], ['zumbido-crt', 0.05]] },
   // ---------- Lado B: los mismos lugares, peor. En todos se oye el agua (la línea del agua) por debajo. ----------
   // El Vestíbulo B: el mismo zumbido, desafinado (más grave, como una cinta estirada), y el agua a los tobillos.
-  zumbido_desafinado: { loops: [['zumbido', 0.45, { rate: 0.94 }], ['agua-inunda', 0.05, { frec: 700, tramo: [2, 26] }]], golpes: [['gota', 0.45, 6, 13]] },
+  zumbido_desafinado: { loops: [['zumbido', 0.45, { rate: 0.94 }], ['agua-inunda', 0.05, { frec: 700, tramo: [2, 26] }], ['viento-fuerte', 0.14, { frec: 2200 }]], golpes: [['gota', 0.45, 6, 13]] },
   ventilacion_y_agua: { loops: [['ventilacion-deposito', 0.36, { rate: 0.96 }], ['agua-inunda', 0.06, { frec: 650, tramo: [2, 26] }]], golpes: [['gota', 0.5, 5, 11]] },
   // La Zona Habitable B (2026-11-14; «todo es casi callado»): el edificio con agua. La ventilación, el agua, la tele de
   // algún vecino a través de la pared (más fuerte que en el A, y con eco) y, por debajo, un acorde grave desafinado (dos
   // notas a medio tono: no se oye como música, se siente como algo que está mal). El piso de arriba cruje, los caños.
   edificio_b: {
-    loops: [['ventilacion-deposito', 0.3, { rate: 0.96, frec: 900 }], ['agua-inunda', 0.07, { frec: 650, tramo: [2, 26] }], ['radio-voces', 0.09, { frec: 520, eco: [0.45, 1.8] }]],
+    loops: [['ventilacion-deposito', 0.3, { rate: 0.96, frec: 900 }], ['agua-inunda', 0.07, { frec: 650, tramo: [2, 26] }], ['radio-voces', 0.09, { frec: 520, eco: [0.45, 1.8] }], ['viento-fuerte', 0.12, { frec: 1800 }]],
     golpes: [['gota', 0.5, 5, 11], ['cama-cruje', 0.4, 12, 26], ['golpe-tuberia', 0.4, 16, 32]],
     colchon: { notas: [55, 58.27, 77.78], vol: 0.05, frec: 520 },
   },
-  calderas_inundadas: { loops: [['sala-de-calderas', 0.3, { rate: 0.95 }], ['agua-inunda', 0.1, { frec: 900, tramo: [2, 26] }]], golpes: [['golpe-tuberia', 0.4, 10, 22], ['gota', 0.4, 5, 11]] },
+  calderas_inundadas: { loops: [['sala-de-calderas', 0.3, { rate: 0.95 }], ['agua-inunda', 0.1, { frec: 900, tramo: [2, 26] }]], golpes: [['golpe-tuberia', 0.4, 10, 22], ['gota', 0.4, 5, 11], ['tuberia-gime', 0.6, 14, 28]] },
   // Las Piscinas B: vacías. El eco de la piscina sin el agua que la llenaba (más bajo y más apagado), y nada más.
   // (2026-11-14; «lo siento con un ambiente tranquilo») Y, muy lejos y despacio, la gente que estaba ese día (como un
   // recuerdo con eco), el agua que se va por un desagüe y el mismo acorde grave desafinado del edificio B.
@@ -111,8 +112,8 @@ const GRITO = ['golpe-piano', 'casillero-golpe', 'inquilino-tararea', 'inquilino
 // La Casa de Espejos (2026-11-21, elegidos por el usuario): los susurros del espejo y la risa lejos.
 const ESPEJOS_FERIA = ['susurros', 'risa-lejos'];
 // La Culpa (Las Piscinas, 2026-11-21): se arrastra mojada, gorgotea y llora ahogada; sale del agua con el apagón.
-export const SONIDOS_CULPA = { 'inquilino-pantuflas': 'pasos-mojados', 'inquilino-arrastre': 'gatear-madera', 'inquilino-tararea': 'llanto-ahogado' };
-const CULPA = ['corte-de-luz', 'pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
+export const SONIDOS_CULPA = { 'inquilino-pantuflas': 'pasos-mojados', 'inquilino-arrastre': 'gatear-madera', 'inquilino-tararea': 'gorgoteo' };
+const CULPA = ['corte-de-luz', 'gorgoteo', 'pasos-mojados', 'gatear-madera', 'llanto-ahogado', 'agua-inunda', 'chapuzon', 'bajo-agua', 'burbujas', 'dron-tension'];
 
 // Todo lo que puede sonar en un nivel (para cargarlo al entrar).
 export function sonidosDelNivel(nivel) {
